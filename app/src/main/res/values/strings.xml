@@ -1,0 +1,245 @@
+<resources>
+    <string name="app_name">Kartoon Cafe</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_menu">Menu</string>
+    <string name="menu_table_reservation">Table Reservation</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="title_activity_sub_menu">SubMenuActivity</string>
+    <string name="price">₹ %1$</string>
+    <string name="welcome">"Welcome Back,"
+                            " Sahil Sharma"
+    </string>
+    <string name="about_us">Kartoon Cafe is one of kind cafe who
+              Offers A Delicious And Multi-Cuisine To Provide
+              A Expert Culinary Experience For Our Customers.
+        Our Promoters Have Extensively Experience
+        of Around The World And they are expert in
+        Refined Understanding Of Food and quality. and on
+        behalf of that experience they developed kartoon cafe
+        recipes for our Valuable customers.</string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+
+        "Component elevations.\n\n"
+
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+
+        "Avoiding elevation interference.\n\n"
+
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+    <string name="juice1">The freshness of watermelon squeezed in a glass</string>
+    <string name="juice2">Apple Cedar Juice</string>
+    <string name="juice3">The Indian style Mango Juice</string>
+    <string name="juice4">Minty Muddled lime soda</string>
+    <string name="juice5">Refreshing mojito drink with watermelon infusion</string>
+    <string name="juice6">Ginger ale with all the goodness of added herbs for summer</string>
+    <string name="juice7">Perfect summer drink featuring Curacao, lemons and mint</string>
+    <string name="juice8">Lemon/Peach</string>
+    <string name="juice9">Sweet/Salted</string>
+    <string name="juice10">Blend of tomato juice with Worcestershire, Tabasco and dash of lemon and pepper</string>
+    <string name="juice11">null</string>
+    <string name="shake1">Milk shakes of your choice Vanilla/Strawberry/Chocolate</string>
+    <string name="shake2">The sweet Banana shake prepared in Banoffee style</string>
+    <string name="shake3">Kid\'s love Oreo cookies and now Oreo shakes topped with donut</string>
+    <string name="shake4">Summer special Mango shake with whipped cream on the top 195.00</string>
+    <string name="shake5">Meal for the day. Is it?</string>
+    <string name="shake6">The taste of cheesecake with strawberry in a shake</string>
+    <string name="salad1">Herb Grilled Chicken and Celery salad with choice of dressing Balsamic/Lemon</string>
+    <string name="salad2">Super Healthy Quinoa mixed with lettuce and grill veggies tossed in home spiced lemon dressing</string>
+    <string name="salad3">Grilled seasonal fruits tossed in lemon dressing topped feta cheese balls and roasted wall nuts</string>
+    <string name="salad4">Hearty salad of Boiled eggs generously mixed with lettuce and black olives</string>
+    <string name="drink1">Choice Of Vanilla/Strawberry/Chocolate/Mocha/Butterscotch</string>
+    <string name="drink2">Thick and creamy milkshake infused with peanut butter</string>
+    <string name="drink3">Rich and healthy all time favorite delicious banana shake</string>
+    <string name="drink4">Indian spiced up buttermilk unbelievably flavorful and refreshing</string>
+    <string name="drink5">null</string>
+    <string name="crunch1">Oat crusted grilled fish served with mashed potatoes and steam veggies</string>
+    <string name="crunch2">A healthy pizza made out of whole wheat crust</string>
+    <string name="crunch3">Tangy, Spicy, juicy, tossed in peri-peri sauce, made perfection to order</string>
+    <string name="crunch4">Healthier whole wheat pasta in tomato sauce with herb grilled veggies/chicken</string>
+    <string name="crunch5">Freshly made to order stone baked Pita with homemade hummus.</string>
+    <string name="crunch6">Durum Wheat wrapped veggies and chicken, steamed, soft, flavourful healthy, homemade, served with assortment of dips</string>
+    <string name="crunch7">Herbs, grilled and marinated in mustard yoghurt dressing in multigrain bread served with healthy green salad</string>
+    <string name="crunch8">Fresh Vegetables &amp; Oats, Savoury pancakes Served with hash Potatoes</string>
+    <string name="crunch9">Pieces of Chicken Grilled to Perfection with Dried Herbs, Served With Corns</string>
+    <string name="croissants1">Classic French cheese loaded croissant, crispy outside and buttery flaky inside with a filling.</string>
+    <string name="croissants2">Cheese Croissant with a filling of vegetarian, chicken or ham combined with our choicest condiments.</string>
+    <string name="croissants3">Croissant topped with lots of fresh chocolate</string>
+    <string name="breakfast1">Crispy waffles topped with chocolate sauce and roasted nuts served with fresh fruits and Vanilla Ice Cream Scoop</string>
+    <string name="breakfast2">Freshly prepared multilayer pan cakes filled with fresh fruits topped with maple syrup served with Vanilla Ice Cream Scoop</string>
+    <string name="breakfast3">Choice of egg: Poached/ Sunny side up/ Scrambled, served with toasted bread and hash brown potato</string>
+    <string name="breakfast4">Egg white/regular omlette with your choice of veggies /chicken served with toasted bread and hash brown potato.</string>
+    <string name="breakfast5">French toast with richness of flavors from cinnamon and vanilla served with maple syrup, fresh fruits and whipped cream.</string>
+    <string name="soup1">Slowly roasted tomatoes with garlic finished with sweet basil. Served with 1 pc. Fresh Garlic bread</string>
+    <string name="soup2">Wild mushroom cooked with hand full of thyme finished with milk froth.Served with 1 pcs. Fresh Garlic bread</string>
+    <string name="soup3">Hearty stock flavored with fresh coriander and lemon.</string>
+    <string name="soup4">Chinese style thick mixed vegetable soup topped with crisp fried noodles.</string>
+    <string name="soup5">Oriental style peppery chicken, spinach and egg drop soup.</string>
+    <string name="soup6">Hearty mix green salad contains mix lettuce, baby spinach tossed fresh lemon dressing</string>
+    <string name="soup7">Classical Salad made of crunchy iceberg lettuce tossed in freshly made in house creamy Caesar dressing</string>
+    <string name="starters1">Crispy fried rolls filled with flavorful finely sliced veggies served with hot &amp; sweet garlic dip</string>
+    <string name="starters2">Freshly made to order stone baked Pita with homemade hummus</string>
+    <string name="starters3">Golden fried vegetable/chicken balls tossed in Chinese spices.</string>
+    <string name="starters4">All time favorite Chilli chicken with Chef’s special touch.</string>
+    <string name="starters5">Hot and juicy finger licking chicken wings/Popcorns with homemade barbeque sauce and masaala Potato Sticks</string>
+    <string name="starters6">Stir Fried rice generously mixed with vegetables/egg/chicken</string>
+    <string name="starters7">All time kids’ favorite noodles made with all fresh in-house blends</string>
+    <string name="starters8">Freshly baked garlic loaf topped with butter or loaded with cheese</string>
+    <string name="starters9">Nuggets cooted in herbs and spices, juicy, tender. … Served with french fries and saute seasonal vegetables</string>
+    <string name="burger1">Grilled Veggies and cottage cheese patty perfectly pan seared &amp; arranged in fresh baked bun, served with side salad and fries.</string>
+    <string name="burger2">Mexican style spicy chicken patty with cheese in fresh baked multigrain bun served with tangy salsa, sour cream and fries.</string>
+    <string name="burger3">Rosemary flavored lamb minced cooked to perfection arranged in fresh baked bun, served with side salad and fries.</string>
+    <string name="burger4">Cheesy thyme flavored chicken grilled in country style bread served with side salad and fries.</string>
+    <string name="burger5">Marinated zucchini, mushrooms, peppers &amp; broccoli put together in focaccia bread for grilling, served with side salad and fries.</string>
+    <string name="burger6">Multi-layered sandwich filled with tender grilled paneer/chicken, tomatoes, lettuce, fried egg and cheese slice served with side salad and fries.</string>
+    <string name="pizza1">All time favorite cheese loaded pizza.</string>
+    <string name="pizza2">Classic combination of mozzarella, tomato and basil.</string>
+    <string name="pizza3">Grilled peppers and onion Pizza.</string>
+    <string name="pizza4">Fiery smoked chicken sausage combined with black olives and jalapeño.</string>
+    <string name="pizza5">Classic Spicy Italian pepperoni pizza.</string>
+    <string name="pizza6">Homemade barebeque chicken, so tender and juicy combined with roast garlic and onions.</string>
+    <string name="pizza7">null</string>
+    <string name="pizza8">Italian folded cheese lovers pizza filled with grilled veggies/chicken, mozzarella and tomato sauce loaded with cheese.</string>
+    <string name="pasta1">Chef’s special pasta tossed in freshly made arrabiatta sauce finished with parmesan cheese and fresh sweet basil</string>
+    <string name="pasta2">Experience the combination of tomato and cream sauce with hint of garlic finished chopped parsley and parmesan.</string>
+    <string name="pasta3">So creamy mushroom sauce pasta with hint of thyme and garlic finished with grated parmesan &amp; fresh black pepper.</string>
+    <string name="pasta4">Very special meat sauce spaghetti pasta tossed in garlic and topped with meat balls and grated parmesan.</string>
+    <string name="pasta5">Homemade multilayer baked pasta filled with grilled veggies/ mince chicken/lamb mince topped with tomato sauce, béchamel and loads of cheese.</string>
+    <string name="pasta6">Risotto provide quick energy conerted into glucose. Chicken and seafood varieties have their own health benefits which are umatched in any other category</string>
+    <string name="mexico1">Tortilla filled with veggies/chicken topped with tomato sauce, cheese and baked served with beans, rice, sour cream and salsa</string>
+    <string name="mexico2">Tortilla filled with veggies/chicken and cheese served with salsa and sour cream.</string>
+    <string name="mexico3">Crispy Tortilla Shells filled with Veggies/Chicken and Mexican salad served with sour cream and salsa</string>
+    <string name="mexico4">Crispy nacho chips topped with spicy beans and cheese and sour cream and salsa.</string>
+    <string name="dimsums1">Finely chopped aromatic veggies dimsums flavored with mince ginger &amp; garlic, served with assortment of dips.</string>
+    <string name="dimsums2">Minced mushroom dimsums flavored with Thai chilli and lemongrass, served with assortment of dips.</string>
+    <string name="dimsums3">American twist dimsums filled with creamy corn and spinach, served with assortment of dips</string>
+    <string name="dimsums4">Original Asian style Chicken dimsums with blend of homemade spices and herbs, served with assortment of dips.</string>
+    <string name="dimsums5">For the meat lovers, minced lamb meat dimsums flavored with rosemary and garlic, served with assortment of dips</string>
+    <string name="parade1">Dum Cooked aromatic basmati rice with tender chicken/vegetables, served with burani raita</string>
+    <string name="parade2">Sizzle your palate with our thrilling sizzlers, Continental Style/Indian Style/Oriental Style</string>
+    <string name="parade3">Japanese delicacy prepared with flavored sticky rice rolled with seafood/vegetables</string>
+    <string name="parade4">Freshly picked sole fish grilled and served with creamy mashed potatoes, grill veggies and lemon butter sauce</string>
+    <string name="parade5">Traditional Chinese stir-fried dish made with chicken, peanuts, vegetables, and peppers.</string>
+    <string name="parade6">Crumb fried fresh sole fish fillets served with hot French fries and homemade tartar sauce.</string>
+    <string name="parade7">Stuffed grilled chicken breast glazed with in house rich brown sauce served with mashed potatoes and grill veggies</string>
+    <string name="parade8">Oriental style pan fried prawns tossed in homemade sweet and sour sauce.</string>
+    <string name="parade9">Oriental Flavored rice or noodles Served with hot &amp; juicy Chicken/Paneer</string>
+    <string name="platter1">One Veg Starter, Dal, Paneer Makhani, Indian bread and Steam Rice with accompaniments: green salad and mint chutney</string>
+    <string name="platter2">One Non. Veg Starter, Dal, Butter Chicken/Mutton Rogan Josh, Indian bread and Steam Rice with accompaniments: green salad and mint chutney</string>
+    <string name="platter3">Dal, Paneer Makhani/Butter Chicken/Mutton Rogan Josh, Indian Bread or Steam Rice with accompaniments: green salad and mint chutney.</string>
+    <string name="platter4">Assortments of Non-veg kebabs: Chicken Afghani, Fish Tikka and Galauti Kebab</string>
+    <string name="platter5">Assortments of veg kebabs: hara bhara kebab, paneer tikka and onion flower blossom</string>
+    <string name="chinese1">One Soup, Veg. Starter, Stir Vegetables and Noodles or fried rice with accompaniments: kimchi salad and homemade Chinese Dips</string>
+    <string name="chinese2">One Soup, Non Veg Starter, Sichuan Style Stir Fried Chicken and Noodles or fried rice with accompaniments: kimchi salad and homemade Chinese Dips</string>
+    <string name="chinese3">Stir Vegetables/ Sichuan Style Stir Fried Chicken and Noodles or fried rice with accompaniments: kimchi salad and homemade Chinese Dips.</string>
+    <string name="arabic1">Greek Salad, French Fries and Falafel Gyro with accompaniments: Hummus and Tzatziki</string>
+    <string name="arabic2">Greek Salad, French Fries and Chicken/Lamb Gyro with accompaniments: Hummus and Tzatziki</string>
+    <string name="arabic3">Fries and Falafel/Chicken/Lamb Gyro with accompaniments: Hummus and Tzatziki</string>
+    <string name="dessert1">Original Classic baked delicious cheesecake.</string>
+    <string name="dessert2">Delightful striped chocolate and vanilla cheesecake.</string>
+    <string name="dessert3">Delicious creamy and smooth cheese cake topped with mango mousse.</string>
+    <string name="dessert4">Original Classic baked delicious cheesecake topped with loads of blue berries.</string>
+    <string name="dessert5">Ultimate Fudgy Dark Chocolate Brownie served with scoop of Vanilla Ice Cream topped with hot chocolate sauce.</string>
+    <string name="dessert6">Rich Creamy baked yoghurt flavored with saffron.</string>
+    <string name="dessert7">Molted chaco lava cake served with a scoop of vanilla ice cream</string>
+    <string name="dessert8">Honey &amp; Sesame coated crisp apple served with ice cream</string>
+    <string name="dessert9">A rich cold dessert layered with Gulab Jamun and rosy cream</string>
+    <string name="dessert10">Classic English dessert made from bananas, cream and caramel combined on a buttery biscuit base</string>
+    <string name="dessert11">Classic baked cheese cake flavored with strawberry</string>
+    <string name="dessert12">Original Classic baked delicious cheesecake.</string>
+    <string name="dessert13">null</string>
+    <string name="dessert14">Tangy lemon flavor creamy texture souffle</string>
+    <string name="dessert15">Traditional Phirni served in western style</string>
+    <string name="dessert16">Tiramisu Cheese Cake</string>
+    <string name="dessert17">Nutella Cheese Cake</string>
+
+
+</resources>
