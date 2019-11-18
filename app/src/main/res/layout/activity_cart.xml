@@ -1,161 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".CartActivity">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/address_edtxt"
-        >
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="4dp"
-            android:src="@drawable/ic_add_location_black_24dp"
+        android:orientation="vertical">
 
-            />
-        <EditText
+        <LinearLayout
+        android:id="@+id/address_edtxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:hint="Enter Location">
-        </EditText>
+            android:background="@android:color/holo_orange_dark"
+            android:orientation="horizontal">
+
+            <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:padding="6dp"
+                android:src="@drawable/ic_location_on_black_24dp" />
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address: 1B/139 Ramesh Nagar"
+            android:inputType="text" />
     </LinearLayout>
+
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cart_list_layout"
-            android:layout_below="@id/address_edtxt"
-            android:orientation="vertical">
+            android:layout_marginBottom="60dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-            <androidx.recyclerview.widget.RecyclerView
+
+                <TextView
+                    android:id="@+id/cartItemText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/cart_list"
-                >
-            </androidx.recyclerview.widget.RecyclerView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cart_list_layout"
-                >
-                <LinearLayout
+                    android:layout_below="@id/address_edtxt"
+                    android:fontFamily="@font/happymarker"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="Cart Items"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cart_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <FrameLayout
+                    android:id="@+id/empty_cart"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/payment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="80dp">
-                    <TextView
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/happymarker"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="Payment Method"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/payment_rads"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Payment Method"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="4dp">
-                    </TextView>
-                    <RadioGroup
+                        android:orientation="vertical">
+
+
+                        <RadioGroup
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <RadioButton
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:background="@color/white">
+
+                            <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="CASH"
-                            android:buttonTint="#99ff33"
-                            />
-                        <RadioButton
+                                android:buttonTint="@color/myOrange"
+                                android:fontFamily="@font/happymarker"
+                                android:text="CASH" />
+
+                            <RadioButton
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:buttonTint="#99ff33"
-                            android:text="CARD / UPI / NETBANKING"
-                            />
+                                android:buttonTint="@color/myOrange"
+                                android:fontFamily="@font/happymarker"
+                                android:text="CARD / UPI / NETBANKING" />
                     </RadioGroup>
                 </LinearLayout>
-
             </androidx.cardview.widget.CardView>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@id/cart_list_layout"-->
-<!--        >-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical">-->
-<!--            <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Payment Method"-->
-<!--                android:textSize="20sp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:layout_marginBottom="4dp">-->
-<!--        </TextView>-->
-<!--            <RadioGroup-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content">-->
-<!--        <RadioButton-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="CASH"-->
-<!--            android:buttonTint="#99ff33"-->
-<!--            />-->
-<!--            <RadioButton-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:buttonTint="#99ff33"-->
-<!--                android:text="CARD / UPI / NETBANKING"-->
-<!--                />-->
-<!--            </RadioGroup>-->
-<!--        </LinearLayout>-->
-
-<!--    </androidx.cardview.widget.CardView>-->
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="4dp"
-        >
+        android:layout_gravity="bottom"
+        android:layout_margin="4dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="#ff4500"
-            >
+            android:background="@android:color/holo_orange_dark"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/cartTotal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text=" $1100 "
                 android:layout_weight="1"
-                android:textColor="#ffffff"
-                android:textSize="20sp"
-                >
-            </TextView>
+                android:text=" $1100 "
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
             <Button
+                android:id="@+id/orderPlacebutton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:text="Place Order"
-                android:backgroundTint="#ffffff"
-                android:id="@+id/orderPlacebutton"
-                />
+                android:backgroundTint="@color/white"
+                android:text="Place Order" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-    </RelativeLayout>
-
-</RelativeLayout>
-
-<!--</RelativeLayout>-->
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

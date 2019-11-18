@@ -4,24 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity"
-    android:fitsSystemWindows="true"
-    android:background="#000000"
+    android:background="@color/colorPrimaryDark"
     >
-    <ImageView
+
+    <FrameLayout
+        android:id="@+id/splash_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:id="@+id/splash"
-        />
+        android:layout_height="300dp"
+        android:layout_gravity="center|bottom" />
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/kartoon_cafe" />
 
     <TextView
         android:id="@+id/username"
         android:layout_height="wrap_content"
         android:layout_width="200dp"
-        android:layout_gravity="center|bottom"
-        android:layout_marginBottom="100dp"
+        android:layout_gravity="center"
         android:text="@string/welcome"
         android:fontFamily="@font/happymarker"
-        android:textColor="#ffffff"
+        android:textColor="@color/white"
         android:textSize="25sp"/>
 </FrameLayout>

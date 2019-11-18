@@ -8,6 +8,11 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <!--    <androidx.appcompat.widget.Toolbar-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="?attr/actionBarSize"-->
+    <!--        android:id="@+id/main_toolbar"-->
+    <!--        android:theme="@style/ToolbarTheme"/>-->
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"

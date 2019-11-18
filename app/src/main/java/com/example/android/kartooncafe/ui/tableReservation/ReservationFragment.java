@@ -1,39 +1,34 @@
 package com.example.android.kartooncafe.ui.tableReservation;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.kartooncafe.Cart;
-import com.example.android.kartooncafe.CartActivity;
-import com.example.android.kartooncafe.Customizables;
+import com.airbnb.lottie.LottieAnimationView;
+import com.example.android.kartooncafe.CartAdapter;
+import com.example.android.kartooncafe.OrderAheadMenu;
+import com.example.android.kartooncafe.OrderAheadSubMenu;
 import com.example.android.kartooncafe.R;
 import com.example.android.kartooncafe.ReservationAdapter;
 import com.example.android.kartooncafe.ReservationItemClickListener;
-import com.example.android.kartooncafe.SubMenuActivity;
-import com.example.android.kartooncafe.ui.menu.MenuFragment;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +40,12 @@ public class ReservationFragment extends Fragment {
     private ArrayList<String>numList=new ArrayList<>();
     private LinearLayout layout1,layout2;
     //public static String TYPE_KEY="reservationOrderAhead";
+    RecyclerView orderRCView;
+    CartAdapter adapter4;
+    FrameLayout frameLayout, frameLayout1;
+    LottieAnimationView animationView, animationView1;
+    CheckBox checkBox;
+    Button button;
 
 
 
@@ -59,39 +60,79 @@ public class ReservationFragment extends Fragment {
         Button reservationButton;
         RecyclerView dateRCView,timeRCView,numberRCView;
         ReservationAdapter adapter1,adapter2,adapter3;
+
+//        adapter4.notifyDataSetChanged();
+        //   frameLayout=root.findViewById(R.id.special_anim);
         dateRCView=root.findViewById(R.id.dateview);
         timeRCView=root.findViewById(R.id.timeview);
         numberRCView=root.findViewById(R.id.numberview);
+        orderRCView = root.findViewById(R.id.order_ahead_list);
         layout1=root.findViewById(R.id.timeLayout);
         layout2=root.findViewById(R.id.numLayout);
         reservationButton=root.findViewById(R.id.reservation_button);
-        reservationButton.setOnClickListener(new View.OnClickListener() {
+        checkBox = root.findViewById(R.id.order_ahead_check_box);
+        button = root.findViewById(R.id.reservation_menu_button);
+
+
+        frameLayout = root.findViewById(R.id.special_anim);
+
+        animationView = new LottieAnimationView(getContext());
+        animationView.setAnimation(R.raw.ballon);
+        frameLayout.addView(animationView);
+        animationView.playAnimation();
+        animationView.setRepeatCount(1);
+
+        frameLayout1 = root.findViewById(R.id.reserveanim);
+        animationView1 = new LottieAnimationView(getContext());
+        animationView1.setAnimation(R.raw.star);
+        frameLayout1.addView(animationView1);
+        animationView1.playAnimation();
+        animationView1.setRepeatCount(4);
+
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle("Would you like to order ahead ?");
-
-                builder.setPositiveButton("Yes, Order Now", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        MenuFragment ldf = new MenuFragment ();
-//                         Bundle args = new Bundle();
-//                         args.putString(TYPE_KEY,"reservationOrderAhead");
-//                         ldf.setArguments(args);
-//                        getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, ldf).commit();
-                    }
-                });
-
-                builder.setNegativeButton("No, Order in Restaurant", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //TODO
-                    }
-                });
-
-                builder.show();
+                if (checkBox.isChecked()) {
+                    button.setVisibility(View.VISIBLE);
+                } else {
+                    button.setVisibility(View.GONE);
+                }
             }
         });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), OrderAheadMenu.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+
+//        reservationButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//                builder.setTitle("Would you like to order ahead ?");
+//
+//                builder.setPositiveButton("Yes, Order Now", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        Intent intent = new Intent(getContext(), OrderAheadMenu.class);
+//                        startActivityForResult(intent,0);
+//                    }
+//                });
+//
+//                builder.setNegativeButton("No, Order in Restaurant", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        //TODO
+//                    }
+//                });
+//
+//                builder.show();
+//            }
+//        });
 
         loadDateList();
         loadTimeList();
@@ -132,10 +173,23 @@ public class ReservationFragment extends Fragment {
         numberRCView.setLayoutManager(layoutManager3);
         numberRCView.setAdapter(adapter3);
 
+        adapter4 = new CartAdapter(getContext(), OrderAheadSubMenu.reservationCart);
+        orderRCView.setItemAnimator(new DefaultItemAnimator());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        orderRCView.setLayoutManager(linearLayoutManager);
+        orderRCView.setAdapter(adapter4);
+
 
 
         return root;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter4.notifyDataSetChanged();
+    }
+
     private void loadDateList(){
 
        String today="TODAY";
@@ -170,7 +224,7 @@ public class ReservationFragment extends Fragment {
                    finalString=today + dateString.substring(4,11) ;
                }
                else if(i==1){
-                   finalString=tommorrow + dateString.substring(4,10) ;
+                   finalString = tommorrow;
                }else{
                    finalString=dateString.substring(4);
                }
@@ -182,6 +236,8 @@ public class ReservationFragment extends Fragment {
 
 
     }
+
+
     private void loadTimeList(){
         timeList.add("11:00 AM");
         timeList.add("11:30 AM");

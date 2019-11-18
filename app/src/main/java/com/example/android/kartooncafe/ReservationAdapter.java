@@ -45,14 +45,14 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationViewHold
 
             });
             if(row_index==position){
-                holder.layout.setBackgroundColor(ContextCompat.getColor(context,R.color.colorButtons));
-                    holder.textView.setBackgroundColor(ContextCompat.getColor(context,R.color.colorButtons));
+                holder.layout.setBackgroundColor(ContextCompat.getColor(context, R.color.myOrange));
+                holder.textView.setBackgroundColor(ContextCompat.getColor(context, R.color.myOrange));
                     holder.textView.setTextColor(ContextCompat.getColor(context,R.color.white));
             }
             else{
                 holder.layout.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
                     holder.textView.setBackgroundColor(ContextCompat.getColor(context,R.color.white));
-                    holder.textView.setTextColor(ContextCompat.getColor(context,R.color.colorButtons));
+                holder.textView.setTextColor(ContextCompat.getColor(context, R.color.myOrange));
             }
     }
 

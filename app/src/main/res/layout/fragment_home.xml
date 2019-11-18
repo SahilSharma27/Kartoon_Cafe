@@ -1,129 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#000000">
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/top_rcview"/>
 
-    <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="vertical"
-        >
-    <TextView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="KC'S SPECIALS"
-        android:gravity="center"
-        android:textColor="#ff4500"
-        android:textSize="25sp"
-        android:fontFamily="@font/happymarker"
-        android:padding="15dp"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/special_rcview"/>
-   </LinearLayout>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/home_img"
-            android:layout_marginTop="10dp"/>
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="FOLLOW US ON"
-            android:gravity="center"
-            android:textColor="#ff4500"
-            android:textSize="25sp"
-            android:fontFamily="@font/happymarker"/>
+        android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="5dp">
-    <androidx.cardview.widget.CardView
+            android:background="@color/colorPrimaryDark"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/top_rcview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:layout_marginTop="10dp">
+
+                <FrameLayout
+                    android:id="@+id/live_music_frame"
+                    android:layout_width="220dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true" />
+
+                <FrameLayout
+                    android:id="@+id/live_music_frame1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="120dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_toRightOf="@id/livetext" />
+
+                <TextView
+                    android:id="@+id/livetext"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/happymarker"
+                    android:padding="15dp"
+                    android:text="LIVE MUSIC  Every Weekend Night"
+                    android:textColor="@color/myOrange"
+                    android:textSize="25sp" />
+
+                <Button
+                    android:id="@+id/reservationfromhome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="15dp"
+                    android:backgroundTint="@color/myOrange"
+                    android:fontFamily="@font/happymarker"
+                    android:text="Reserve Table"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <FrameLayout
+                    android:id="@+id/live_music_frame2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="220dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toLeftOf="@id/live_music_frame"
+
+                    />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/happymarker"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="KC'S SPECIALS"
+                    android:textColor="@color/myOrange"
+                    android:textSize="25sp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/special_rcview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <FrameLayout
+                        android:id="@+id/likes"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/happymarker"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="KC'S BEST SELLERS"
+                    android:textColor="@color/myOrange"
+                    android:textSize="25sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/best_seller_rcview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/home_img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/happymarker"
+                    android:gravity="center"
+                    android:text="FOLLOW US ON"
+                    android:textColor="@color/myOrange"
+                    android:textSize="25sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/instafollow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        app:cardCornerRadius="8dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/follow"
+                            android:layout_height="@dimen/follow"
+                            android:layout_gravity="center"
+                            android:layout_margin="25dp"
+                            android:src="@drawable/insta" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/fbfollow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp"
+                        app:cardCornerRadius="8dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/follow"
+                            android:layout_height="@dimen/follow"
+                            android:layout_gravity="center"
+                            android:layout_margin="25dp"
+                            android:src="@drawable/fb" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/twitterfollow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginBottom="6dp"
+                        app:cardCornerRadius="8dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/follow"
+                            android:layout_height="@dimen/follow"
+                            android:layout_gravity="center"
+                            android:layout_margin="25dp"
+                            android:src="@drawable/twitter" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/ytfollow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="6dp"
+                        app:cardCornerRadius="8dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/follow"
+                            android:layout_height="@dimen/follow"
+                            android:layout_gravity="center"
+                            android:layout_margin="25dp"
+                            android:src="@drawable/youtube" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        app:cardCornerRadius="8dp"
-        android:id="@+id/instafollow">
-        <ImageView
-            android:layout_width="@dimen/follow"
-            android:layout_height="@dimen/follow"
-            android:layout_gravity="center"
-            android:layout_margin="25dp"
-            android:src="@drawable/insta"/>
-    </androidx.cardview.widget.CardView>
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                app:cardCornerRadius="8dp"
-                android:id="@+id/fbfollow">
-                <ImageView
-                    android:layout_width="@dimen/follow"
-                    android:layout_height="@dimen/follow"
-                    android:layout_gravity="center"
-                    android:layout_margin="25dp"
-                    android:src="@drawable/fb"/>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:layout_marginTop="2dp"
-            >
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="6dp"
-            android:id="@+id/twitterfollow">
-            <ImageView
-                android:layout_width="@dimen/follow"
-                android:layout_height="@dimen/follow"
-                android:layout_gravity="center"
-                android:layout_margin="25dp"
-                android:src="@drawable/twitter"/>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginBottom="6dp"
-            android:id="@+id/ytfollow">
-            <ImageView
-                android:layout_width="@dimen/follow"
-                android:layout_height="@dimen/follow"
-                android:layout_gravity="center"
-                android:layout_margin="25dp"
-                android:src="@drawable/youtube"/>
-        </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </LinearLayout>
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:backgroundTint="@color/myOrange"
+        app:fabCustomSize="60dp"
+        app:fabSize="auto"
+        app:srcCompat="@drawable/ic_restaurant_menu_black_24dp"
+
+        ></com.google.android.material.floatingactionbutton.FloatingActionButton>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

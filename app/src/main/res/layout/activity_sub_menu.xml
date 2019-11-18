@@ -22,18 +22,19 @@
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:scaleType="fitXY">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:id="@+id/menu_back"
-                android:transitionName="robot"
-                />
+
+                <ImageView
+                    android:id="@+id/menu_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:transitionName="robot" />
             </FrameLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -48,22 +49,33 @@
 
     <include layout="@layout/content_sub_menu" />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="@dimen/fab_margin"-->
-<!--        app:layout_anchor="@id/app_bar"-->
-<!--        app:layout_anchorGravity="bottom|end"-->
-<!--        app:srcCompat="@drawable/ic_shopping_cart_black_24dp" />-->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabCart"
-        android:layout_width="wrap_content"
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/fab"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="@dimen/fab_margin"-->
+    <!--        app:layout_anchor="@id/app_bar"-->
+    <!--        app:layout_anchorGravity="bottom|end"-->
+    <!--        app:srcCompat="@drawable/ic_shopping_cart_black_24dp" />-->
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/fabCart"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="@dimen/fab_margin"-->
+    <!--        android:backgroundTint="#ffffff"-->
+    <!--        android:layout_gravity="bottom|end"-->
+    <!--        app:srcCompat="@drawable/basket" >-->
+    <!--    </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
+
+    <Button
+        android:id="@+id/cartbutton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="#ffffff"
-        android:layout_gravity="bottom|end"
-        app:srcCompat="@drawable/basket" >
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        android:layout_gravity="bottom|center"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/myOrange"
+        android:text="Go to Cart"
+        android:textColor="@color/white" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

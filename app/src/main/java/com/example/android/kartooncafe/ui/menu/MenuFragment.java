@@ -1,20 +1,14 @@
 package com.example.android.kartooncafe.ui.menu;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,12 +18,11 @@ import com.example.android.kartooncafe.Menu;
 import com.example.android.kartooncafe.MenuImageClickListener;
 import com.example.android.kartooncafe.R;
 import com.example.android.kartooncafe.SubMenuActivity;
-import com.example.android.kartooncafe.ui.tableReservation.ReservationFragment;
 
 import java.util.ArrayList;
 
 public class MenuFragment extends Fragment {
-       // private String Type="NORMALCART";
+
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         final ArrayList<Menu> menuList = new ArrayList<>();
@@ -65,10 +58,10 @@ public class MenuFragment extends Fragment {
         menuList.add(new Menu("ARABIC","arabic",R.drawable.arabic));
         menuList.add(new Menu("'DESSSSERTS' IS OUR SPECIALITY","desserts",R.drawable.desserts));
 
-
         menuRecyclerView.setItemAnimator(new DefaultItemAnimator());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         menuRecyclerView.setLayoutManager(linearLayoutManager);
+
         menuAdapter=new CustomAdapter1(getContext(), menuList, new MenuImageClickListener() {
             @Override
             public void onMenuClicked(View view, int position) {
@@ -79,7 +72,6 @@ public class MenuFragment extends Fragment {
                 intent.putExtra("title",clickedMenuItem.getMenuTitle());
                 intent.putExtra("category",clickedMenuItem.getMenuCategory());
                 intent.putExtra("id",clickedMenuItem.getMenuBackDrop());
-               // intent.putExtra("typeOfCart",Type);
                 startActivity(intent);
              }
         });

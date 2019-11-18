@@ -2,29 +2,19 @@ package com.example.android.kartooncafe;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.example.android.kartooncafe.ui.tableReservation.ReservationFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.SpannableString;
-import android.text.style.TypefaceSpan;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class SubMenuActivity extends AppCompatActivity {
-    public static ArrayList<Cart> cartList=new ArrayList<>();
 
     Customizables veg ;
     Customizables veg1;
@@ -107,44 +97,54 @@ public class SubMenuActivity extends AppCompatActivity {
     ArrayList<Item> clickedMenu=new ArrayList<>();
 
    public static ArrayList<Cart> cartItems = new ArrayList<>();
-  // public static ArrayList<Cart> reservationCart =new ArrayList<>();
-   // public static String Type;
+
 
     RecyclerView subMenuRCView;
     CustomAdapter2 adapter2;
+    Button button1;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_menu);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         menuBackView=findViewById(R.id.menu_back);
         subMenuRCView=findViewById(R.id.sub_menu_rcv);
+        button1 = findViewById(R.id.cartbutton);
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabCart);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Snackbar.make(view, "Opening Cart", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
-
-                    Intent intent = new Intent(SubMenuActivity.this, CartActivity.class);
-                    startActivity(intent);
-
-
-
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabCart);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Snackbar.make(view, "Opening Cart", Snackbar.LENGTH_SHORT)
+//                        .setAction("Action", null).show();
+//
+//                    Intent intent = new Intent(SubMenuActivity.this, CartActivity.class);
+//                    startActivity(intent);
+//
+//
+//
+//            }
+//        });
         Intent intent = getIntent();
         int menuBackdropId = intent.getIntExtra("id",0);
         String menuTitle =intent.getStringExtra("title");
         String menuCategory = intent.getStringExtra("category");
-      //  Type=intent.getStringExtra("typeOfCart");
+
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SubMenuActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        SpannableString s= new SpannableString(menuTitle);
 //        s.setSpan(new TypefaceSpan(this,,0,s.length()));
@@ -399,7 +399,7 @@ public class SubMenuActivity extends AppCompatActivity {
 
         menu6.add(new Item("FCR1","Special Oat Grilled Fish",getString(R.string.crunch1),1,500,0,defaultCust));
         menu6.add(new Item("FCR2","Snoopy's Whole Wheat Pizza",getString(R.string.crunch2),2,500,1,menu6cutItem2));
-        menu6.add(new Item("FCR3","Peri Peri Chicken Wings/Paneer",getString(R.string.crunch3),2,500,0,defaultCust));
+        menu6.add(new Item("FCR3", "Peri Peri Chicken Wings/Paneer", getString(R.string.crunch3), 1, 500, 0, defaultCust));
         menu6.add(new Item("FCR4","Whole Wheat Pasta",getString(R.string.crunch4),2,500,1,menu6cutItem4));
         menu6.add(new Item("FCR5","Jasmine Pita with Hummus",getString(R.string.crunch5),1,500,1,menu6cutItem5));
         menu6.add(new Item("FCR6","Whole Wheat Dimsums",getString(R.string.crunch6),2,500,1,menu6cutItem6));
@@ -418,7 +418,7 @@ public class SubMenuActivity extends AppCompatActivity {
         ArrayList<Customizables> defaultCust = new ArrayList<>();
         menu7.add(new Item("CRST1","Utterly Butterly Delicious Layered",getString(R.string.croissants1),2,180,1,menu7custItem1));
         menu7.add(new Item("CRST2","Pumbaa Stuffed Croissant",getString(R.string.croissants2),2,110,1,menu7custItem2));
-        menu7.add(new Item("CRST3","Chip and Dale Chocolate Croissant",getString(R.string.croissants3),2,175,0,defaultCust));
+        menu7.add(new Item("CRST3", "Chip and Dale Chocolate Croissant", getString(R.string.croissants3), 0, 175, 0, defaultCust));
     }
     public void loadMenu8(){
         ArrayList<Customizables> defautCust=new ArrayList<>();

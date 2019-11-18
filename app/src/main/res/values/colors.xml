@@ -3,7 +3,7 @@
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorButtons">#ff4500</color>
+    <color name="myOrange">@android:color/holo_orange_dark</color>
     <color name="white">#ffffff</color>
 
 </resources>

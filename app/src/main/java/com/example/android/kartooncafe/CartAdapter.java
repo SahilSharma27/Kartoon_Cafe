@@ -4,17 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.android.kartooncafe.ui.tableReservation.ReservationFragment;
 
 import java.util.ArrayList;
 
@@ -22,10 +14,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
     private Context context;
    private ArrayList<Cart> finalCartItemsList;
 
+
     public CartAdapter(Context context, ArrayList<Cart> cartList) {
 
         this.context = context;
         this.finalCartItemsList = cartList;
+
     }
 
 
@@ -46,13 +40,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SubMenuActivity.cartItems.remove(pos);
-                CartActivity.cartItemPrices.remove(pos);
-                notifyDataSetChanged();
-            }
-        });
+                if (context instanceof CartActivity) {
+                    SubMenuActivity.cartItems.remove(pos);
+                    CartActivity.cartItemPrices.remove(pos);
+                    notifyDataSetChanged();
+                } else {
+                    OrderAheadSubMenu.reservationCart.remove(pos);
+                    notifyDataSetChanged();
+                }
 
-        holder.cartItemPrice.setText("₹ " + String.valueOf(currentCartItem.getCartItem().getItemPrice()));
+
+            }
+
+        });
+        if (currentCartItem.getCustom() != null) {
+            holder.cartItemCutsomize.setVisibility(View.VISIBLE);
+            holder.cartItemCutsomize.setText(currentCartItem.getCustom().getCustomName());
+        } else holder.cartItemCutsomize.setVisibility(View.GONE);
+
+        holder.cartItemPrice.setText("₹ " + currentCartItem.getCartItem().getItemPrice());
 
         holder.cartItemQty.setText(String.valueOf(currentCartItem.getQuantity()));
 
@@ -105,10 +111,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
             }
         }
 
-        if(currentCartItem.getCustom()!=null){
-            holder.cartItemCutsomize.setText(currentCartItem.getCustom().getCustomName());
-        }
-        else holder.cartItemCutsomize.setVisibility(View.GONE);
+//        if(currentCartItem.getCustom()!=null){
+//            holder.cartItemCutsomize.setText(currentCartItem.getCustom().getCustomName());
+//        }
+//        else holder.cartItemCutsomize.setVisibility(View.GONE);
     }
 
     @Override
