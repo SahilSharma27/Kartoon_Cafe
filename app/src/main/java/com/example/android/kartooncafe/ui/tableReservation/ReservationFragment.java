@@ -109,31 +109,6 @@ public class ReservationFragment extends Fragment {
         });
 
 
-//        reservationButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//                builder.setTitle("Would you like to order ahead ?");
-//
-//                builder.setPositiveButton("Yes, Order Now", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        Intent intent = new Intent(getContext(), OrderAheadMenu.class);
-//                        startActivityForResult(intent,0);
-//                    }
-//                });
-//
-//                builder.setNegativeButton("No, Order in Restaurant", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        //TODO
-//                    }
-//                });
-//
-//                builder.show();
-//            }
-//        });
-
         loadDateList();
         loadTimeList();
         loadNumberList();
@@ -146,7 +121,7 @@ public class ReservationFragment extends Fragment {
             }
         });
         dateRCView.setItemAnimator(new DefaultItemAnimator());
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),2,RecyclerView.HORIZONTAL,false);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1, RecyclerView.HORIZONTAL, false);
         dateRCView.setLayoutManager(layoutManager);
         dateRCView.setAdapter(adapter1);
 

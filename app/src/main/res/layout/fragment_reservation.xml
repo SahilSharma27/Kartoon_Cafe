@@ -273,7 +273,7 @@
         android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:layout_margin="4dp"
-        android:background="@color/myOrange"
+        android:background="@drawable/side_nav_bar"
         android:fontFamily="@font/happymarker"
         android:text="Confirm"
         android:textColor="@color/white"

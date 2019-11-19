@@ -9,12 +9,6 @@
     android:background="@color/colorPrimaryDark"
     tools:showIn="@layout/activity_sub_menu">
 
-    <!--    <TextView-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="@dimen/text_margin"-->
-    <!--        android:text="@string/large_text" />-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,12 +25,5 @@
             android:scaleType="fitXY"
             android:src="@drawable/kartoon_cafe" />
     </LinearLayout>
-    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-    <!--            android:id="@+id/fab"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_margin="@dimen/fab_margin"-->
-    <!--            android:layout_gravity="bottom|end"-->
-    <!--            app:srcCompat="@drawable/ic_shopping_cart_black_24dp" >-->
-    <!--    </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
+    \
 </androidx.core.widget.NestedScrollView>

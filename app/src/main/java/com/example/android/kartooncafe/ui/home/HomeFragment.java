@@ -46,7 +46,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class HomeFragment extends Fragment {
 
-
+    private static int TIME_OUT = 4000;
     private ArrayList<Menu> specialMenu = new ArrayList<>();
     private ArrayList<Poster> topPosterList = new ArrayList<>();
     private ArrayList<BestSellerItem> bestSellerList = new ArrayList<>();
@@ -64,6 +64,7 @@ public class HomeFragment extends Fragment {
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
         // specialMenu.clear();
         LottieAnimationView animationView1, animationView2, animationView3, animationView4;
+
         PosterAdapter adapter1;
         RecyclerView specialsRCView, posterRCView, bestsellRCVIew;
         CustomAdapter1 adapter;
@@ -72,6 +73,7 @@ public class HomeFragment extends Fragment {
         ImageView iv, open;
         Button button;
         FrameLayout liveMusicFrame1, liveMusicFrame2, liveMusicFrame3, specialFrame;
+
 
         FloatingActionButton fab = root.findViewById(R.id.fabHome);
         fab.setOnClickListener(new View.OnClickListener() {
