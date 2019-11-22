@@ -642,23 +642,23 @@ public class SubMenuActivity extends AppCompatActivity {
 
     public void loadMenu20(){
         ArrayList<Customizables>defaultCust=new ArrayList<>();
-        menu20.add(new Item("DSRT1","Peter Pan Baked Cheese Cake",getString(R.string.dessert1),1,190,0,defaultCust));
-        menu20.add(new Item("DSRT2","Stripes Zebra Cheese Cake",getString(R.string.dessert2),1,210,0,defaultCust));
-        menu20.add(new Item("DSRT3","Flintstones Mango Cheese Cake",getString(R.string.dessert3),1,170,0,defaultCust));
-        menu20.add(new Item("DSRT4","X-Men Blue Berry Cheese Cake",getString(R.string.dessert4),1,170,0,defaultCust));
-        menu20.add(new Item("DSRT5","Black Panther Choco Fudge Brownies",getString(R.string.dessert5),1,240,0,defaultCust));
-        menu20.add(new Item("DSRT6","Snoopy Safron Baked Yogurt",getString(R.string.dessert6),1,200,0,defaultCust));
-        menu20.add(new Item("DSRT7","Chocolate Lava Cake with Ice Cream",getString(R.string.dessert7),1,235,0,defaultCust));
-        menu20.add(new Item("DSRT8","Shanghai Special Apple Toffee",getString(R.string.dessert8),1,210,0,defaultCust));
+        menu20.add(new Item("DSRT1", "Peter Pan Baked Cheese Cake", getString(R.string.dessert1), 3, 190, 0, defaultCust));
+        menu20.add(new Item("DSRT2", "Stripes Zebra Cheese Cake", getString(R.string.dessert2), 3, 210, 0, defaultCust));
+        menu20.add(new Item("DSRT3", "Flintstones Mango Cheese Cake", getString(R.string.dessert3), 3, 170, 0, defaultCust));
+        menu20.add(new Item("DSRT4", "X-Men Blue Berry Cheese Cake", getString(R.string.dessert4), 3, 170, 0, defaultCust));
+        menu20.add(new Item("DSRT5", "Black Panther Choco Fudge Brownies", getString(R.string.dessert5), 0, 240, 0, defaultCust));
+        menu20.add(new Item("DSRT6", "Snoopy Safron Baked Yogurt", getString(R.string.dessert6), 0, 200, 0, defaultCust));
+        menu20.add(new Item("DSRT7", "Chocolate Lava Cake with Ice Cream", getString(R.string.dessert7), 0, 235, 0, defaultCust));
+        menu20.add(new Item("DSRT8", "Shanghai Special Apple Toffee", getString(R.string.dessert8), 0, 210, 0, defaultCust));
         menu20.add(new Item("DSRT9","Gulab Jamun Rosy Parfait",getString(R.string.dessert9),0,190,0,defaultCust));
-        menu20.add(new Item("DSRT10","Banoffie Pie",getString(R.string.dessert10),1,170,0,defaultCust));
-        menu20.add(new Item("DSRT11","Strawberry Cheese Cake",getString(R.string.dessert11),1,170,0,defaultCust));
-        menu20.add(new Item("DSRT12","Baked New York Cheese Cake",getString(R.string.dessert12),1,160,0,defaultCust));
+        menu20.add(new Item("DSRT10", "Banoffie Pie", getString(R.string.dessert10), 3, 170, 0, defaultCust));
+        menu20.add(new Item("DSRT11", "Strawberry Cheese Cake", getString(R.string.dessert11), 3, 170, 0, defaultCust));
+        menu20.add(new Item("DSRT12", "Baked New York Cheese Cake", getString(R.string.dessert12), 3, 160, 0, defaultCust));
         menu20.add(new Item("DSRT13","Flavoured Kulfi",getString(R.string.dessert13),0,140,0,defaultCust));
-        menu20.add(new Item("DSRT14","Lemon Grass Souffle",getString(R.string.dessert14),1,120,0,defaultCust));
-        menu20.add(new Item("DSRT15","Phirni Tart",getString(R.string.dessert15),1,120,0,defaultCust));
-        menu20.add(new Item("DSRT16","Tiramisu Cheese Cake",getString(R.string.dessert16),1,161.90,0,defaultCust));
-        menu20.add(new Item("DSRT17","Nutella Cheese Cake",getString(R.string.dessert17),1,142.90,0,defaultCust));
+        menu20.add(new Item("DSRT14", "Lemon Grass Souffle", getString(R.string.dessert14), 0, 120, 0, defaultCust));
+        menu20.add(new Item("DSRT15", "Phirni Tart", getString(R.string.dessert15), 0, 120, 0, defaultCust));
+        menu20.add(new Item("DSRT16", "Tiramisu Cheese Cake", getString(R.string.dessert16), 3, 161.90, 0, defaultCust));
+        menu20.add(new Item("DSRT17", "Nutella Cheese Cake", getString(R.string.dessert17), 3, 142.90, 0, defaultCust));
 
 
     }

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".CartActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,49 +34,95 @@
                 android:textColor="@color/colorPrimaryDark" />
         </LinearLayout>
 
+        <FrameLayout
+            android:id="@+id/empty_cart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_gravity="center" />
 
-        <androidx.core.widget.NestedScrollView
+        <TextView
+            android:id="@+id/cartemptytext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="60dp">
+            android:gravity="center"
+            android:text="Oops! Your Cart is Empty.. " />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/cart_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/cartItemText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/address_edtxt"
-                    android:fontFamily="@font/happymarker"
-                    android:padding="15dp"
-                    android:text="Cart Items"
-                    android:visibility="gone"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/cart_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="2dp" />
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cartpricing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="4dp"
-                    android:visibility="gone">
+                    android:layout_marginBottom="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:fontFamily="@font/happymarker"
+                            android:padding="15dp"
+                            android:text="CART ITEMS "
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginEnd="6dp"
+                            android:background="@color/myOrange" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/cart_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/happymarker"
+                            android:padding="15dp"
+                            android:text="Payable"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginEnd="6dp"
+                            android:background="@color/myOrange" />
 
                         <TextView
                             android:id="@+id/subTotal"
@@ -109,44 +156,33 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <FrameLayout
-                    android:id="@+id/empty_cart"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_gravity="center" />
-
-                <TextView
-                    android:id="@+id/cartemptytext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Oops! Your Cart is Empty.. "
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/payment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/happymarker"
-                    android:padding="15dp"
-                    android:text="Payment Method"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
-
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/payment_rads"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:visibility="gone">
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="4dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/happymarker"
+                            android:padding="15dp"
+                            android:text="Payment Method"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="20sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginEnd="6dp"
+                            android:background="@color/myOrange" />
 
                         <RadioGroup
                             android:layout_width="match_parent"
@@ -170,15 +206,61 @@
                         </RadioGroup>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/happymarker"
+                            android:padding="15dp"
+                            android:text="Additional Requests"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="20sp" />
+
+                        <EditText
+                            android:id="@+id/additional_request_cart"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="6dp"
+                            android:layout_marginEnd="6dp"
+                            android:backgroundTint="@color/myOrange"
+                            android:cursorVisible="false"
+                            android:hint="Provide additional requests or information if Any...."
+                            android:inputType="text"
+                            android:lines="3"
+                            android:padding="4dp"
+                            android:textColor="@color/colorPrimaryDark" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="210dp"
+                    android:src="@drawable/kartoon_cafe" />
+
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/placebuttoncard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:id="@+id/placebuttoncard"
         android:layout_margin="4dp"
         android:backgroundTint="@color/myOrange"
         android:visibility="gone">
@@ -193,11 +275,11 @@
                 android:id="@+id/cartTotal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text=" $1100 "
-                android:textColor="@color/white"
                 android:layout_marginStart="6dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/happymarker"
+                android:text=" $1100 "
+                android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <Button

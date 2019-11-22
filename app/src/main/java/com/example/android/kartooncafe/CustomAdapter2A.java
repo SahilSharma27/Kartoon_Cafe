@@ -58,6 +58,9 @@ public class CustomAdapter2A extends RecyclerView.Adapter<ItemViewHolder2> {
         } else if (currentItem.getItemCategory() == 2) {
             holder.catgView1.setImageResource(R.drawable.veg_icon);
             holder.catgView2.setImageResource((R.drawable.non_veg_icon));
+        } else if (currentItem.getItemCategory() == 3) {
+            holder.catgView1.setImageResource(R.drawable.egg_icon);
+            holder.catgView2.setVisibility(View.INVISIBLE);
         }
         if (currentItem.getCustomizable() == 0) {
             holder.custButton.setVisibility(View.GONE);

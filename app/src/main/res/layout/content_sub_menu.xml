@@ -25,5 +25,5 @@
             android:scaleType="fitXY"
             android:src="@drawable/kartoon_cafe" />
     </LinearLayout>
-    \
+
 </androidx.core.widget.NestedScrollView>

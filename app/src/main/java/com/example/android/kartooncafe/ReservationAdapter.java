@@ -17,6 +17,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationViewHold
     private Context context;
     private ReservationItemClickListener listener;
     private int row_index=-1;
+    int pos;
     public ReservationAdapter(Context context,ArrayList<String> ReserveList,ReservationItemClickListener listener) {
         this.listener=listener;
         this.context=context;
@@ -33,14 +34,19 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final ReservationViewHolder holder, final int position) {
+
             String Reserve=ReserveList.get(position);
             holder.textView.setText(Reserve);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    row_index=position;
+
+                    row_index = position;
+                    //                   notifyDataSetChanged();
+                    int x = holder.getAdapterPosition();
                     notifyDataSetChanged();
-                    listener.onReservationItemClicked(view,holder.getAdapterPosition());
+                    listener.onReservationItemClicked(view, x);
+
                 }
 
             });

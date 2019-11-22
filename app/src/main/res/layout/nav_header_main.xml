@@ -13,7 +13,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Light">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/signed_in_user_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/nav_header_desc"
@@ -25,14 +25,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="SAHIL SHARMA"
+        android:id="@+id/signed_in_username"
+        android:text="Sahil Sharma"
+        android:textAllCaps="true"
         android:gravity="center"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/signed_in_useremail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

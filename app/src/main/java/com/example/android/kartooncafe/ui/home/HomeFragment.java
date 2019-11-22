@@ -57,13 +57,14 @@ public class HomeFragment extends Fragment {
     private Customizables belgianChocolate;
     private Customizables egg;
     private Customizables nonveg8;
+    LottieAnimationView animationView1, animationView2, animationView3, animationView4;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         final View root = inflater.inflate(R.layout.fragment_home, container, false);
         // specialMenu.clear();
-        LottieAnimationView animationView1, animationView2, animationView3, animationView4;
+
 
         PosterAdapter adapter1;
         RecyclerView specialsRCView, posterRCView, bestsellRCVIew;
@@ -99,7 +100,7 @@ public class HomeFragment extends Fragment {
         animationView1.setAnimation(R.raw.live_music);
         liveMusicFrame1.addView(animationView1);
         animationView1.playAnimation();
-        animationView1.setRepeatCount(1);
+
 
         liveMusicFrame2 = root.findViewById(R.id.live_music_frame1);
         animationView2 = new LottieAnimationView(getContext());
@@ -307,4 +308,13 @@ public class HomeFragment extends Fragment {
         egg = new Customizables("Egg", 20, 1);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        animationView1.playAnimation();
+        animationView2.playAnimation();
+        animationView3.playAnimation();
+        animationView4.playAnimation();
+
+    }
 }

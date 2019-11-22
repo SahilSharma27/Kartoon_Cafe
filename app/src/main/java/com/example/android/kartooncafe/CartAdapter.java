@@ -101,12 +101,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
         }
         else if(currentCartItem.getCartItem().getItemCategory()==1) {
             holder.cartItemType.setImageResource(R.drawable.non_veg_icon);
-        }
-        else if (currentCartItem.getCartItem().getItemCategory()==2){
+        } else if (currentCartItem.getCartItem().getItemCategory() == 3) {
+            holder.cartItemType.setImageResource(R.drawable.egg_icon);
+        } else if (currentCartItem.getCartItem().getItemCategory() == 2) {
             if(currentCartItem.getCustom().getCustType()==0){
                 holder.cartItemType.setImageResource(R.drawable.veg_icon);
-            }
-            else if(currentCartItem.getCustom().getCustType()==1) {
+            } else if (currentCartItem.getCustom().getCustType() == 1) {
                 holder.cartItemType.setImageResource(R.drawable.non_veg_icon);
             }
         }
