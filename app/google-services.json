@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "169004608289",
+    "firebase_url": "https://kartoon-cafe.firebaseio.com",
+    "project_id": "kartoon-cafe",
+    "storage_bucket": "kartoon-cafe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169004608289:android:2b89c39b2bd19d048aec60",
+        "android_client_info": {
+          "package_name": "com.example.android.kartooncafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169004608289-0o0ovdru53iaboh4bj6qgmadsg4gdq1u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.kartooncafe",
+            "certificate_hash": "c8fa9ad0b82ae6742f0c739a86c12f26f95de5ce"
+          }
+        },
+        {
+          "client_id": "169004608289-f7ks85vq2d40vhc3b3d1je218bnuu7la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnOkHs-tk7gJZHTBDNqtVcyc5wgDc9778"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169004608289-f7ks85vq2d40vhc3b3d1je218bnuu7la.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
