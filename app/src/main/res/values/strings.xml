@@ -12,7 +12,7 @@
     <string name="menu_menu">Menu</string>
     <string name="menu_table_reservation">Table Reservation</string>
     <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_account">My Account</string>
     <string name="title_activity_sub_menu">SubMenuActivity</string>
     <string name="price">₹ %1$</string>
     <string name="welcome">"Welcome Back,"

@@ -159,11 +159,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.sign_out:
                 //sign out
-                AuthUI.getInstance().signOut(this);
-                //     finish();
-//                Intent intent =new Intent(this,LoginActivity.class);
-//                startActivity(intent);
-                //  AuthUI.getInstance().signOut(this);
+//                AuthUI.getInstance().signOut(this);
+
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

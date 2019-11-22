@@ -46,10 +46,11 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class HomeFragment extends Fragment {
 
-    private static int TIME_OUT = 4000;
+
     private ArrayList<Menu> specialMenu = new ArrayList<>();
     private ArrayList<Poster> topPosterList = new ArrayList<>();
     private ArrayList<BestSellerItem> bestSellerList = new ArrayList<>();
+
     private Customizables veg;
     private Customizables chk;
     private Customizables vanilla;
@@ -57,26 +58,37 @@ public class HomeFragment extends Fragment {
     private Customizables belgianChocolate;
     private Customizables egg;
     private Customizables nonveg8;
-    LottieAnimationView animationView1, animationView2, animationView3, animationView4;
+
+    private LottieAnimationView animationView1, animationView2, animationView3, animationView4;
+
+    private View root;
+    private FloatingActionButton fab;
+
+    private PosterAdapter adapter1;
+    private CustomAdapter1 adapter;
+    private BestSellerAdapter adapter2;
+
+    private RecyclerView specialsRCView, posterRCView, bestsellRCVIew;
+
+    private CardView insta, fb, twitter, yt;
+    private ImageView open;
+
+    private Button button;
+
+    private FrameLayout liveMusicFrame1, liveMusicFrame2, liveMusicFrame3, specialFrame;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        final View root = inflater.inflate(R.layout.fragment_home, container, false);
-        // specialMenu.clear();
+        root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        findViews();
+        playAnimations();
+        loadTopPosters();
+        loadSpecialMenu();
+        loadBestSellers();
 
 
-        PosterAdapter adapter1;
-        RecyclerView specialsRCView, posterRCView, bestsellRCVIew;
-        CustomAdapter1 adapter;
-        BestSellerAdapter adapter2;
-        CardView insta, fb, twitter, yt;
-        ImageView iv, open;
-        Button button;
-        FrameLayout liveMusicFrame1, liveMusicFrame2, liveMusicFrame3, specialFrame;
-
-
-        FloatingActionButton fab = root.findViewById(R.id.fabHome);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,59 +102,9 @@ public class HomeFragment extends Fragment {
         });
 
 
-        specialsRCView = root.findViewById(R.id.special_rcview);
-        bestsellRCVIew = root.findViewById(R.id.best_seller_rcview);
-        button = root.findViewById(R.id.reservationfromhome);
-        //final NavigationView navigationView = root.findViewById(R.id.nav_view);
-
-        liveMusicFrame1 = root.findViewById(R.id.live_music_frame);
-        animationView1 = new LottieAnimationView(getContext());
-        animationView1.setAnimation(R.raw.live_music);
-        liveMusicFrame1.addView(animationView1);
-        animationView1.playAnimation();
-
-
-        liveMusicFrame2 = root.findViewById(R.id.live_music_frame1);
-        animationView2 = new LottieAnimationView(getContext());
-        animationView2.setAnimation(R.raw.live_music3);
-        liveMusicFrame2.addView(animationView2);
-        animationView2.playAnimation();
-        animationView2.setRepeatCount(1);
-
-        liveMusicFrame3 = root.findViewById(R.id.live_music_frame2);
-        animationView3 = new LottieAnimationView(getContext());
-        animationView3.setAnimation(R.raw.live_music2);
-        liveMusicFrame3.addView(animationView3);
-        animationView3.playAnimation();
-        animationView3.setRepeatCount(1);
-
-        specialFrame = root.findViewById(R.id.likes);
-        animationView4 = new LottieAnimationView(getContext());
-        animationView4.setAnimation(R.raw.like);
-        specialFrame.addView(animationView4);
-        animationView4.playAnimation();
-        animationView4.setRepeatCount(2);
-
-
-        // animationView.setSpeed(3);
-
-        posterRCView = root.findViewById(R.id.top_rcview);
-        insta = root.findViewById(R.id.instafollow);
-        fb = root.findViewById(R.id.fbfollow);
-        twitter = root.findViewById(R.id.twitterfollow);
-        open = root.findViewById(R.id.home_img);
-        yt = root.findViewById(R.id.ytfollow);
         Glide.with(open).load(R.drawable.openow).into(open);
 
-        loadTopPosters();
-        loadSpecialMenu();
-        loadBestSellers();
-
-        posterRCView.setItemAnimator(new DefaultItemAnimator());
-        SnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(posterRCView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
-        posterRCView.setLayoutManager(linearLayoutManager);
+        //Top Posters
         adapter1 = new PosterAdapter(getContext(), topPosterList, new PosterItemClickListener() {
             @Override
             public void onPosterItemClicked(View view, int positon) {
@@ -150,8 +112,15 @@ public class HomeFragment extends Fragment {
 
             }
         });
+        posterRCView.setItemAnimator(new DefaultItemAnimator());
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(posterRCView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
+        posterRCView.setLayoutManager(linearLayoutManager);
         posterRCView.setAdapter(adapter1);
 
+
+        //Specials
         specialsRCView.setItemAnimator(new DefaultItemAnimator());
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
         specialsRCView.setLayoutManager(layoutManager);
@@ -170,6 +139,8 @@ public class HomeFragment extends Fragment {
         });
         specialsRCView.setAdapter(adapter);
 
+
+        //Bestsellers
         bestsellRCVIew.setItemAnimator(new DefaultItemAnimator());
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
         bestsellRCVIew.setLayoutManager(linearLayoutManager1);
@@ -315,6 +286,61 @@ public class HomeFragment extends Fragment {
         animationView2.playAnimation();
         animationView3.playAnimation();
         animationView4.playAnimation();
+    }
+
+    private void findViews() {
+        fab = root.findViewById(R.id.fabHome);
+
+        //RCVIEWS
+        specialsRCView = root.findViewById(R.id.special_rcview);
+        bestsellRCVIew = root.findViewById(R.id.best_seller_rcview);
+        posterRCView = root.findViewById(R.id.top_rcview);
+
+        button = root.findViewById(R.id.reservationfromhome);
+        //animations
+        liveMusicFrame1 = root.findViewById(R.id.live_music_frame);
+        liveMusicFrame2 = root.findViewById(R.id.live_music_frame1);
+        liveMusicFrame3 = root.findViewById(R.id.live_music_frame2);
+        specialFrame = root.findViewById(R.id.likes);
+
+        //FollowUs
+        insta = root.findViewById(R.id.instafollow);
+        fb = root.findViewById(R.id.fbfollow);
+        twitter = root.findViewById(R.id.twitterfollow);
+        yt = root.findViewById(R.id.ytfollow);
+
+        open = root.findViewById(R.id.home_img);
+
+    }
+
+    private void playAnimations() {
+        //guitar girl
+        animationView1 = new LottieAnimationView(getContext());
+        animationView1.setAnimation(R.raw.live_music);
+        liveMusicFrame1.addView(animationView1);
+        animationView1.playAnimation();
+
+
+        //speaker
+        animationView2 = new LottieAnimationView(getContext());
+        animationView2.setAnimation(R.raw.live_music3);
+        liveMusicFrame2.addView(animationView2);
+        animationView2.playAnimation();
+        animationView2.setRepeatCount(1);
+
+        //headphone guy
+        animationView3 = new LottieAnimationView(getContext());
+        animationView3.setAnimation(R.raw.live_music2);
+        liveMusicFrame3.addView(animationView3);
+        animationView3.playAnimation();
+        animationView3.setRepeatCount(1);
+
+        //likes
+        animationView4 = new LottieAnimationView(getContext());
+        animationView4.setAnimation(R.raw.like);
+        specialFrame.addView(animationView4);
+        animationView4.playAnimation();
+        animationView4.setRepeatCount(2);
 
     }
 }

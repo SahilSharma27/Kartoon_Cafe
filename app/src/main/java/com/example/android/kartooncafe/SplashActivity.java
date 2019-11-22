@@ -37,6 +37,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, TIME_OUT);
 
+
     }
 }
 //frameLayout=findViewById(R.id.anim);

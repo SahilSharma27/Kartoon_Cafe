@@ -6,5 +6,5 @@
         android:orderInCategory="100"
         android:icon="@mipmap/ic_launcher_round"
         android:title="SignOut"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>
