@@ -64,8 +64,8 @@ public class CustomAdapter2 extends RecyclerView.Adapter<ItemViewHolder2> {
         }
         if (currentItem.getCustomizable() == 0) {
             holder.custButton.setVisibility(View.GONE);
-
         }
+
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
