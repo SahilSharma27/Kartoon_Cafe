@@ -1,47 +1,49 @@
 package com.example.android.kartooncafe;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class Cart implements Parcelable {
-    private Item cartItem;
+@Entity(tableName = "CartTable")
+public class Cart {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "cart_item_id")
+    private int cartItemId;
+    @ColumnInfo(name = "cart_item_name")
+    private String cartItemName;
+    @ColumnInfo(name = "cart_item_qty")
     private int quantity;
-    private double total;
-    private Customizables custom;
+    @ColumnInfo(name = "cart_item_price")
+    private double price;
+    @ColumnInfo(name = "cart_item_custom")
+    private String custom;
+    @ColumnInfo(name = "cart_item_custom_price")
+    private double customPrice;
+    @ColumnInfo(name = "cart_item_catg")
+    private int cartItemCategory;//veg , non veg , egg
 
 
-    public Cart(Item cartItem, int quantity, double total) {
-        this.cartItem = cartItem;
+    public Cart(String cartItemName, int quantity, double price) {
+        this.cartItemName = cartItemName;
         this.quantity = quantity;
-        this.total = total;
+        this.price = price;
     }
 
 
-    public static final Creator<Cart> CREATOR = new Creator<Cart>() {
-        @Override
-        public Cart createFromParcel(Parcel in) {
-            return new Cart(in);
-        }
-
-        @Override
-        public Cart[] newArray(int size) {
-            return new Cart[size];
-        }
-    };
-
-    protected Cart(Parcel in) {
-        cartItem = in.readParcelable(Item.class.getClassLoader());
-        quantity = in.readInt();
-        total = in.readDouble();
-        custom = in.readParcelable(Customizables.class.getClassLoader());
+    public int getCartItemId() {
+        return cartItemId;
     }
 
-    public Item getCartItem() {
-        return cartItem;
+    public void setCartItemId(int cartItemId) {
+        this.cartItemId = cartItemId;
     }
 
-    public void setCartItem(Item cartItem) {
-        this.cartItem = cartItem;
+    public String getCartItemName() {
+        return cartItemName;
+    }
+
+    public void setCartItemName(String cartItemName) {
+        this.cartItemName = cartItemName;
     }
 
     public int getQuantity() {
@@ -52,34 +54,37 @@ public class Cart implements Parcelable {
         this.quantity = quantity;
     }
 
-    public double getTotal() {
-        return total;
+    public double getPrice() {
+        return price;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-
-
-    public Customizables getCustom() {
+    public String getCustom() {
         return custom;
     }
 
-    public void setCustom(Customizables custom) {
+    public void setCustom(String custom) {
         this.custom = custom;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public double getCustomPrice() {
+        return customPrice;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeParcelable(cartItem, i);
-        parcel.writeInt(quantity);
-        parcel.writeDouble(total);
-        parcel.writeParcelable(custom, i);
+    public void setCustomPrice(double customPrice) {
+        this.customPrice = customPrice;
     }
+
+    public int getCartItemCategory() {
+        return cartItemCategory;
+    }
+
+    public void setCartItemCategory(int cartItemCategory) {
+        this.cartItemCategory = cartItemCategory;
+    }
+
+
 }

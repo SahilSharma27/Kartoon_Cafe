@@ -9,6 +9,10 @@ public class Item implements Parcelable {
     private String itemCode;
     private String itemName;
     private String itemDescription;
+    private double itemPrice;
+    private int customizable;//o-no,1-yes
+    private ArrayList<Customizables> customList;
+    private int itemCategory;// Veg=0,non-veg=1,option=2,egg=3
     public static final Creator<Item> CREATOR = new Creator<Item>() {
         @Override
         public Item createFromParcel(Parcel in) {
@@ -20,9 +24,6 @@ public class Item implements Parcelable {
             return new Item[size];
         }
     };
-    private double itemPrice;
-    private int customizable;//o-no,1-yes
-    private ArrayList<Customizables> customList;
 
 
     public Item(String itemCode, String itemName, String itemDescription, int itemCategory, double itemPrice, int customizable, ArrayList<Customizables> customList) {
@@ -35,7 +36,6 @@ public class Item implements Parcelable {
         this.customList = customList;
     }
 
-    private int itemCategory;// Veg=0,non-veg=1,option=2,egg=3
 
     protected Item(Parcel in) {
         itemCode = in.readString();

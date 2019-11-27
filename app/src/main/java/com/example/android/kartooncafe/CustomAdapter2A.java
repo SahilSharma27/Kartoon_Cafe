@@ -62,74 +62,126 @@ public class CustomAdapter2A extends RecyclerView.Adapter<ItemViewHolder2> {
             holder.catgView1.setImageResource(R.drawable.egg_icon);
             holder.catgView2.setVisibility(View.INVISIBLE);
         }
-        if (currentItem.getCustomizable() == 0) {
-            holder.custButton.setVisibility(View.GONE);
-
-        }
+//        if (currentItem.getCustomizable() == 0) {
+//            holder.custButton.setVisibility(View.GONE);
+//
+//        }
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //  Toast.makeText(context, currentItem.getCustomList().get(0).getCustomName() +" to Cart",Toast.LENGTH_LONG).show();
-                Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
-                OrderAheadSubMenu.reservationCart.add(cartItem);
-            }
-        });
-
-        holder.custButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                customValuesList.clear();
-                radValue = "";
-                clickedRadPos = 0;
-                for (int i = 0; i < currentItem.getCustomList().size(); i++) {
-                    if (currentItem.getCustomList().get(i).getCustomPrice() == 0.0) {
-                        radValue = currentItem.getCustomList().get(i).getCustomName();
-                    } else {
-                        radValue = currentItem.getCustomList().get(i).getCustomName()
-                                + "  ( + ₹" + currentItem.getCustomList().get(i).getCustomPrice() + ")";
+                if (currentItem.getCustomizable() == 0) {
+//                    Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
+//                    OrderAheadSubMenu.reservationCart.add(cartItem);
+                } else {
+                    customValuesList.clear();
+                    radValue = "";
+                    clickedRadPos = 0;
+                    for (int i = 0; i < currentItem.getCustomList().size(); i++) {
+                        if (currentItem.getCustomList().get(i).getCustomPrice() == 0.0) {
+                            radValue = currentItem.getCustomList().get(i).getCustomName();
+                        } else {
+                            radValue = currentItem.getCustomList().get(i).getCustomName()
+                                    + "  ( + ₹" + currentItem.getCustomList().get(i).getCustomPrice() + ")";
+                        }
+                        customValuesList.add(radValue);
                     }
-                    customValuesList.add(radValue);
+
+                    selectedRad = customValuesList.get(0);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Select one(Required)");
+                    builder.setSingleChoiceItems(customValuesList.toArray(new String[customValuesList.size()]), 0, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            clickedRadPos = i;
+                            selectedRad = customValuesList.get(i);
+                        }
+                    });
+
+                    builder.setPositiveButton("ADD to Cart", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(context, selectedRad, Toast.LENGTH_LONG).show();
+                            customValuesList.clear();
+
+//                            Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
+//                            double customPrice = currentItem.getCustomList().get(clickedRadPos).getCustomPrice();
+//                            int custType = currentItem.getCustomList().get(clickedRadPos).getCustType();
+//                            cartItem.setCustom(new Customizables(selectedRad, customPrice, custType));
+//
+//                            OrderAheadSubMenu.reservationCart.add(cartItem);
+                            // CartActivity.cartItemPrices.add(currentItem.getItemPrice());
+                        }
+                    });
+
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //TODO
+                        }
+                    });
+
+                    builder.show();
                 }
-
-                selectedRad = customValuesList.get(0);
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Select one(Required)");
-                builder.setSingleChoiceItems(customValuesList.toArray(new String[customValuesList.size()]), 0, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        clickedRadPos = i;
-                        selectedRad = customValuesList.get(i);
-                    }
-                });
-
-                builder.setPositiveButton("ADD to Cart", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(context, selectedRad, Toast.LENGTH_LONG).show();
-                        customValuesList.clear();
-
-                        Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
-                        double customPrice = currentItem.getCustomList().get(clickedRadPos).getCustomPrice();
-                        int custType = currentItem.getCustomList().get(clickedRadPos).getCustType();
-                        cartItem.setCustom(new Customizables(selectedRad, customPrice, custType));
-
-                        OrderAheadSubMenu.reservationCart.add(cartItem);
-                        // CartActivity.cartItemPrices.add(currentItem.getItemPrice());
-                    }
-                });
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //TODO
-                    }
-                });
-
-                builder.show();
             }
         });
-
     }
+
+//        holder.custButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                customValuesList.clear();
+//                radValue = "";
+//                clickedRadPos = 0;
+//                for (int i = 0; i < currentItem.getCustomList().size(); i++) {
+//                    if (currentItem.getCustomList().get(i).getCustomPrice() == 0.0) {
+//                        radValue = currentItem.getCustomList().get(i).getCustomName();
+//                    } else {
+//                        radValue = currentItem.getCustomList().get(i).getCustomName()
+//                                + "  ( + ₹" + currentItem.getCustomList().get(i).getCustomPrice() + ")";
+//                    }
+//                    customValuesList.add(radValue);
+//                }
+//
+//                selectedRad = customValuesList.get(0);
+//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                builder.setTitle("Select one(Required)");
+//                builder.setSingleChoiceItems(customValuesList.toArray(new String[customValuesList.size()]), 0, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        clickedRadPos = i;
+//                        selectedRad = customValuesList.get(i);
+//                    }
+//                });
+//
+//                builder.setPositiveButton("ADD to Cart", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        Toast.makeText(context, selectedRad, Toast.LENGTH_LONG).show();
+//                        customValuesList.clear();
+//
+//                        Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
+//                        double customPrice = currentItem.getCustomList().get(clickedRadPos).getCustomPrice();
+//                        int custType = currentItem.getCustomList().get(clickedRadPos).getCustType();
+//                        cartItem.setCustom(new Customizables(selectedRad, customPrice, custType));
+//
+//                        OrderAheadSubMenu.reservationCart.add(cartItem);
+//                        // CartActivity.cartItemPrices.add(currentItem.getItemPrice());
+//                    }
+//                });
+//
+//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        //TODO
+//                    }
+//                });
+//
+//                builder.show();
+//            }
+//        });
+//
+//    }
 
     @Override
     public int getItemCount() {

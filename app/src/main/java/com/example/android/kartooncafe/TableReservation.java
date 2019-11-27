@@ -1,23 +1,9 @@
 package com.example.android.kartooncafe;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.ArrayList;
 
-public class TableReservation implements Parcelable {
+public class TableReservation {
 
-    public static final Creator<TableReservation> CREATOR = new Creator<TableReservation>() {
-        @Override
-        public TableReservation createFromParcel(Parcel in) {
-            return new TableReservation(in);
-        }
-
-        @Override
-        public TableReservation[] newArray(int size) {
-            return new TableReservation[size];
-        }
-    };
     private int reservationId;
     private String reservationDate;
     private String reservationTime;
@@ -34,19 +20,6 @@ public class TableReservation implements Parcelable {
     public TableReservation() {
     }
 
-    protected TableReservation(Parcel in) {
-        reservationId = in.readInt();
-        reservationDate = in.readString();
-        reservationTime = in.readString();
-        numberOfPpl = in.readString();
-        userName = in.readString();
-        userEmail = in.readString();
-        userContact = in.readString();
-        specialOcassion = in.readString();
-        specialInstruction = in.readString();
-        reservtaionOrderAheadList = in.createTypedArrayList(Cart.CREATOR);
-        orderTotal = in.readDouble();
-    }
 
     public int getReservationId() {
         return reservationId;
@@ -137,23 +110,4 @@ public class TableReservation implements Parcelable {
     }
 
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(reservationId);
-        parcel.writeString(reservationDate);
-        parcel.writeString(reservationTime);
-        parcel.writeString(numberOfPpl);
-        parcel.writeString(userName);
-        parcel.writeString(userEmail);
-        parcel.writeString(userContact);
-        parcel.writeString(specialOcassion);
-        parcel.writeString(specialInstruction);
-        parcel.writeTypedList(reservtaionOrderAheadList);
-        parcel.writeDouble(orderTotal);
-    }
 }

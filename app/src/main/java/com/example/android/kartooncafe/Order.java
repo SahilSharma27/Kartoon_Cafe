@@ -1,22 +1,9 @@
 package com.example.android.kartooncafe;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.ArrayList;
 
-public class Order implements Parcelable {
-    public static final Creator<Order> CREATOR = new Creator<Order>() {
-        @Override
-        public Order createFromParcel(Parcel in) {
-            return new Order(in);
-        }
+public class Order {
 
-        @Override
-        public Order[] newArray(int size) {
-            return new Order[size];
-        }
-    };
     private int orderId;
     private String orderDate;
     private String orderTime;
@@ -26,24 +13,14 @@ public class Order implements Parcelable {
     private String userAddress;
     private String specialInstruction;
     private ArrayList<Cart> orderList;
+    private String payementMethod;
+    private String orderStatus;
     private double orderTotal;
 
 
     public Order() {
     }
 
-    protected Order(Parcel in) {
-        orderId = in.readInt();
-        orderDate = in.readString();
-        orderTime = in.readString();
-        userName = in.readString();
-        userEmail = in.readString();
-        userContact = in.readString();
-        userAddress = in.readString();
-        specialInstruction = in.readString();
-        orderList = in.createTypedArrayList(Cart.CREATOR);
-        orderTotal = in.readDouble();
-    }
 
     public int getOrderId() {
         return orderId;
@@ -126,23 +103,19 @@ public class Order implements Parcelable {
         this.orderTotal = orderTotal;
     }
 
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getPayementMethod() {
+        return payementMethod;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(orderId);
-        parcel.writeString(orderDate);
-        parcel.writeString(orderTime);
-        parcel.writeString(userName);
-        parcel.writeString(userEmail);
-        parcel.writeString(userContact);
-        parcel.writeString(userAddress);
-        parcel.writeString(specialInstruction);
-        parcel.writeTypedList(orderList);
-        parcel.writeDouble(orderTotal);
+    public void setPayementMethod(String payementMethod) {
+        this.payementMethod = payementMethod;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

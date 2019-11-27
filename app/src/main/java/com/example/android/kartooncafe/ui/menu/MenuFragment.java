@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,8 +57,10 @@ public class MenuFragment extends Fragment {
         menuList.add(new Menu("ARABIC","arabic",R.drawable.arabic));
         menuList.add(new Menu("'DESSSSERTS' IS OUR SPECIALITY","desserts",R.drawable.desserts));
 
-        menuRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        //  menuRecyclerView.setItemAnimator(new DefaultItemAnimator());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+//        linearLayoutManager.setReverseLayout(true);
+//        linearLayoutManager.setStackFromEnd(true);
         menuRecyclerView.setLayoutManager(linearLayoutManager);
 
         menuAdapter=new CustomAdapter1(getContext(), menuList, new MenuImageClickListener() {

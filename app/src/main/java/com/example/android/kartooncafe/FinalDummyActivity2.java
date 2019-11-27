@@ -18,24 +18,24 @@ public class FinalDummyActivity2 extends AppCompatActivity {
         Intent intent = getIntent();
         String X;
 
-        TableReservation finalTableReservation = intent.getParcelableExtra("OI");
-        if (finalTableReservation.getReservtaionOrderAheadList() != null) {
-            X = finalTableReservation.getReservtaionOrderAheadList().get(0).getCartItem().getItemName();
-        } else X = "Nopee";
+//        TableReservation finalTableReservation = intent.getParcelableExtra("OI");
+//        if (finalTableReservation.getReservtaionOrderAheadList() != null) {
+//            X = finalTableReservation.getReservtaionOrderAheadList().get(0).getCartItem().getItemName();
+//        } else X = "Nopee";
 
 
-        String dummy = finalTableReservation.getReservationId() +
-                "\n " + finalTableReservation.getReservationDate() +
-                "\n " + finalTableReservation.getReservationTime() +
-                "\n " + finalTableReservation.getNumberOfPpl() +
-                "\n " + finalTableReservation.getUserName() +
-                "\n " + finalTableReservation.getUserEmail() +
-                "\n " + finalTableReservation.getUserContact() +
-                "\n " + finalTableReservation.getSpecialInstruction() +
-                "\n" + finalTableReservation.getSpecialOcassion() +
-                "\n" + finalTableReservation.getOrderTotal() + X;
-
-        textView.setText(dummy);
+//        String dummy = finalTableReservation.getReservationId() +
+//                "\n " + finalTableReservation.getReservationDate() +
+//                "\n " + finalTableReservation.getReservationTime() +
+//                "\n " + finalTableReservation.getNumberOfPpl() +
+//                "\n " + finalTableReservation.getUserName() +
+//                "\n " + finalTableReservation.getUserEmail() +
+//                "\n " + finalTableReservation.getUserContact() +
+//                "\n " + finalTableReservation.getSpecialInstruction() +
+//                "\n" + finalTableReservation.getSpecialOcassion() +
+//                "\n" + finalTableReservation.getOrderTotal() + X;
+//
+//        textView.setText(dummy);
 
     }
 }

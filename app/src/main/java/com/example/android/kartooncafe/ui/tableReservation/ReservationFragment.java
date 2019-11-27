@@ -25,7 +25,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.android.kartooncafe.Cart;
 import com.example.android.kartooncafe.CartAdapter;
-import com.example.android.kartooncafe.FinalDummyActivity2;
 import com.example.android.kartooncafe.MainActivity;
 import com.example.android.kartooncafe.OrderAheadMenu;
 import com.example.android.kartooncafe.OrderAheadSubMenu;
@@ -187,9 +186,9 @@ public class ReservationFragment extends Fragment {
 
                 tableReservation.setOrderTotal(1000.0);
 
-                Intent intent = new Intent(getContext(), FinalDummyActivity2.class);
-                intent.putExtra("OI", tableReservation);
-                startActivity(intent);
+//                Intent intent = new Intent(getContext(), FinalDummyActivity2.class);
+//                intent.putExtra("OI", tableReservation);
+//                startActivity(intent);
             }
         });
 

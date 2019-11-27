@@ -136,16 +136,19 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/happymarker"
                     android:padding="10dp"
+                    android:id="@+id/user_address"
                     android:text="1B/139 Ramesh Nagar, New Delhi 110015."
                     android:textColor="@color/textColor"
                     android:textSize="20sp" />
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+
+                <Button
+                    android:id="@+id/get_location"
+                    android:layout_width="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:src="@drawable/ic_mode_edit_black_24dp" />
+                    android:layout_height="wrap_content"
+                    android:text="Locate me" />
 
             </LinearLayout>
         </RelativeLayout>

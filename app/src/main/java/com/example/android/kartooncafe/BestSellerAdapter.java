@@ -108,13 +108,20 @@ public class BestSellerAdapter extends RecyclerView.Adapter<BestSellViewHolder> 
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Toast.makeText(context, selectedRad, Toast.LENGTH_LONG).show();
                             customValuesList.clear();
-
-                            Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
+                            Cart cartItem = new Cart(currentItem.getItemName(), 1, currentItem.getItemPrice());
                             double customPrice = currentItem.getCustomList().get(clickedRadPos).getCustomPrice();
                             int custType = currentItem.getCustomList().get(clickedRadPos).getCustType();
-                            cartItem.setCustom(new Customizables(selectedRad, customPrice, custType));
-                            SubMenuActivity.cartItems.add(cartItem);
-                            CartActivity.cartItemPrices.add(currentItem.getItemPrice());
+                            cartItem.setCustom(selectedRad);
+                            cartItem.setCustomPrice(customPrice);
+                            cartItem.setCartItemCategory(custType);
+                            CartHelper.addItemToCart(context, cartItem);
+
+//                            Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
+//                            double customPrice = currentItem.getCustomList().get(clickedRadPos).getCustomPrice();
+//                            int custType = currentItem.getCustomList().get(clickedRadPos).getCustType();
+//                            cartItem.setCustom(new Customizables(selectedRad, customPrice, custType));
+//                            SubMenuActivity.cartItems.add(cartItem);
+//                            CartActivity.cartItemPrices.add(currentItem.getItemPrice());
                         }
                     });
 
@@ -128,10 +135,16 @@ public class BestSellerAdapter extends RecyclerView.Adapter<BestSellViewHolder> 
                     builder.show();
                 } else {
                     Toast.makeText(context, "Added to cart", Toast.LENGTH_LONG).show();
-                    Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
 
-                    SubMenuActivity.cartItems.add(cartItem);
-                    CartActivity.cartItemPrices.add(currentItem.getItemPrice());
+                    Cart cartItem = new Cart(currentItem.getItemName(), 1, currentItem.getItemPrice());
+                    cartItem.setCustom(null);
+                    cartItem.setCustomPrice(0.0);
+                    cartItem.setCartItemCategory(currentItem.getItemCategory());
+                    CartHelper.addItemToCart(context, cartItem);
+//                    Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
+//
+//                    SubMenuActivity.cartItems.add(cartItem);
+//                    CartActivity.cartItemPrices.add(currentItem.getItemPrice());
                 }
 
             }

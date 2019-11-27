@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
     private Context context;
-   private ArrayList<Cart> finalCartItemsList;
+    private ArrayList<Cart> finalCartItemsList;
 
 
     public CartAdapter(Context context, ArrayList<Cart> cartList) {
@@ -40,10 +40,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (context instanceof CartActivity) {
-                    SubMenuActivity.cartItems.remove(pos);
-                    CartActivity.cartItemPrices.remove(pos);
+                    CartHelper.removeItemFromCart(context, currentCartItem);
+                    finalCartItemsList.remove(pos);
+//                    SubMenuActivity.cartItems.remove(pos);
+//                    CartActivity.cartItemPrices.remove(pos);
                     notifyDataSetChanged();
+                    CartActivity.Refresh();
                 } else {
                     OrderAheadSubMenu.reservationCart.remove(pos);
                     notifyDataSetChanged();
@@ -55,10 +59,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
         });
         if (currentCartItem.getCustom() != null) {
             holder.cartItemCutsomize.setVisibility(View.VISIBLE);
-            holder.cartItemCutsomize.setText(currentCartItem.getCustom().getCustomName());
+            holder.cartItemCutsomize.setText(currentCartItem.getCustom());
         } else holder.cartItemCutsomize.setVisibility(View.GONE);
 
-        holder.cartItemPrice.setText("₹ " + currentCartItem.getCartItem().getItemPrice());
+        holder.cartItemPrice.setText("₹ " + currentCartItem.getPrice());
 
         holder.cartItemQty.setText(String.valueOf(currentCartItem.getQuantity()));
 
@@ -69,11 +73,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
                 if (currentQty == 1) {
                     holder.minusButton.setClickable(true);
 
+
                 }
                 int newQty = currentQty + 1;
                 holder.cartItemQty.setText(String.valueOf(newQty));
-                holder.cartItemPrice.setText("₹ " + newQty * currentCartItem.getCartItem().getItemPrice());
-
+                holder.cartItemPrice.setText("₹ " + newQty * currentCartItem.getPrice());
             }
         });
         holder.minusButton.setOnClickListener(new View.OnClickListener() {
@@ -86,35 +90,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
                 }
                 int newQty = currentQty - 1;
                 holder.cartItemQty.setText(String.valueOf(newQty));
-                holder.cartItemPrice.setText("₹ " + newQty * currentCartItem.getCartItem().getItemPrice());
+                holder.cartItemPrice.setText("₹ " + newQty * currentCartItem.getPrice());
+
             }
         });
 
 
-        holder.cartItemName.setText(currentCartItem.getCartItem().getItemName());
+        holder.cartItemName.setText(currentCartItem.getCartItemName());
 
-        // if item is pure veg(0) then type is veg(0), if item is non-veg(1) then type is also non-veg(1)
-        // if item has options(2) then it depends on customs type if custom is 0 then type is 0 if custom
-        // is 1 then type is 1
-        if (currentCartItem.getCartItem().getItemCategory()==0){
+        if (currentCartItem.getCartItemCategory() == 0) {
             holder.cartItemType.setImageResource(R.drawable.veg_icon);
-        }
-        else if(currentCartItem.getCartItem().getItemCategory()==1) {
-            holder.cartItemType.setImageResource(R.drawable.non_veg_icon);
-        } else if (currentCartItem.getCartItem().getItemCategory() == 3) {
+        } else if (currentCartItem.getCartItemCategory() == 3) {
             holder.cartItemType.setImageResource(R.drawable.egg_icon);
-        } else if (currentCartItem.getCartItem().getItemCategory() == 2) {
-            if(currentCartItem.getCustom().getCustType()==0){
-                holder.cartItemType.setImageResource(R.drawable.veg_icon);
-            } else if (currentCartItem.getCustom().getCustType() == 1) {
-                holder.cartItemType.setImageResource(R.drawable.non_veg_icon);
-            }
+        } else if (currentCartItem.getCartItemCategory() == 1) {
+            holder.cartItemType.setImageResource(R.drawable.non_veg_icon);
         }
 
-//        if(currentCartItem.getCustom()!=null){
-//            holder.cartItemCutsomize.setText(currentCartItem.getCustom().getCustomName());
-//        }
-//        else holder.cartItemCutsomize.setVisibility(View.GONE);
+        if (currentCartItem.getCustom() != null) {
+            holder.cartItemCutsomize.setText(currentCartItem.getCustom());
+        } else holder.cartItemCutsomize.setVisibility(View.GONE);
     }
 
     @Override
