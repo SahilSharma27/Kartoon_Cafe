@@ -219,6 +219,7 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
+
     private void loadSpecialMenu() {
         specialMenu.clear();
         specialMenu.add(new Menu("PIZZAS", "pizza", R.drawable.pizza2));
@@ -343,4 +344,5 @@ public class HomeFragment extends Fragment {
         animationView4.setRepeatCount(2);
 
     }
+
 }

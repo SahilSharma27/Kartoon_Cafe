@@ -1,10 +1,15 @@
 package com.example.android.kartooncafe;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,10 +45,14 @@ public class CartActivity extends AppCompatActivity {
     NestedScrollView cartContent;
     Button placeOrderbutton;
     EditText editText;
-    String additionalRequest;
+    String additionalRequest = "Not Any";
     String orderDate, orderTime;
     TextView emptytext, addressTextView;
     String address;
+    FrameLayout frameLayout;
+    RadioGroup radioGroup;
+    Order finalOrder;
+
 
     public static void Refresh() {
         subtotal = 0.0;
@@ -117,36 +126,16 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                initializeObject();
+                cartOrderdatabaseReference.push().setValue(finalOrder);
 
-                Date time = Calendar.getInstance().getTime();
-                orderTime = time.toString();
-
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
-                orderDate = dateFormat.format(time);
-
-                Order order = new Order();
-                order.setOrderId(1);
-                order.setOrderDate(orderDate);
-                order.setOrderTime(orderTime);
-                order.setUserName(MainActivity.userName);
-                order.setUserEmail(MainActivity.userEmail);
-                order.setUserContact("9810040013");
-                order.setUserAddress(address);
-                order.setSpecialInstruction(additionalRequest);
-                order.setOrderList(finalCartItems);
-                order.setOrderTotal(GrandTotal);
-                order.setOrderStatus("Placed");
-                order.setPayementMethod("Cash");
-                cartOrderdatabaseReference.push().setValue(order);
                 CartHelper.emptyThecart(CartActivity.this);
-                Toast.makeText(CartActivity.this, orderTime, Toast.LENGTH_LONG).show();
-//
-//
-//                Intent intent = new Intent(CartActivity.this, FinalDummyActivity.class);
-//                intent.putExtra("YO", order);
-//                startActivity(intent);
 
-
+                if (finalOrder.getPayementMethod().equals("CASH")) {
+                    showMyDialog();
+                } else {
+                    //todo open Razorpay
+                }
             }
         });
 
@@ -159,6 +148,28 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void showMyDialog() {
+        Dialog myDialog = new Dialog(CartActivity.this);
+        myDialog.setContentView(R.layout.custom_dialog_layout);
+        myDialog.show();
+
+        frameLayout = myDialog.findViewById(R.id.anim);
+        animationView = new LottieAnimationView(CartActivity.this);
+        animationView.setAnimation(R.raw.checkmark);
+        frameLayout.addView(animationView);
+        animationView.playAnimation();
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(CartActivity.this, FinalCheckoutActivity.class);
+                startActivity(intent);
+            }
+        };
+        handler.postDelayed(runnable, 3000);
+        Toast.makeText(CartActivity.this, "Order Placed", Toast.LENGTH_LONG).show();
     }
 
     public void loadAnimations() {
@@ -177,7 +188,7 @@ public class CartActivity extends AppCompatActivity {
 
 
         cartRecyclerView = findViewById(R.id.cart_list);
-
+        radioGroup = findViewById(R.id.payment_method);
         editText = findViewById(R.id.additional_request_cart);
 
         //place order card and button
@@ -196,5 +207,35 @@ public class CartActivity extends AppCompatActivity {
 
 
     }
+
+    public void initializeObject() {
+
+        int id = radioGroup.getCheckedRadioButtonId();
+        RadioButton rb = radioGroup.findViewById(id);
+        finalOrder = new Order();
+        getCurrentDateTime();
+        finalOrder.setOrderId(1);
+        finalOrder.setOrderDate(orderDate);
+        finalOrder.setOrderTime(orderTime);
+        finalOrder.setUserName(MainActivity.userName);
+        finalOrder.setUserEmail(MainActivity.userEmail);
+        finalOrder.setUserContact("9810040013");
+        finalOrder.setUserAddress(address);
+        finalOrder.setSpecialInstruction(additionalRequest);
+        finalOrder.setOrderList(finalCartItems);
+        finalOrder.setOrderTotal(GrandTotal);
+        finalOrder.setOrderStatus("Placed");
+        finalOrder.setPayementMethod(rb.getText().toString());
+
+    }
+
+    public void getCurrentDateTime() {
+        Date time = Calendar.getInstance().getTime();
+        orderTime = time.toString();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        orderDate = dateFormat.format(time);
+    }
+
 
 }
