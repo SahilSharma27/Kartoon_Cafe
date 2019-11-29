@@ -76,8 +76,8 @@ public class CustomAdapter2 extends RecyclerView.Adapter<ItemViewHolder2> {
                     cartItem.setCustomPrice(0.0);
                     cartItem.setCartItemCategory(currentItem.getItemCategory());
                     CartHelper.addItemToCart(context, cartItem);
-//                    SubMenuActivity.cartItems.add(cartItem);
-//                    CartActivity.cartItemPrices.add(currentItem.getItemPrice());
+                    Toast.makeText(context, "ADDED TO CART", Toast.LENGTH_LONG).show();
+
                 } else {
                     customValuesList.clear();
                     radValue = "";
@@ -132,6 +132,7 @@ public class CustomAdapter2 extends RecyclerView.Adapter<ItemViewHolder2> {
                     });
 
                     builder.show();
+                    Toast.makeText(context, "ADDED TO CART", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -139,60 +140,6 @@ public class CustomAdapter2 extends RecyclerView.Adapter<ItemViewHolder2> {
         });
     }
 
-//        holder.custButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                customValuesList.clear();
-//                radValue = "";
-//                clickedRadPos = 0;
-//                for (int i = 0; i < currentItem.getCustomList().size(); i++) {
-//                    if (currentItem.getCustomList().get(i).getCustomPrice() == 0.0) {
-//                        radValue = currentItem.getCustomList().get(i).getCustomName();
-//                    } else {
-//                        radValue = currentItem.getCustomList().get(i).getCustomName()
-//                                + "  ( + ₹" + currentItem.getCustomList().get(i).getCustomPrice() + ")";
-//                    }
-//                    customValuesList.add(radValue);
-//                }
-//
-//                selectedRad = customValuesList.get(0);
-//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                builder.setTitle("Select one(Required)");
-//                builder.setSingleChoiceItems(customValuesList.toArray(new String[customValuesList.size()]), 0, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        clickedRadPos = i;
-//                        selectedRad = customValuesList.get(i);
-//                    }
-//                });
-//
-//                builder.setPositiveButton("ADD to Cart", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        Toast.makeText(context, selectedRad, Toast.LENGTH_LONG).show();
-//                        customValuesList.clear();
-//
-//                        Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
-//                        double customPrice = currentItem.getCustomList().get(clickedRadPos).getCustomPrice();
-//                        int custType = currentItem.getCustomList().get(clickedRadPos).getCustType();
-//                        cartItem.setCustom(new Customizables(selectedRad, customPrice, custType));
-//
-//                        SubMenuActivity.cartItems.add(cartItem);
-//                        CartActivity.cartItemPrices.add(currentItem.getItemPrice());
-//                    }
-//                });
-//
-//                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        //TODO
-//                    }
-//                });
-//
-//                builder.show();
-//            }
-//        });
-//    }
 
     @Override
     public int getItemCount() {

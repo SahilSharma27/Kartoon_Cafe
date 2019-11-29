@@ -48,13 +48,14 @@ public class SendFragment extends Fragment {
     public static String MY_PREF_NAME = "userAddress";
     CardView logOutCard;
     public static String userDeliveryAddress = "Not Mentioned Yet!";
-    TextView firstName, secondName, accountMail, userAddress;
+    public static String contactNumber = "9810040013";
     Button button;
     LocationRequest locationRequest;
     LocationCallback locationCallback;
     FusedLocationProviderClient fusedLocationProviderClient;
     Location currentLocation;
     Location centerLocation;
+    TextView firstName, secondName, accountMail, userAddress, userContact;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -91,6 +92,7 @@ public class SendFragment extends Fragment {
         userAddress = root.findViewById(R.id.user_address);
         button = root.findViewById(R.id.get_location);
         logOutCard = root.findViewById(R.id.log_out_card);
+        userContact = root.findViewById(R.id.user_contact);
         String[] splitName = MainActivity.userName.split("\\s+");
         firstName.setText(splitName[0]);
         secondName.setText(splitName[1]);
@@ -200,7 +202,6 @@ public class SendFragment extends Fragment {
     public void onResume() {
         if (fusedLocationProviderClient != null) {
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
-
         }
         super.onResume();
     }

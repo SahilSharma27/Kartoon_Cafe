@@ -102,6 +102,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/happymarker"
                     android:padding="10dp"
+                    android:id="@+id/user_contact"
                     android:text="9810040013"
                     android:textColor="@color/textColor"
                     android:textSize="20sp" />

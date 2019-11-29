@@ -80,6 +80,7 @@ public class BestSellerAdapter extends RecyclerView.Adapter<BestSellViewHolder> 
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (currentItem.getCustomizable() == 1) {
                     customValuesList.clear();
                     radValue = "";
@@ -133,6 +134,7 @@ public class BestSellerAdapter extends RecyclerView.Adapter<BestSellViewHolder> 
                     });
 
                     builder.show();
+                    Toast.makeText(context, "ADDED TO CART", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(context, "Added to cart", Toast.LENGTH_LONG).show();
 

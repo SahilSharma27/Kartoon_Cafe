@@ -1,9 +1,11 @@
 package com.example.android.kartooncafe;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,16 +26,21 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.android.kartooncafe.ui.send.SendFragment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
+
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity implements PaymentResultListener {
     RecyclerView cartRecyclerView;
     FrameLayout emptycartView;
     CartAdapter adapter;
+    String TAG = "Payment Error";
     public static ArrayList<Cart> finalCartItems = new ArrayList<>();
     static TextView cartTotalPrice;
     static TextView subTotalTV, grandTotalTV;
@@ -47,7 +54,7 @@ public class CartActivity extends AppCompatActivity {
     EditText editText;
     String additionalRequest = "Not Any";
     String orderDate, orderTime;
-    TextView emptytext, addressTextView;
+    TextView emptytext, addressTextView, contactTextView;
     String address;
     FrameLayout frameLayout;
     RadioGroup radioGroup;
@@ -76,6 +83,7 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        Checkout.preload(getApplicationContext());
         getSupportActionBar().setTitle("CART");
         findViews();
         loadAnimations();
@@ -84,6 +92,7 @@ public class CartActivity extends AppCompatActivity {
         finalCartItems.clear();
         finalCartItems = CartHelper.getItemsFromCart(this);
         addressTextView.setText(SendFragment.userDeliveryAddress);
+        contactTextView.setText(SendFragment.contactNumber);
         subtotal = 0.0;
         GrandTotal = 0.0;
         address = addressTextView.getText().toString();
@@ -121,20 +130,19 @@ public class CartActivity extends AppCompatActivity {
 
         cartTotalPrice.setText("₹ " + GrandTotal);
 
-
+//Order place
         placeOrderbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 initializeObject();
-                cartOrderdatabaseReference.push().setValue(finalOrder);
-
-                CartHelper.emptyThecart(CartActivity.this);
 
                 if (finalOrder.getPayementMethod().equals("CASH")) {
+                    cartOrderdatabaseReference.push().setValue(finalOrder);
+                    CartHelper.emptyThecart(CartActivity.this);
                     showMyDialog();
-                } else {
-                    //todo open Razorpay
+                } else if (finalOrder.getPayementMethod().equals("CARD / UPI / NETBANKING")) {
+                    startPayment();
                 }
             }
         });
@@ -204,6 +212,7 @@ public class CartActivity extends AppCompatActivity {
         emptytext = findViewById(R.id.cartemptytext);
 
         addressTextView = findViewById(R.id.address);
+        contactTextView = findViewById(R.id.contact_textview);
 
 
     }
@@ -219,7 +228,7 @@ public class CartActivity extends AppCompatActivity {
         finalOrder.setOrderTime(orderTime);
         finalOrder.setUserName(MainActivity.userName);
         finalOrder.setUserEmail(MainActivity.userEmail);
-        finalOrder.setUserContact("9810040013");
+        finalOrder.setUserContact(SendFragment.contactNumber);
         finalOrder.setUserAddress(address);
         finalOrder.setSpecialInstruction(additionalRequest);
         finalOrder.setOrderList(finalCartItems);
@@ -235,6 +244,76 @@ public class CartActivity extends AppCompatActivity {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
         orderDate = dateFormat.format(time);
+    }
+
+    public void startPayment() {
+//        int amount=Integer.parseInt(editText.getText().toString().trim());
+//        amount=amount*100;
+        /**
+         * Instantiate Checkout
+         */
+        Checkout checkout = new Checkout();
+
+
+        /**
+         * Set your logo here
+         */
+        // checkout.setImage(R.drawable.kclogo);
+        // int id = checkout.getId();
+        /**
+         * Reference to current activity
+         */
+        final Activity activity = this;
+
+        /**
+         * Pass your payment options to the Razorpay Checkout as a JSONObject
+         */
+        try {
+            JSONObject options = new JSONObject();
+
+            /**
+             * Merchant Name
+             * eg: ACME Corp || HasGeek etc.
+             */
+            options.put("name", "Kartoon Cafe");
+
+            /**
+             * Description can be anything
+             * eg: Order #123123
+             *     Invoice Payment
+             *     etc.
+             */
+            options.put("description", "Test Order");
+            // options.put("order_id", id);
+            options.put("currency", "INR");
+
+            /**
+             * Amount is always passed in PAISE
+             * Eg: "500" = Rs 5.00
+             */
+            options.put("amount", GrandTotal * 100);
+
+            checkout.open(activity, options);
+        } catch (Exception e) {
+            Log.e(TAG, "Error in starting Razorpay Checkout", e);
+        }
+    }
+
+
+    @Override
+    public void onPaymentSuccess(String s) {
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        cartOrderdatabaseReference.push().setValue(finalOrder);
+        CartHelper.emptyThecart(CartActivity.this);
+        showMyDialog();
+
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+
+        Toast.makeText(this, "Oops! somthing went wrong", Toast.LENGTH_SHORT).show();
+
     }
 
 

@@ -283,8 +283,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        animationView1.playAnimation();
-        animationView2.playAnimation();
+//        animationView1.playAnimation();
+//        animationView2.playAnimation();
         animationView3.playAnimation();
         animationView4.playAnimation();
     }
