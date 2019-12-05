@@ -38,7 +38,6 @@ import com.example.android.kartooncafe.PosterItemClickListener;
 import com.example.android.kartooncafe.R;
 import com.example.android.kartooncafe.SubMenuActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -46,6 +45,9 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class HomeFragment extends Fragment {
 
+    public static String SPECIAL_TITLE_KEY = "title";
+    public static String SPECIAL_CATEGORY_KEY = "category";
+    public static String SPECIAL_BACKDROPID_KEY = "id";
 
     private ArrayList<Menu> specialMenu = new ArrayList<>();
     private ArrayList<Poster> topPosterList = new ArrayList<>();
@@ -59,23 +61,15 @@ public class HomeFragment extends Fragment {
     private Customizables egg;
     private Customizables nonveg8;
 
-    private LottieAnimationView animationView1, animationView2, animationView3, animationView4;
-
-    private View root;
-    private FloatingActionButton fab;
-
-    private PosterAdapter adapter1;
-    private CustomAdapter1 adapter;
-    private BestSellerAdapter adapter2;
-
-    private RecyclerView specialsRCView, posterRCView, bestsellRCVIew;
-
     private CardView insta, fb, twitter, yt;
     private ImageView open;
 
     private Button button;
 
     private FrameLayout liveMusicFrame1, liveMusicFrame2, liveMusicFrame3, specialFrame;
+    private View root;
+    private FloatingActionButton fab;
+    private RecyclerView specialsRCView, posterRCView, bestsellRCVIew;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -93,8 +87,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Snackbar.make(view, "Opening Cart", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Opening Cart", Snackbar.LENGTH_SHORT)
+//                        .setAction("Action", null).show();
                 Intent intent = new Intent(getContext(), CartActivity.class);
                 startActivity(intent);
 
@@ -105,7 +99,7 @@ public class HomeFragment extends Fragment {
         Glide.with(open).load(R.drawable.openow).into(open);
 
         //Top Posters
-        adapter1 = new PosterAdapter(getContext(), topPosterList, new PosterItemClickListener() {
+        PosterAdapter adapter1 = new PosterAdapter(getContext(), topPosterList, new PosterItemClickListener() {
             @Override
             public void onPosterItemClicked(View view, int positon) {
                 Toast.makeText(getContext(), "Do Action If Needed", Toast.LENGTH_LONG).show();
@@ -124,16 +118,16 @@ public class HomeFragment extends Fragment {
         specialsRCView.setItemAnimator(new DefaultItemAnimator());
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
         specialsRCView.setLayoutManager(layoutManager);
-        adapter = new CustomAdapter1(getContext(), specialMenu, new MenuImageClickListener() {
+        CustomAdapter1 adapter = new CustomAdapter1(getContext(), specialMenu, new MenuImageClickListener() {
             @Override
             public void onMenuClicked(View view, int position) {
                 Menu clickedMenuItem = specialMenu.get(position);
                 Toast.makeText(getActivity(), clickedMenuItem.getMenuTitle(), Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getActivity(), SubMenuActivity.class);
-                intent.putExtra("title", clickedMenuItem.getMenuTitle());
-                intent.putExtra("category", clickedMenuItem.getMenuCategory());
-                intent.putExtra("id", clickedMenuItem.getMenuBackDrop());
+                intent.putExtra(SPECIAL_TITLE_KEY, clickedMenuItem.getMenuTitle());
+                intent.putExtra(SPECIAL_CATEGORY_KEY, clickedMenuItem.getMenuCategory());
+                intent.putExtra(SPECIAL_BACKDROPID_KEY, clickedMenuItem.getMenuBackDrop());
                 startActivity(intent);
             }
         });
@@ -144,7 +138,7 @@ public class HomeFragment extends Fragment {
         bestsellRCVIew.setItemAnimator(new DefaultItemAnimator());
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
         bestsellRCVIew.setLayoutManager(linearLayoutManager1);
-        adapter2 = new BestSellerAdapter(getContext(), bestSellerList);
+        BestSellerAdapter adapter2 = new BestSellerAdapter(getContext(), bestSellerList);
         bestsellRCVIew.setAdapter(adapter2);
 
 
@@ -193,7 +187,7 @@ public class HomeFragment extends Fragment {
         yt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = null;
+                Intent intent;
                 String url = "https://www.youtube.com/channel/UCrZUbj_qk4Xw75keYyutnaw";
                 try {
                     intent = new Intent(Intent.ACTION_VIEW);
@@ -211,6 +205,7 @@ public class HomeFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //Todo open Reservation fragment
             }
         });
@@ -232,10 +227,6 @@ public class HomeFragment extends Fragment {
         topPosterList.clear();
         topPosterList.add(new Poster(R.drawable.poster1, "\" We Believe In Quality Food and Happy Atmosphere\""));
         topPosterList.add(new Poster(R.drawable.poster2, "\" Our Commitment to Fulfill Customer Expectations\""));
-        topPosterList.add(new Poster(R.drawable.poster3, "\" Dessssertss Is Our Speciality! \" "));
-        topPosterList.add(new Poster(R.drawable.poster4, " "));
-        topPosterList.add(new Poster(R.drawable.poster5, " "));
-
     }
 
     private void loadBestSellers() {
@@ -280,24 +271,15 @@ public class HomeFragment extends Fragment {
         egg = new Customizables("Egg", 20, 1);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-//        animationView1.playAnimation();
-//        animationView2.playAnimation();
-        animationView3.playAnimation();
-        animationView4.playAnimation();
-    }
-
     private void findViews() {
-        fab = root.findViewById(R.id.fabHome);
+        fab = root.findViewById(R.id.fab_home);
 
         //RCVIEWS
         specialsRCView = root.findViewById(R.id.special_rcview);
         bestsellRCVIew = root.findViewById(R.id.best_seller_rcview);
         posterRCView = root.findViewById(R.id.top_rcview);
 
-        button = root.findViewById(R.id.reservationfromhome);
+        button = root.findViewById(R.id.reservation_from_home);
         //animations
         liveMusicFrame1 = root.findViewById(R.id.live_music_frame);
         liveMusicFrame2 = root.findViewById(R.id.live_music_frame1);
@@ -305,10 +287,10 @@ public class HomeFragment extends Fragment {
         specialFrame = root.findViewById(R.id.likes);
 
         //FollowUs
-        insta = root.findViewById(R.id.instafollow);
-        fb = root.findViewById(R.id.fbfollow);
-        twitter = root.findViewById(R.id.twitterfollow);
-        yt = root.findViewById(R.id.ytfollow);
+        insta = root.findViewById(R.id.insta_follow);
+        fb = root.findViewById(R.id.fb_follow);
+        twitter = root.findViewById(R.id.twitter_follow);
+        yt = root.findViewById(R.id.yt_follow);
 
         open = root.findViewById(R.id.home_img);
 
@@ -316,28 +298,28 @@ public class HomeFragment extends Fragment {
 
     private void playAnimations() {
         //guitar girl
-        animationView1 = new LottieAnimationView(getContext());
+        LottieAnimationView animationView1 = new LottieAnimationView(getContext());
         animationView1.setAnimation(R.raw.live_music);
         liveMusicFrame1.addView(animationView1);
         animationView1.playAnimation();
 
 
         //speaker
-        animationView2 = new LottieAnimationView(getContext());
+        LottieAnimationView animationView2 = new LottieAnimationView(getContext());
         animationView2.setAnimation(R.raw.live_music3);
         liveMusicFrame2.addView(animationView2);
         animationView2.playAnimation();
         animationView2.setRepeatCount(1);
 
         //headphone guy
-        animationView3 = new LottieAnimationView(getContext());
+        LottieAnimationView animationView3 = new LottieAnimationView(getContext());
         animationView3.setAnimation(R.raw.live_music2);
         liveMusicFrame3.addView(animationView3);
         animationView3.playAnimation();
         animationView3.setRepeatCount(1);
 
         //likes
-        animationView4 = new LottieAnimationView(getContext());
+        LottieAnimationView animationView4 = new LottieAnimationView(getContext());
         animationView4.setAnimation(R.raw.like);
         specialFrame.addView(animationView4);
         animationView4.playAnimation();

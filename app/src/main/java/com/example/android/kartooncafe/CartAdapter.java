@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.kartooncafe.ui.tableReservation.ReservationFragment;
+
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
@@ -41,17 +43,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
             @Override
             public void onClick(View view) {
 
+                CartHelper.removeItemFromCart(context, currentCartItem);
+                finalCartItemsList.remove(pos);
+
                 if (context instanceof CartActivity) {
-                    CartHelper.removeItemFromCart(context, currentCartItem);
-                    finalCartItemsList.remove(pos);
-//                    SubMenuActivity.cartItems.remove(pos);
-//                    CartActivity.cartItemPrices.remove(pos);
-                    notifyDataSetChanged();
                     CartActivity.Refresh();
                 } else {
-                    OrderAheadSubMenu.reservationCart.remove(pos);
-                    notifyDataSetChanged();
+                    ReservationFragment.Refresh();
                 }
+                notifyDataSetChanged();
 
 
             }
@@ -62,7 +62,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
             holder.cartItemCutsomize.setText(currentCartItem.getCustom());
         } else holder.cartItemCutsomize.setVisibility(View.GONE);
 
-        holder.cartItemPrice.setText("₹ " + currentCartItem.getPrice());
+        holder.cartItemPrice.setText("₹ " + currentCartItem.getPrice() * currentCartItem.getQuantity());
 
         holder.cartItemQty.setText(String.valueOf(currentCartItem.getQuantity()));
 
@@ -78,6 +78,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
                 int newQty = currentQty + 1;
                 holder.cartItemQty.setText(String.valueOf(newQty));
                 holder.cartItemPrice.setText("₹ " + newQty * currentCartItem.getPrice());
+                currentCartItem.setQuantity(newQty);
+                int id = currentCartItem.getCartItemId();
+                CartHelper.updateCartItemQty(context, id, newQty);
+                if (context instanceof CartActivity)
+                    CartActivity.Refresh();
+                else {
+                    ReservationFragment.Refresh();
+                }
+                notifyDataSetChanged();
             }
         });
         holder.minusButton.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +100,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
                 int newQty = currentQty - 1;
                 holder.cartItemQty.setText(String.valueOf(newQty));
                 holder.cartItemPrice.setText("₹ " + newQty * currentCartItem.getPrice());
+                currentCartItem.setQuantity(newQty);
+                int id = currentCartItem.getCartItemId();
+                CartHelper.updateCartItemQty(context, id, newQty);
+
+                if (context instanceof CartActivity)
+                    CartActivity.Refresh();
+                else {
+                    ReservationFragment.Refresh();
+                }
+
+
+                notifyDataSetChanged();
 
             }
         });

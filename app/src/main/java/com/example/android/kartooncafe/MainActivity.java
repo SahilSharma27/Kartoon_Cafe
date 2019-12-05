@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,12 +31,8 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
     public static final int RC_SIGN_IN = 1;
-    public static String userName;
-    public static String userEmail;
-    public static String userPic;
     TextView textView1, textView2;
     private AppBarConfiguration mAppBarConfiguration;
-    ImageView imageView;
     FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
 
@@ -47,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         SharedPreferences prefs = getSharedPreferences(SendFragment.MY_PREF_NAME, Context.MODE_PRIVATE);
-        SendFragment.userDeliveryAddress = prefs.getString("address", "Not Mentioned Yet!");
+        SendFragment.USER_ADDRESS = prefs.getString(SendFragment.ADDRESS_KEY, "");
+        SendFragment.USER_CONTACT = prefs.getString(SendFragment.CONTACT_KEY, "");
 
         firebaseAuth = FirebaseAuth.getInstance();
         authStateListener = new FirebaseAuth.AuthStateListener() {
@@ -56,8 +53,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    //   String x=user.getPhotoUrl().toString();
-                    //  Toast.makeText(MainActivity.this,x,Toast.LENGTH_LONG).show();
+
                     onSignedInInitialize(user.getDisplayName(), user.getEmail());
 
                 } else {
@@ -76,19 +72,11 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
+        textView1 = headerView.findViewById(R.id.signed_in_username);
+        textView2 = headerView.findViewById(R.id.signed_in_useremail);
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -101,23 +89,18 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        textView1 = headerView.findViewById(R.id.signed_in_username);
-        //  textView1.setText(userName);
 
-        textView2 = headerView.findViewById(R.id.signed_in_useremail);
-        //  imageView=headerView.findViewById(R.id.signed_in_user_image);
-        // textView2.setText(userEmail);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Toast.makeText(this, requestCode + "" + resultCode, Toast.LENGTH_LONG).show();
+
         if (requestCode == RC_SIGN_IN) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(this, "Signed In", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Signed In Successfully", Toast.LENGTH_LONG).show();
             } else if (resultCode == RESULT_CANCELED) {
-                // Toast.makeText(this, "Sign In Canceled ", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Sign In Canceled ", Toast.LENGTH_LONG).show();
                 finish();
             }
         }
@@ -136,20 +119,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onSignedInInitialize(String username, String email) {
-        userName = username;
-        userEmail = email;
-        // userPic = photoUrl;
-        textView1.setText(userName);
-        textView2.setText(userEmail);
-//        if (userPic != null)
-//            Glide.with(imageView).load(userPic).apply(new RequestOptions().centerCrop()).into(imageView);
-
-
+        SendFragment.USER_NAME = username;
+        SendFragment.USER_EMAIL = email;
+        textView1.setText(SendFragment.USER_NAME);
+        textView2.setText(SendFragment.USER_EMAIL);
     }
 
     private void onSignedOutCleanup() {
-        userName = "ANONYMOUS";
-        userEmail = "null";
+        SendFragment.USER_NAME = "ANONYMOUS";
+        SendFragment.USER_EMAIL = "null";
 
     }
 
@@ -162,16 +140,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.sign_out:
-                //sign out
-//                AuthUI.getInstance().signOut(this);
-
-
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.simple_icon) {
+            Toast.makeText(this, "KARTOON CAFE", Toast.LENGTH_SHORT).show();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
 
     }
 

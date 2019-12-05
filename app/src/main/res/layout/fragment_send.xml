@@ -34,8 +34,8 @@
                 android:fontFamily="@font/happymarker"
                 android:paddingStart="15dp"
                 android:paddingTop="15dp"
-                android:text="Sahil"
                 android:textAllCaps="true"
+                android:text="FN"
                 android:textColor="@color/textColor"
                 android:textSize="30sp" />
 
@@ -47,11 +47,10 @@
                 android:layout_toEndOf="@id/account_img"
                 android:fontFamily="@font/happymarker"
                 android:paddingStart="15dp"
-                android:text="Sharma"
+                android:text="LN"
                 android:textAllCaps="true"
                 android:textColor="@color/textColor"
                 android:textSize="30sp" />
-
 
             <LinearLayout
                 android:id="@+id/mail_layout"
@@ -62,8 +61,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:src="@drawable/ic_email_black_24dp" />
@@ -75,8 +74,7 @@
                     android:fontFamily="@font/happymarker"
                     android:padding="10dp"
                     android:text="27decsahilsharma@gmail.com"
-                    android:textColor="@color/textColor"
-                    android:textSize="20sp" />
+                    android:textColor="@color/textColor" />
 
 
             </LinearLayout>
@@ -90,29 +88,22 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:src="@drawable/ic_call_black_24dp" />
 
-                <TextView
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/happymarker"
                     android:padding="10dp"
                     android:id="@+id/user_contact"
-                    android:text="9810040013"
-                    android:textColor="@color/textColor"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/ic_mode_edit_black_24dp" />
+                    android:hint="Contact"
+                    android:inputType="number"
+                    android:textColor="@color/textColor" />
 
 
             </LinearLayout>
@@ -122,36 +113,49 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/account_contact"
                 android:layout_margin="10dp"
+                android:id="@+id/account_mail_layout"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:src="@drawable/ic_location_on_black_24dp" />
 
-                <TextView
+                <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/happymarker"
                     android:padding="10dp"
                     android:id="@+id/user_address"
-                    android:text="1B/139 Ramesh Nagar, New Delhi 110015."
-                    android:textColor="@color/textColor"
-                    android:textSize="20sp" />
+                    android:hint="Location"
+                    android:textColor="@color/textColor" />
 
 
                 <Button
                     android:id="@+id/get_location"
-                    android:layout_width="wrap_content"
+                    android:layout_width="25dp"
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
-                    android:layout_height="wrap_content"
-                    android:text="Locate me" />
+                    android:layout_height="25dp"
+                    android:background="@drawable/ic_my_location_black_24dp"
+                    android:elevation="4dp" />
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/save_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/account_mail_layout"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:fontFamily="@font/happymarker"
+                android:padding="10dp"
+                android:text="Save"
+                android:textColor="@color/myOrange" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

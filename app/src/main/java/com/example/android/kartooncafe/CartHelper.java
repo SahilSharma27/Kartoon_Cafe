@@ -24,22 +24,38 @@ public class CartHelper {
         dao.removeFromCart(cart);
     }
 
-    public static ArrayList<Cart> getItemsFromCart(Context context) {
+    public static ArrayList<Cart> getItemsFromCart(Context context, String type) {
         CartDatabase database = Room.databaseBuilder(context, CartDatabase.class, "cart _db").
                 allowMainThreadQueries().build();
         CartDao dao = database.getCartDao();
-        List<Cart> cart1 = dao.getCart();
+        List<Cart> cart1 = dao.getCart(type);
         ArrayList<Cart> cart2 = new ArrayList<>();
         cart2.addAll(cart1);
         return cart2;
 
     }
 
-    public static void emptyThecart(Context context) {
+    public static void emptyThecart(Context context, String type) {
         CartDatabase database = Room.databaseBuilder(context, CartDatabase.class, "cart _db").
                 allowMainThreadQueries().build();
         CartDao dao = database.getCartDao();
-        dao.deleteCart();
+        dao.deleteCart(type);
+    }
+
+    public static void deleteCart(Context context) {
+        CartDatabase database = Room.databaseBuilder(context, CartDatabase.class, "cart _db").
+                allowMainThreadQueries().build();
+        CartDao dao = database.getCartDao();
+        dao.deleteWholeCart();
+    }
+
+
+    public static void updateCartItemQty(Context context, int id, int qty) {
+        CartDatabase database = Room.databaseBuilder(context, CartDatabase.class, "cart _db").
+                allowMainThreadQueries().build();
+        CartDao dao = database.getCartDao();
+        dao.updateQty(qty, id);
+
     }
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -44,18 +45,21 @@
                     android:layout_width="200dp"
                     android:layout_height="120dp"
                     android:layout_gravity="end|center"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:outlineSpotShadowColor="@color/myOrange"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_margin="4dp"
                         android:background="@color/white"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="4dp">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
                             android:fontFamily="@font/happymarker"
                             android:text="For :"
                             android:textColor="@color/textColor" />
@@ -63,33 +67,29 @@
                         <TextView
                             android:id="@+id/username"
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:fontFamily="@font/happymarker"
-                            android:gravity="center"
-                            android:text="Sahil Sharma"
+                            android:gravity="start"
+                            android:text="userName"
                             android:textAllCaps="true"
                             android:textColor="@color/textColor" />
 
                         <TextView
                             android:id="@+id/usercontact"
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:fontFamily="@font/happymarker"
-                            android:gravity="center"
-                            android:text="9810040013"
+                            android:gravity="start"
+                            android:text="contact"
                             android:textAllCaps="true"
                             android:textColor="@color/textColor" />
 
                         <TextView
                             android:id="@+id/useremail"
                             android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="2dp"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:fontFamily="@font/happymarker"
-                            android:gravity="center"
+                            android:gravity="start"
                             android:text="Email"
                             android:textColor="@color/textColor" />
                     </LinearLayout>
@@ -202,7 +202,9 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="10dp"
+                android:outlineSpotShadowColor="@color/myOrange"
+                app:cardUseCompatPadding="true">
 
                 <androidx.coordinatorlayout.widget.CoordinatorLayout
                     android:layout_width="match_parent"
@@ -271,13 +273,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp">
+                android:layout_marginEnd="5dp"
+                android:outlineSpotShadowColor="@color/myOrange"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingBottom="4dp">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -286,7 +289,7 @@
 
                         <CheckBox
                             android:id="@+id/order_ahead_check_box"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
@@ -318,7 +321,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:paddingBottom="4dp">
 
                             <TextView
                                 android:layout_width="0dp"
@@ -347,7 +351,7 @@
                             android:layout_height="1dp"
                             android:layout_marginStart="6dp"
                             android:layout_marginEnd="6dp"
-                            android:background="@color/myOrange" />
+                            android:background="@color/dividerColor" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/order_ahead_list"
@@ -365,12 +369,13 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
-                android:visibility="gone">
+                android:outlineSpotShadowColor="@color/myOrange"
+                android:visibility="gone"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <TextView
@@ -387,37 +392,87 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="6dp"
-                        android:background="@color/myOrange" />
+                        android:background="@color/dividerColor" />
 
-                    <TextView
-                        android:id="@+id/reservation_cart_subtotal"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:fontFamily="@font/happymarker"
-                        android:gravity="end"
-                        android:text="SubTotal  :  $100"
-                        android:textColor="@color/textColor" />
+                        android:layout_margin="2dp"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
 
-                    <TextView
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:orientation="vertical">
 
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:fontFamily="@font/happymarker"
-                        android:gravity="end"
-                        android:text="TAX  :   5%     "
-                        android:textColor="@color/textColor" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="4dp"
+                                android:fontFamily="@font/happymarker"
+                                android:gravity="end"
+                                android:text="SubTotal  :"
+                                android:textColor="@color/textColor" />
 
-                    <TextView
-                        android:id="@+id/reservation_cart_grandTotal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:fontFamily="@font/happymarker"
-                        android:gravity="end"
-                        android:text="GrandTotal  :  $118"
-                        android:textColor="@color/textColor" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="4dp"
+                                android:fontFamily="@font/happymarker"
+                                android:gravity="end"
+                                android:text="TAX  :"
+                                android:textColor="@color/textColor" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="4dp"
+                                android:fontFamily="@font/happymarker"
+                                android:gravity="end"
+                                android:text="GrandTotal  :"
+                                android:textColor="@color/textColor" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/order_ahead_subtotal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="4dp"
+                                android:fontFamily="@font/happymarker"
+                                android:gravity="end"
+                                android:text=" $100"
+                                android:textColor="@color/textColor" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="4dp"
+                                android:fontFamily="@font/happymarker"
+                                android:gravity="end"
+                                android:text=" 5%"
+                                android:textColor="@color/textColor" />
+
+                            <TextView
+                                android:id="@+id/order_ahead_grand_total"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="4dp"
+                                android:fontFamily="@font/happymarker"
+                                android:gravity="end"
+                                android:text=" $118"
+                                android:textColor="@color/textColor" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -428,7 +483,9 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
-                android:visibility="gone">
+                android:outlineSpotShadowColor="@color/myOrange"
+                android:visibility="gone"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -450,9 +507,10 @@
                         android:layout_height="1dp"
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="6dp"
-                        android:background="@color/myOrange" />
+                        android:background="@color/dividerColor" />
 
                     <RadioGroup
+                        android:id="@+id/order_ahead_payment_method"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
@@ -463,7 +521,7 @@
                             android:layout_height="wrap_content"
                             android:buttonTint="@color/myOrange"
                             android:fontFamily="@font/happymarker"
-                            android:text="PAY IN RESTAURANT"
+                            android:text="CASH"
                             android:textColor="@color/textColor" />
 
                         <RadioButton
@@ -471,7 +529,7 @@
                             android:layout_height="wrap_content"
                             android:buttonTint="@color/myOrange"
                             android:fontFamily="@font/happymarker"
-                            android:text="PAY NOW USING CARD / UPI / NETBANKING"
+                            android:text="CARD / UPI / NETBANKING"
                             android:textColor="@color/textColor" />
                     </RadioGroup>
                 </LinearLayout>
@@ -483,7 +541,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="5dp">
+                android:layout_marginEnd="5dp"
+                android:outlineSpotShadowColor="@color/myOrange"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -507,8 +567,6 @@
                         android:layout_marginStart="6dp"
                         android:layout_marginEnd="6dp"
                         android:backgroundTint="@color/myOrange"
-                        android:cursorVisible="false"
-                        android:hint="Provide additional requests or information if Any...."
                         android:inputType="text"
                         android:lines="3"
                         android:padding="4dp"

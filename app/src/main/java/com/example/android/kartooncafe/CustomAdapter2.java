@@ -62,9 +62,7 @@ public class CustomAdapter2 extends RecyclerView.Adapter<ItemViewHolder2> {
             holder.catgView1.setImageResource(R.drawable.veg_icon);
             holder.catgView2.setImageResource((R.drawable.non_veg_icon));
         }
-//        if (currentItem.getCustomizable() == 0) {
-//            holder.custButton.setVisibility(View.GONE);
-//        }
+
 
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +73,7 @@ public class CustomAdapter2 extends RecyclerView.Adapter<ItemViewHolder2> {
                     cartItem.setCustom(null);
                     cartItem.setCustomPrice(0.0);
                     cartItem.setCartItemCategory(currentItem.getItemCategory());
+                    cartItem.setCartItemType(CartActivity.ORDER_KEY);
                     CartHelper.addItemToCart(context, cartItem);
                     Toast.makeText(context, "ADDED TO CART", Toast.LENGTH_LONG).show();
 
@@ -117,10 +116,9 @@ public class CustomAdapter2 extends RecyclerView.Adapter<ItemViewHolder2> {
                             cartItem.setCustom(selectedRad);
                             cartItem.setCustomPrice(customPrice);
                             cartItem.setCartItemCategory(custType);
+                            cartItem.setCartItemType(CartActivity.ORDER_KEY);
                             CartHelper.addItemToCart(context, cartItem);
-//
-//                            SubMenuActivity.cartItems.add(cartItem);
-//                            CartActivity.cartItemPrices.add(currentItem.getItemPrice());
+
                         }
                     });
 

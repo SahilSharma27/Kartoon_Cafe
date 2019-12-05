@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -31,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Address: 1B/139 Ramesh Nagar, New Delhi  "
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/textColor" />
         </LinearLayout>
 
         <FrameLayout
@@ -64,7 +65,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="4dp">
+                    android:layout_marginEnd="4dp"
+                    android:outlineSpotShadowColor="@color/myOrange"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -85,7 +88,7 @@
                             android:layout_gravity="center"
                             android:fontFamily="@font/happymarker"
                             android:text="980040013"
-                            android:textColor="@color/colorPrimaryDark" />
+                            android:textColor="@color/textColor" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -96,7 +99,9 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:outlineSpotShadowColor="@color/myOrange"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -110,7 +115,7 @@
                             android:fontFamily="@font/happymarker"
                             android:padding="15dp"
                             android:text="CART ITEMS "
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/textColor"
                             android:textSize="20sp" />
 
                         <View
@@ -118,7 +123,7 @@
                             android:layout_height="1dp"
                             android:layout_marginStart="6dp"
                             android:layout_marginEnd="6dp"
-                            android:background="@color/myOrange" />
+                            android:background="@color/dividerColor" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/cart_list"
@@ -132,7 +137,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp">
+                    android:layout_marginEnd="4dp"
+                    android:outlineSpotShadowColor="@color/myOrange"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -145,7 +152,7 @@
                             android:fontFamily="@font/happymarker"
                             android:padding="15dp"
                             android:text="Payable"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/textColor"
                             android:textSize="20sp" />
 
                         <View
@@ -153,37 +160,89 @@
                             android:layout_height="1dp"
                             android:layout_marginStart="6dp"
                             android:layout_marginEnd="6dp"
-                            android:background="@color/myOrange" />
+                            android:background="@color/dividerColor" />
 
-                        <TextView
-                            android:id="@+id/subTotal"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:fontFamily="@font/happymarker"
-                            android:gravity="end"
-                            android:text="SubTotal  :  $100"
-                            android:textColor="@color/colorPrimaryDark" />
+                            android:layout_margin="2dp"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/tax"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:fontFamily="@font/happymarker"
-                            android:gravity="end"
-                            android:text="TAX  :   5%     "
-                            android:textColor="@color/colorPrimaryDark" />
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/grand_total"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="4dp"
-                            android:fontFamily="@font/happymarker"
-                            android:gravity="end"
-                            android:text="GrandTotal  :  $118"
-                            android:textColor="@color/colorPrimaryDark" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="4dp"
+                                    android:fontFamily="@font/happymarker"
+                                    android:gravity="end"
+                                    android:text="SubTotal  :"
+                                    android:textColor="@color/textColor" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="4dp"
+                                    android:fontFamily="@font/happymarker"
+                                    android:gravity="end"
+                                    android:text="TAX  :"
+                                    android:textColor="@color/textColor" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="4dp"
+                                    android:fontFamily="@font/happymarker"
+                                    android:gravity="end"
+                                    android:text="GrandTotal  :"
+                                    android:textColor="@color/textColor" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="4dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/subTotal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="4dp"
+                                    android:fontFamily="@font/happymarker"
+                                    android:gravity="end"
+                                    android:text=" $100"
+                                    android:textColor="@color/textColor" />
+
+                                <TextView
+                                    android:id="@+id/tax"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="4dp"
+                                    android:fontFamily="@font/happymarker"
+                                    android:gravity="end"
+                                    android:text=" 5%"
+                                    android:textColor="@color/textColor" />
+
+                                <TextView
+                                    android:id="@+id/grand_total"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="4dp"
+                                    android:fontFamily="@font/happymarker"
+                                    android:gravity="end"
+                                    android:text=" $118"
+                                    android:textColor="@color/textColor" />
+                            </LinearLayout>
+                        </LinearLayout>
+
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -192,7 +251,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="4dp">
+                    android:layout_marginEnd="4dp"
+                    android:outlineSpotShadowColor="@color/myOrange"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -205,7 +266,7 @@
                             android:fontFamily="@font/happymarker"
                             android:padding="15dp"
                             android:text="Payment Method"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/textColor"
                             android:textSize="20sp" />
 
                         <View
@@ -213,7 +274,7 @@
                             android:layout_height="1dp"
                             android:layout_marginStart="6dp"
                             android:layout_marginEnd="6dp"
-                            android:background="@color/myOrange" />
+                            android:background="@color/dividerColor" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -235,7 +296,8 @@
                                     android:buttonTint="@color/myOrange"
                                     android:checked="true"
                                     android:fontFamily="@font/happymarker"
-                                    android:text="CASH" />
+                                    android:text="CASH"
+                                    android:textColor="@color/textColor" />
 
                                 <RadioButton
                                     android:id="@+id/online"
@@ -243,7 +305,8 @@
                                     android:layout_height="wrap_content"
                                     android:buttonTint="@color/myOrange"
                                     android:fontFamily="@font/happymarker"
-                                    android:text="CARD / UPI / NETBANKING" />
+                                    android:text="CARD / UPI / NETBANKING"
+                                    android:textColor="@color/textColor" />
                             </RadioGroup>
 
                             <ImageView
@@ -260,7 +323,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginEnd="4dp">
+                    android:layout_marginEnd="4dp"
+                    android:outlineSpotShadowColor="@color/myOrange"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -274,7 +339,7 @@
                             android:fontFamily="@font/happymarker"
                             android:padding="15dp"
                             android:text="Additional Requests"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/textColor"
                             android:textSize="20sp" />
 
                         <EditText
@@ -283,21 +348,18 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="6dp"
                             android:layout_marginEnd="6dp"
+                            android:layout_marginBottom="6dp"
                             android:backgroundTint="@color/myOrange"
-                            android:cursorVisible="false"
-                            android:hint="eg No Sugar, No Salt"
                             android:inputType="text"
                             android:lines="3"
-                            android:padding="4dp"
-                            android:textColor="@color/colorPrimaryDark" />
+                            android:padding="4dp" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
 
-                <ImageView
+                <View
                     android:layout_width="match_parent"
-                    android:layout_height="210dp"
-                    android:src="@drawable/kartoon_cafe" />
+                    android:layout_height="100dp" />
 
 
             </LinearLayout>
@@ -311,7 +373,9 @@
         android:layout_gravity="bottom"
         android:layout_margin="4dp"
         android:backgroundTint="@color/myOrange"
-        android:visibility="gone">
+        android:outlineSpotShadowColor="@color/myOrange"
+        android:visibility="gone"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"

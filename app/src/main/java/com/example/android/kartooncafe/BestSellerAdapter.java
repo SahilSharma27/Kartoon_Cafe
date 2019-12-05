@@ -59,24 +59,7 @@ public class BestSellerAdapter extends RecyclerView.Adapter<BestSellViewHolder> 
             holder.imageView2.setImageResource(R.drawable.veg_icon);
             holder.imageView3.setImageResource((R.drawable.non_veg_icon));
         }
-//        if(currentItem.getCustomizable()==0){
-//            holder.custButton.setVisibility(View.GONE);
-//
-//        }
-//        holder.addButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //  Toast.makeText(context, currentItem.getCustomList().get(0).getCustomName() +" to Cart",Toast.LENGTH_LONG).show();
-//                Cart cartItem=new Cart(currentItem,1,currentItem.getItemPrice());
-//
-//                SubMenuActivity.cartItems.add(cartItem);
-//                CartActivity.cartItemPrices.add(currentItem.getItemPrice());
-//
-//
-//
-//
-//            }
-//        });
+
         holder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,14 +98,8 @@ public class BestSellerAdapter extends RecyclerView.Adapter<BestSellViewHolder> 
                             cartItem.setCustom(selectedRad);
                             cartItem.setCustomPrice(customPrice);
                             cartItem.setCartItemCategory(custType);
+                            cartItem.setCartItemType(CartActivity.ORDER_KEY);
                             CartHelper.addItemToCart(context, cartItem);
-
-//                            Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
-//                            double customPrice = currentItem.getCustomList().get(clickedRadPos).getCustomPrice();
-//                            int custType = currentItem.getCustomList().get(clickedRadPos).getCustType();
-//                            cartItem.setCustom(new Customizables(selectedRad, customPrice, custType));
-//                            SubMenuActivity.cartItems.add(cartItem);
-//                            CartActivity.cartItemPrices.add(currentItem.getItemPrice());
                         }
                     });
 
@@ -142,11 +119,9 @@ public class BestSellerAdapter extends RecyclerView.Adapter<BestSellViewHolder> 
                     cartItem.setCustom(null);
                     cartItem.setCustomPrice(0.0);
                     cartItem.setCartItemCategory(currentItem.getItemCategory());
+                    cartItem.setCartItemType(CartActivity.ORDER_KEY);
                     CartHelper.addItemToCart(context, cartItem);
-//                    Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
-//
-//                    SubMenuActivity.cartItems.add(cartItem);
-//                    CartActivity.cartItemPrices.add(currentItem.getItemPrice());
+
                 }
 
             }

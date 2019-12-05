@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.kartooncafe.ui.tableReservation.ReservationFragment;
+
 import java.util.ArrayList;
 
 public class CustomAdapter2A extends RecyclerView.Adapter<ItemViewHolder2> {
@@ -71,6 +73,15 @@ public class CustomAdapter2A extends RecyclerView.Adapter<ItemViewHolder2> {
             public void onClick(View view) {
                 //  Toast.makeText(context, currentItem.getCustomList().get(0).getCustomName() +" to Cart",Toast.LENGTH_LONG).show();
                 if (currentItem.getCustomizable() == 0) {
+                    Cart cartItem = new Cart(currentItem.getItemName(), 1, currentItem.getItemPrice());
+                    cartItem.setCustom(null);
+                    cartItem.setCustomPrice(0.0);
+                    cartItem.setCartItemCategory(currentItem.getItemCategory());
+                    cartItem.setCartItemType(ReservationFragment.TABLE_RESERVATION_KEY);
+                    CartHelper.addItemToCart(context, cartItem);
+                    Toast.makeText(context, "ADDED TO CART", Toast.LENGTH_LONG).show();
+
+
 //                    Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
 //                    OrderAheadSubMenu.reservationCart.add(cartItem);
                 } else {
@@ -103,7 +114,14 @@ public class CustomAdapter2A extends RecyclerView.Adapter<ItemViewHolder2> {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Toast.makeText(context, selectedRad, Toast.LENGTH_LONG).show();
                             customValuesList.clear();
-
+                            Cart cartItem = new Cart(currentItem.getItemName(), 1, currentItem.getItemPrice());
+                            double customPrice = currentItem.getCustomList().get(clickedRadPos).getCustomPrice();
+                            int custType = currentItem.getCustomList().get(clickedRadPos).getCustType();
+                            cartItem.setCustom(selectedRad);
+                            cartItem.setCustomPrice(customPrice);
+                            cartItem.setCartItemCategory(custType);
+                            cartItem.setCartItemType(ReservationFragment.TABLE_RESERVATION_KEY);
+                            CartHelper.addItemToCart(context, cartItem);
 //                            Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());
 //                            double customPrice = currentItem.getCustomList().get(clickedRadPos).getCustomPrice();
 //                            int custType = currentItem.getCustomList().get(clickedRadPos).getCustType();

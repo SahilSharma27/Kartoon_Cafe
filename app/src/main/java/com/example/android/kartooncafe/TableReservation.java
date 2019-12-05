@@ -5,16 +5,17 @@ import java.util.ArrayList;
 public class TableReservation {
 
     private int reservationId;
-    private String reservationDate;
-    private String reservationTime;
+    private String reservationForDate;
+    private String reservationForTime;
     private String numberOfPpl;
     private String userName;
     private String userEmail;
     private String userContact;
     private String specialOcassion;
     private String specialInstruction;
-    private ArrayList<Cart> reservtaionOrderAheadList;
+    private ArrayList<Cart> reservationOrderAheadList;
     private double orderTotal;
+    private String paymentMethod;
 
 
     public TableReservation() {
@@ -27,22 +28,6 @@ public class TableReservation {
 
     public void setReservationId(int reservationId) {
         this.reservationId = reservationId;
-    }
-
-    public String getReservationDate() {
-        return reservationDate;
-    }
-
-    public void setReservationDate(String reservationDate) {
-        this.reservationDate = reservationDate;
-    }
-
-    public String getReservationTime() {
-        return reservationTime;
-    }
-
-    public void setReservationTime(String reservationTime) {
-        this.reservationTime = reservationTime;
     }
 
     public String getUserName() {
@@ -85,14 +70,6 @@ public class TableReservation {
         this.specialInstruction = specialInstruction;
     }
 
-    public ArrayList<Cart> getReservtaionOrderAheadList() {
-        return reservtaionOrderAheadList;
-    }
-
-    public void setReservtaionOrderAheadList(ArrayList<Cart> reservtaionOrderAheadList) {
-        this.reservtaionOrderAheadList = reservtaionOrderAheadList;
-    }
-
     public String getNumberOfPpl() {
         return numberOfPpl;
     }
@@ -109,5 +86,36 @@ public class TableReservation {
         this.orderTotal = orderTotal;
     }
 
+    public ArrayList<Cart> getReservationOrderAheadList() {
+        return reservationOrderAheadList;
+    }
 
+    public void setReservationOrderAheadList(ArrayList<Cart> reservationOrderAheadList) {
+        this.reservationOrderAheadList = reservationOrderAheadList;
+    }
+
+    public String getReservationForDate() {
+        return reservationForDate;
+    }
+
+    public void setReservationForDate(String reservationForDate) {
+        this.reservationForDate = reservationForDate;
+    }
+
+    public String getReservationForTime() {
+        return reservationForTime;
+    }
+
+    public void setReservationForTime(String reservationForTime) {
+        this.reservationForTime = reservationForTime;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
 }
+

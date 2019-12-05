@@ -10,6 +10,7 @@ import com.airbnb.lottie.LottieAnimationView;
 public class FinalCheckoutActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     LottieAnimationView animationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,4 +25,6 @@ public class FinalCheckoutActivity extends AppCompatActivity {
         animationView.setRepeatCount(2);
 
     }
+
+
 }

@@ -1,17 +1,22 @@
 package com.example.android.kartooncafe.ui.send;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.example.android.kartooncafe.MainActivity;
+import com.example.android.kartooncafe.CartHelper;
 import com.example.android.kartooncafe.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -43,25 +48,35 @@ import java.util.Locale;
 
 public class SendFragment extends Fragment {
 
-    //private SendViewModel sendViewModel;
 
-    public static String MY_PREF_NAME = "userAddress";
+    public static String USER_NAME;
+    public static String USER_EMAIL;
+    public static String USER_CONTACT = "Not Mentioned Yet!";
+    public static String USER_ADDRESS = "Not Mentioned Yet!";
+
+    public static String ADDRESS_KEY = "address";
+    public static String CONTACT_KEY = "contact";
+
+
+    public static String MY_PREF_NAME = "delivery_details";
+
     CardView logOutCard;
-    public static String userDeliveryAddress = "Not Mentioned Yet!";
-    public static String contactNumber = "9810040013";
-    Button button;
-    LocationRequest locationRequest;
-    LocationCallback locationCallback;
-    FusedLocationProviderClient fusedLocationProviderClient;
-    Location currentLocation;
-    Location centerLocation;
-    TextView firstName, secondName, accountMail, userAddress, userContact;
+    Button locateMeButton, saveDetailsButton;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private Location currentLocation;
+    private Location centerLocation;
+    private TextView firstName, secondName, accountMail;
+    private EditText userAddress, userContact;
+    private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_send, container, false);
+        root = inflater.inflate(R.layout.fragment_send, container, false);
+        findView();
 
-
+        final LocationManager manager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         centerLocation = new Location("");
         centerLocation.setLatitude(28.6193953);
         centerLocation.setLongitude(77.09188);
@@ -84,56 +99,73 @@ public class SendFragment extends Fragment {
 
                     }
                 }).check();
-        initLoctation();
+        //Get Location
+        initLocation();
 
-        firstName = root.findViewById(R.id.account_firstName);
-        secondName = root.findViewById(R.id.account_lastName);
-        accountMail = root.findViewById(R.id.account_mail);
-        userAddress = root.findViewById(R.id.user_address);
-        button = root.findViewById(R.id.get_location);
-        logOutCard = root.findViewById(R.id.log_out_card);
-        userContact = root.findViewById(R.id.user_contact);
-        String[] splitName = MainActivity.userName.split("\\s+");
+
+        String[] splitName = USER_NAME.split("\\s+");
         firstName.setText(splitName[0]);
         secondName.setText(splitName[1]);
-        accountMail.setText(MainActivity.userEmail);
-        userAddress.setText(userDeliveryAddress);
+        accountMail.setText(USER_EMAIL);
+        userAddress.setText(USER_ADDRESS);
+        userContact.setText(USER_CONTACT);
+
         logOutCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CartHelper.deleteCart(getContext());
+                getContext().getSharedPreferences(MY_PREF_NAME, 0).edit().clear().apply();
                 AuthUI.getInstance().signOut(getContext());
             }
         });
-        button.setOnClickListener(new View.OnClickListener() {
+
+        saveDetailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fusedLocationProviderClient.getLastLocation()
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .addOnCompleteListener(new OnCompleteListener<Location>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Location> task) {
-                                String coordinates = new StringBuilder()
-                                        .append(task.getResult().getLatitude())
-                                        .append("/")
-                                        .append(task.getResult().getLongitude()).toString();
-                                //textView1.setText(coordinates);
+                USER_CONTACT = userContact.getText().toString();
+                USER_ADDRESS = userAddress.getText().toString();
+                SharedPreferences.Editor editor = getContext().getSharedPreferences(MY_PREF_NAME, Context.MODE_PRIVATE).edit();
+                editor.putString(ADDRESS_KEY, USER_ADDRESS);
+                editor.putString(CONTACT_KEY, USER_CONTACT);
+                editor.apply();
+            }
+        });
 
-                                float distanceInMeters = centerLocation.distanceTo(currentLocation);
-                                boolean isWithin10km = distanceInMeters < 10000;
-                                String singleAddress = getAddressFromLatLng(task.getResult().getLatitude(),
-                                        task.getResult().getLongitude());
-                                userDeliveryAddress = singleAddress + " " + isWithin10km + " " + distanceInMeters;
-                                userAddress.setText(userDeliveryAddress);
-                                SharedPreferences.Editor editor = getContext().getSharedPreferences(MY_PREF_NAME, Context.MODE_PRIVATE).edit();
-                                editor.putString("address", userDeliveryAddress);
-                                editor.apply();
-                            }
-                        });
+        locateMeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    buildAlertMessageNoGps();
+                } else {
+                    fusedLocationProviderClient.getLastLocation()
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .addOnCompleteListener(new OnCompleteListener<Location>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Location> task) {
+//                                    String coordinates = new StringBuilder()
+//                                            .append(task.getResult().getLatitude())
+//                                            .append("/")
+//                                            .append(task.getResult().getLongitude()).toString();
+//                                    textView1.setText(coordinates);
+
+                                    float distanceInMeters = centerLocation.distanceTo(currentLocation);
+                                    boolean isWithin10km = distanceInMeters < 10000;
+                                    //todo gettting error here
+                                    String singleAddress = getAddressFromLatLng(task.getResult().getLatitude(),
+                                            task.getResult().getLongitude());
+                                    USER_ADDRESS = singleAddress + " " + isWithin10km + " " + distanceInMeters;
+                                    userAddress.setText(USER_ADDRESS);
+
+                                }
+                            });
+                }
 
             }
 
@@ -142,6 +174,24 @@ public class SendFragment extends Fragment {
 
         return root;
 
+    }
+
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private String getAddressFromLatLng(double latitude, double longitude) {
@@ -155,7 +205,7 @@ public class SendFragment extends Fragment {
                 result = sb.toString();
                 // Location.distanceBetween((latitude,longi));
             } else {
-                result = "Adress not found";
+                result = "Address not found";
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -164,7 +214,7 @@ public class SendFragment extends Fragment {
         return result;
     }
 
-    private void initLoctation() {
+    private void initLocation() {
         buildLocationRequest();
         buildLocationCallback();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
@@ -204,5 +254,20 @@ public class SendFragment extends Fragment {
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
         }
         super.onResume();
+    }
+
+    public void findView() {
+        firstName = root.findViewById(R.id.account_firstName);
+        secondName = root.findViewById(R.id.account_lastName);
+
+        userContact = root.findViewById(R.id.user_contact);
+        accountMail = root.findViewById(R.id.account_mail);
+        userAddress = root.findViewById(R.id.user_address);
+
+        locateMeButton = root.findViewById(R.id.get_location);
+        saveDetailsButton = root.findViewById(R.id.save_details);
+        logOutCard = root.findViewById(R.id.log_out_card);
+
+
     }
 }

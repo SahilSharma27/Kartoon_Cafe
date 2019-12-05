@@ -3,7 +3,7 @@ package com.example.android.kartooncafe;
 import java.util.ArrayList;
 
 public class BestSellerItem extends Item {
-    int backDropId;
+    private int backDropId;
 
     public BestSellerItem
             (String itemCode, String itemName, String itemDescription, int itemCategory, double itemPrice,

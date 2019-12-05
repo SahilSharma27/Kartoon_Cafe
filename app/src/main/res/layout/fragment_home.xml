@@ -49,7 +49,7 @@
                     android:textSize="25sp" />
 
                 <Button
-                    android:id="@+id/reservationfromhome"
+                    android:id="@+id/reservation_from_home"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -154,7 +154,7 @@
                     android:padding="5dp">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/instafollow"
+                        android:id="@+id/insta_follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="6dp"
@@ -169,7 +169,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/fbfollow"
+                        android:id="@+id/fb_follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="6dp"
@@ -193,7 +193,7 @@
                     android:padding="5dp">
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/twitterfollow"
+                        android:id="@+id/twitter_follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
@@ -210,7 +210,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/ytfollow"
+                        android:id="@+id/yt_follow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
@@ -231,13 +231,15 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabHome"
+        android:id="@+id/fab_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:backgroundTint="@color/myOrange"
+        android:backgroundTint="@color/colorPrimaryDark"
         app:fabCustomSize="60dp"
         app:fabSize="auto"
-        app:srcCompat="@drawable/ic_restaurant_menu_black_24dp" />
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/finalcart" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

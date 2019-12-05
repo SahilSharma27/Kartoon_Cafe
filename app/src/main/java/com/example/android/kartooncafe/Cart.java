@@ -21,7 +21,8 @@ public class Cart {
     private double customPrice;
     @ColumnInfo(name = "cart_item_catg")
     private int cartItemCategory;//veg , non veg , egg
-
+    @ColumnInfo(name = "cart_item_type")
+    private String cartItemType;//tableReservation/Order
 
     public Cart(String cartItemName, int quantity, double price) {
         this.cartItemName = cartItemName;
@@ -86,5 +87,11 @@ public class Cart {
         this.cartItemCategory = cartItemCategory;
     }
 
+    public String getCartItemType() {
+        return cartItemType;
+    }
 
+    public void setCartItemType(String cartItemType) {
+        this.cartItemType = cartItemType;
+    }
 }

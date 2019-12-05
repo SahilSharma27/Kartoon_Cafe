@@ -8,11 +8,12 @@ public class Menu {
     private int menuBackDrop;
     private ArrayList<Item> menuItemList;
 
-    public Menu(String menuTitle,String menuCategory, int menuBackDrop) {
-        this.menuTitle=menuTitle;
+    public Menu(String menuTitle, String menuCategory, int menuBackDrop) {
+        this.menuTitle = menuTitle;
         this.menuCategory = menuCategory;
         this.menuBackDrop = menuBackDrop;
     }
+
     public String getMenuTitle() {
         return menuTitle;
     }

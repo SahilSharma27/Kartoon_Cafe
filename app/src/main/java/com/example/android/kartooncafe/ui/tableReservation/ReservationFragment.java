@@ -1,7 +1,9 @@
 package com.example.android.kartooncafe.ui.tableReservation;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +13,13 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -25,13 +30,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.android.kartooncafe.Cart;
 import com.example.android.kartooncafe.CartAdapter;
-import com.example.android.kartooncafe.MainActivity;
+import com.example.android.kartooncafe.CartHelper;
+import com.example.android.kartooncafe.FinalCheckoutActivity;
 import com.example.android.kartooncafe.OrderAheadMenu;
-import com.example.android.kartooncafe.OrderAheadSubMenu;
 import com.example.android.kartooncafe.R;
 import com.example.android.kartooncafe.ReservationAdapter;
 import com.example.android.kartooncafe.ReservationItemClickListener;
 import com.example.android.kartooncafe.TableReservation;
+import com.example.android.kartooncafe.ui.send.SendFragment;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -43,47 +51,105 @@ import java.util.List;
 public class ReservationFragment extends Fragment {
 
 
-    TextView reservationCartQty;
-    EditText editText;
-    View root;
-    CardView payable, paymentOptn;
-    String finalDate, finalTime, finalNumber;
-    String finalSpecialOcassion = "NOT ANY";
-    boolean orderAhead = false;
-    CartAdapter adapter4;
+    public static TextView subTotalTV, grandTotalTV;
+    public static String TABLE_RESERVATION_KEY = "reservation_order";
+    private static ArrayList<Cart> finalReservationCartList = new ArrayList<>();
+    private static Double tax = 0.05, subtotal = 0.0, GrandTotal = 0.0;
+    private EditText editText;
+    private View root;
+    private CardView payable, paymentOptn;
+
     private ArrayList<String> dateList = new ArrayList<>();
     private ArrayList<String> timeList = new ArrayList<>();
     private ArrayList<String> numList = new ArrayList<>();
-    private ArrayList<Cart> finalReservationCartList;
+    private String finalDate, finalTime, finalNumber;
+
     private LinearLayout layout1, layout2;
     private RecyclerView orderRCView;
     private FrameLayout frameLayout, frameLayout1;
-    private LottieAnimationView animationView, animationView1;
+    private String finalSpecialOcassion = "NOT ANY";
     private CheckBox checkBoxOrderAhead, birthday, anniversary, party;
     private Button button;
-    private TextView textViewname, textViewemail;
     private LinearLayout cartView;
     private RecyclerView dateRCView, timeRCView, numberRCView;
     private Button reservationButton;
-    private ReservationAdapter adapter1, adapter2, adapter3;
+
     private String x = "", y = "", z = "";
+    private boolean orderAhead = false;
+    private CartAdapter adapter4;
+    private LottieAnimationView animationView;
+    private DatabaseReference cartOrderdatabaseReference;
+    private TableReservation tableReservation;
+    private RadioGroup radioGroup;
+
+    public static void Refresh() {
+        subtotal = 0.0;
+        GrandTotal = 0.0;
+        double price = 0.0;
+
+        for (int i = 0; i < finalReservationCartList.size(); i++) {
+
+            price = finalReservationCartList.get(i).getPrice() * finalReservationCartList.get(i).getQuantity();
+            subtotal += price;
+
+            if (finalReservationCartList.get(i).getCustom() != null) {
+
+                subtotal += finalReservationCartList.get(i).getCustomPrice() * finalReservationCartList.get(i).getQuantity();
+            }
+        }
+
+        GrandTotal = subtotal + (subtotal * tax);
+        subTotalTV.setText("₹ " + subtotal);
+        grandTotalTV.setText("₹ " + GrandTotal);
+
+        // cartTotalPrice.setText("₹ " + GrandTotal);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.fragment_reservation, container, false);
-
+        subtotal = 0.0;
+        GrandTotal = 0.0;
         findViews();
         loadAnimations();
         loadDateList();
         loadTimeList();
         loadNumberList();
 
+        FirebaseDatabase cartfirebaseDatabase = FirebaseDatabase.getInstance();
+        cartOrderdatabaseReference = cartfirebaseDatabase.getReference().child("Table Reservation");
+
+        finalReservationCartList.clear();
+        finalReservationCartList = CartHelper.getItemsFromCart(getContext(), TABLE_RESERVATION_KEY);
+
+        if (!finalReservationCartList.isEmpty()) {
+            checkBoxOrderAhead.setChecked(true);
+            orderAhead = true;
+            button.setVisibility(View.VISIBLE);
+            cartView.setVisibility(View.VISIBLE);
+            payable.setVisibility(View.VISIBLE);
+            paymentOptn.setVisibility(View.VISIBLE);
+        }
+
+        for (int i = 0; i < finalReservationCartList.size(); i++) {
+
+            subtotal += finalReservationCartList.get(i).getPrice() * finalReservationCartList.get(i).getQuantity();
+            if (finalReservationCartList.get(i).getCustom() != null) {
+
+                subtotal += finalReservationCartList.get(i).getCustomPrice() * finalReservationCartList.get(i).getQuantity();
+            }
+        }
+
+        GrandTotal = subtotal + (subtotal * tax);
+        subTotalTV.setText(String.format("₹ %s", subtotal));
+        grandTotalTV.setText(String.format("₹ %s", GrandTotal));
+
         checkBoxOrderAhead.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (checkBoxOrderAhead.isChecked()) {
                     orderAhead = true;
-                    finalReservationCartList = new ArrayList<>();
                     button.setVisibility(View.VISIBLE);
                     cartView.setVisibility(View.VISIBLE);
                     payable.setVisibility(View.VISIBLE);
@@ -159,42 +225,28 @@ public class ReservationFragment extends Fragment {
                     Toast.makeText(getContext(), "Please select Number of People!", Toast.LENGTH_LONG).show();
                     return;
                 } else if (checkBoxOrderAhead.isChecked()) {
-                    if (OrderAheadSubMenu.reservationCart == null || OrderAheadSubMenu.reservationCart.isEmpty()) {
+                    if (finalReservationCartList.isEmpty()) {
                         Toast.makeText(getContext(), "Your Cart is Empty!", Toast.LENGTH_LONG).show();
                         return;
-                    } else {
-                        finalReservationCartList.addAll(OrderAheadSubMenu.reservationCart);
                     }
                 }
 
 
                 finalSpecialOcassion = x + " " + y + " " + z;
+                initializeObject();
 
-                TableReservation tableReservation = new TableReservation();
-                tableReservation.setReservationId(1);
-                tableReservation.setReservationDate(finalDate);
-                tableReservation.setReservationTime(finalTime);
-                tableReservation.setNumberOfPpl(finalNumber);
-                tableReservation.setUserName(MainActivity.userName);
-                tableReservation.setUserEmail(MainActivity.userEmail);
-                tableReservation.setUserContact("9810040013");
-                tableReservation.setSpecialOcassion(finalSpecialOcassion);
-                tableReservation.setSpecialInstruction(editText.getText().toString());
-                if (orderAhead) {
-                    tableReservation.setReservtaionOrderAheadList(finalReservationCartList);
-                } else tableReservation.setReservtaionOrderAheadList(null);
 
-                tableReservation.setOrderTotal(1000.0);
+                cartOrderdatabaseReference.push().setValue(tableReservation);
+                CartHelper.emptyThecart(getContext(), TABLE_RESERVATION_KEY);
+                showMyDialog();
 
-//                Intent intent = new Intent(getContext(), FinalDummyActivity2.class);
-//                intent.putExtra("OI", tableReservation);
-//                startActivity(intent);
+
             }
         });
 
 
         //Date RCVIEW
-        adapter1 = new ReservationAdapter(getContext(), dateList, new ReservationItemClickListener() {
+        ReservationAdapter adapter1 = new ReservationAdapter(getContext(), dateList, new ReservationItemClickListener() {
             @Override
             public void onReservationItemClicked(View view, int pos) {
                 finalDate = dateList.get(pos);
@@ -208,7 +260,7 @@ public class ReservationFragment extends Fragment {
 
 
         //Time RCVIEW
-        adapter2 = new ReservationAdapter(getContext(), timeList, new ReservationItemClickListener() {
+        ReservationAdapter adapter2 = new ReservationAdapter(getContext(), timeList, new ReservationItemClickListener() {
             @Override
             public void onReservationItemClicked(View view, int pos) {
                 finalTime = timeList.get(pos);
@@ -223,7 +275,7 @@ public class ReservationFragment extends Fragment {
 
 
         //Number RCVIEW
-        adapter3 = new ReservationAdapter(getContext(), numList, new ReservationItemClickListener() {
+        ReservationAdapter adapter3 = new ReservationAdapter(getContext(), numList, new ReservationItemClickListener() {
             @Override
             public void onReservationItemClicked(View view, int pos) {
                 finalNumber = numList.get(pos);
@@ -237,7 +289,7 @@ public class ReservationFragment extends Fragment {
 
 
         //order ahead Cart RCVIEW
-        adapter4 = new CartAdapter(getContext(), OrderAheadSubMenu.reservationCart);
+        adapter4 = new CartAdapter(getContext(), finalReservationCartList);
         orderRCView.setItemAnimator(new DefaultItemAnimator());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         orderRCView.setLayoutManager(linearLayoutManager);
@@ -299,7 +351,6 @@ public class ReservationFragment extends Fragment {
 
     }
 
-
     private void loadTimeList() {
         timeList.add("11:00 AM");
         timeList.add("11:30 AM");
@@ -338,12 +389,38 @@ public class ReservationFragment extends Fragment {
         numList.add("7+");
     }
 
+    private void initializeObject() {
+        int id = radioGroup.getCheckedRadioButtonId();
+        RadioButton rb = radioGroup.findViewById(id);
+        tableReservation = new TableReservation();
+        tableReservation.setReservationId(1);
+        tableReservation.setReservationForDate(finalDate);
+        tableReservation.setReservationForTime(finalTime);
+        tableReservation.setNumberOfPpl(finalNumber);
+        tableReservation.setUserName(SendFragment.USER_NAME);
+        tableReservation.setUserEmail(SendFragment.USER_EMAIL);
+        tableReservation.setUserContact(SendFragment.USER_CONTACT);
+        tableReservation.setSpecialOcassion(finalSpecialOcassion);
+        tableReservation.setSpecialInstruction(editText.getText().toString());
+        if (orderAhead) {
+            tableReservation.setReservationOrderAheadList(finalReservationCartList);
+            tableReservation.setPaymentMethod(rb.getText().toString());
+        } else {
+            tableReservation.setPaymentMethod(null);
+            tableReservation.setReservationOrderAheadList(null);
+        }
+        tableReservation.setOrderTotal(GrandTotal);
+    }
+
     private void findViews() {
 
-        textViewname = root.findViewById(R.id.username);
-        textViewname.setText(MainActivity.userName);
-        textViewemail = root.findViewById(R.id.useremail);
-        textViewemail.setText(MainActivity.userEmail);
+        TextView textViewname = root.findViewById(R.id.username);
+        textViewname.setText(SendFragment.USER_NAME);
+        TextView textViewemail = root.findViewById(R.id.useremail);
+        textViewemail.setText(SendFragment.USER_EMAIL);
+        TextView textViewContact = root.findViewById(R.id.usercontact);
+        textViewContact.setText(SendFragment.USER_CONTACT);
+
 
         dateRCView = root.findViewById(R.id.dateview);
         timeRCView = root.findViewById(R.id.timeview);
@@ -365,10 +442,14 @@ public class ReservationFragment extends Fragment {
 
         button = root.findViewById(R.id.reservation_menu_button);
 
+        subTotalTV = root.findViewById(R.id.order_ahead_subtotal);
+        grandTotalTV = root.findViewById(R.id.order_ahead_grand_total);
+
         cartView = root.findViewById(R.id.order_ahead_cart);
-        reservationCartQty = root.findViewById(R.id.reservation_cart_qty);
+        TextView reservationCartQty = root.findViewById(R.id.reservation_cart_qty);
         payable = root.findViewById(R.id.reservation_cart_payable);
         paymentOptn = root.findViewById(R.id.reservation_cart_paymentOptn);
+        radioGroup = root.findViewById(R.id.order_ahead_payment_method);
 
 
         editText = root.findViewById(R.id.reservation_editxt);
@@ -388,14 +469,52 @@ public class ReservationFragment extends Fragment {
         animationView.setRepeatCount(1);
 
 
-        animationView1 = new LottieAnimationView(getContext());
+        LottieAnimationView animationView1 = new LottieAnimationView(getContext());
         animationView1.setAnimation(R.raw.star);
         frameLayout1.addView(animationView1);
         animationView1.playAnimation();
         animationView1.setRepeatCount(4);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            finalReservationCartList.clear();
+            finalReservationCartList = CartHelper.getItemsFromCart(getContext(), TABLE_RESERVATION_KEY);
+            adapter4 = new CartAdapter(getContext(), finalReservationCartList);
+            orderRCView.setItemAnimator(new DefaultItemAnimator());
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+            orderRCView.setLayoutManager(linearLayoutManager);
+            orderRCView.setAdapter(adapter4);
+            Refresh();
+        }
+    }
+
+    private void showMyDialog() {
+        Dialog myDialog = new Dialog(getContext());
+        myDialog.setContentView(R.layout.custom_dialog_layout);
+        myDialog.show();
+
+        frameLayout = myDialog.findViewById(R.id.anim);
+        animationView = new LottieAnimationView(getContext());
+        animationView.setAnimation(R.raw.checkmark);
+        frameLayout.addView(animationView);
+        animationView.playAnimation();
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(getContext(), FinalCheckoutActivity.class);
+                startActivity(intent);
+            }
+        };
+        handler.postDelayed(runnable, 3000);
+        Toast.makeText(getContext(), "Reservation Done", Toast.LENGTH_LONG).show();
+    }
+
 
 }
+
 
 
