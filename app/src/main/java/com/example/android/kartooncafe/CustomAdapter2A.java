@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.kartooncafe.ui.tableReservation.ReservationFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -79,7 +80,9 @@ public class CustomAdapter2A extends RecyclerView.Adapter<ItemViewHolder2> {
                     cartItem.setCartItemCategory(currentItem.getItemCategory());
                     cartItem.setCartItemType(ReservationFragment.TABLE_RESERVATION_KEY);
                     CartHelper.addItemToCart(context, cartItem);
-                    Toast.makeText(context, "ADDED TO CART", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(context, "ADDED TO CART", Toast.LENGTH_LONG).show();
+                    Snackbar.make(view, "Added To Cart", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
 
 
 //                    Cart cartItem = new Cart(currentItem, 1, currentItem.getItemPrice());

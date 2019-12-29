@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -111,9 +112,13 @@ public class BestSellerAdapter extends RecyclerView.Adapter<BestSellViewHolder> 
                     });
 
                     builder.show();
-                    Toast.makeText(context, "ADDED TO CART", Toast.LENGTH_LONG).show();
+                    Snackbar.make(view, "Added To Cart", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                    //Toast.makeText(context, "ADDED TO CART", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(context, "Added to cart", Toast.LENGTH_LONG).show();
+                    Snackbar.make(view, "Added To Cart", Snackbar.LENGTH_SHORT)
+                            .setAction("Action", null).show();
+                    //    Toast.makeText(context, "Added to cart", Toast.LENGTH_LONG).show();
 
                     Cart cartItem = new Cart(currentItem.getItemName(), 1, currentItem.getItemPrice());
                     cartItem.setCustom(null);

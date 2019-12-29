@@ -26,12 +26,15 @@
                 android:padding="6dp"
                 android:src="@drawable/ic_location_on_black_24dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:layout_gravity="center"
-                android:text="Address: 1B/139 Ramesh Nagar, New Delhi  "
+                android:fontFamily="@font/happymarker"
+                android:hint="Add your location"
+                android:textSize="14sp"
                 android:textColor="@color/textColor" />
         </LinearLayout>
 
@@ -81,13 +84,16 @@
                             android:padding="6dp"
                             android:src="@drawable/ic_call_black_24dp" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/contact_textview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:hint="Add your contact"
                             android:fontFamily="@font/happymarker"
-                            android:text="980040013"
+                            android:inputType="phone"
+                            android:textSize="15sp"
                             android:textColor="@color/textColor" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -357,9 +363,15 @@
                 </androidx.cardview.widget.CardView>
 
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/kartoon_cafe" />
+
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="100dp" />
+                    android:layout_height="70dp" />
 
 
             </LinearLayout>

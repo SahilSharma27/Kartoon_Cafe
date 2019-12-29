@@ -31,7 +31,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.android.kartooncafe.Cart;
 import com.example.android.kartooncafe.CartAdapter;
 import com.example.android.kartooncafe.CartHelper;
-import com.example.android.kartooncafe.FinalCheckoutActivity;
+import com.example.android.kartooncafe.FinalDummyActivity2;
 import com.example.android.kartooncafe.OrderAheadMenu;
 import com.example.android.kartooncafe.R;
 import com.example.android.kartooncafe.ReservationAdapter;
@@ -42,11 +42,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.GregorianCalendar;
+
 
 public class ReservationFragment extends Fragment {
 
@@ -75,12 +75,15 @@ public class ReservationFragment extends Fragment {
     private Button reservationButton;
 
     private String x = "", y = "", z = "";
-    private boolean orderAhead = false;
+    public static boolean orderAhead = false;
     private CartAdapter adapter4;
     private LottieAnimationView animationView;
     private DatabaseReference cartOrderdatabaseReference;
     private TableReservation tableReservation;
     private RadioGroup radioGroup;
+    ReservationAdapter adapter2;
+    private String TODAY = "   TODAY   ";
+    private String TOMMORROW = "TOMMORROW";
 
     public static void Refresh() {
         subtotal = 0.0;
@@ -105,6 +108,12 @@ public class ReservationFragment extends Fragment {
         // cartTotalPrice.setText("₹ " + GrandTotal);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter4.notifyDataSetChanged();
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -114,11 +123,11 @@ public class ReservationFragment extends Fragment {
         findViews();
         loadAnimations();
         loadDateList();
-        loadTimeList();
+        //  loadTimeList();
         loadNumberList();
 
         FirebaseDatabase cartfirebaseDatabase = FirebaseDatabase.getInstance();
-        cartOrderdatabaseReference = cartfirebaseDatabase.getReference().child("Table Reservation");
+        cartOrderdatabaseReference = cartfirebaseDatabase.getReference().child("TableReservation");
 
         finalReservationCartList.clear();
         finalReservationCartList = CartHelper.getItemsFromCart(getContext(), TABLE_RESERVATION_KEY);
@@ -250,6 +259,8 @@ public class ReservationFragment extends Fragment {
             @Override
             public void onReservationItemClicked(View view, int pos) {
                 finalDate = dateList.get(pos);
+                loadTimeList();
+                adapter2.notifyDataSetChanged();
                 layout1.setVisibility(View.VISIBLE);
             }
         });
@@ -260,11 +271,10 @@ public class ReservationFragment extends Fragment {
 
 
         //Time RCVIEW
-        ReservationAdapter adapter2 = new ReservationAdapter(getContext(), timeList, new ReservationItemClickListener() {
+        adapter2 = new ReservationAdapter(getContext(), timeList, new ReservationItemClickListener() {
             @Override
             public void onReservationItemClicked(View view, int pos) {
                 finalTime = timeList.get(pos);
-
                 layout2.setVisibility(View.VISIBLE);
             }
         });
@@ -299,84 +309,28 @@ public class ReservationFragment extends Fragment {
         return root;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        adapter4.notifyDataSetChanged();
-    }
-
     private void loadDateList() {
 
-        String today = "TODAY";
-        String tommorrow = "TOMMORROW";
-//        String s = "Sun, Oct 20 2019";
-//        String e = "Sat, Nov 02 2019";
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM d EEEE");
-        String current = sdf.format(date);
-        // String s = "2019 Oct 20 Sunday";
-        String e = "2019 Nov 30 Saturday";
-        //  String e=current.pl
 
-        LocalDate start = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMM d EEEE");
-            start = LocalDate.parse(current, formatter);
-            LocalDate end = LocalDate.parse(e, formatter);
-            end = start.plusDays(31);
-            List<LocalDate> totalDates = new ArrayList<>();
-            while (!start.isAfter(end)) {
-                totalDates.add(start);
-                start = start.plusDays(1);
-            }
+        Calendar calendar = new GregorianCalendar();
+
+        for (int i = 0; i < 30; i++) {
+            Date date = calendar.getTime();
 
             String dateString;
-            String finalString;
-            for (int i = 0; i < totalDates.size(); i++) {
 
-                dateString = String.valueOf(formatter.format(totalDates.get(i)));
-                if (i == 0) {
-                    finalString = today + dateString.substring(4, 11);
-                } else if (i == 1) {
-                    finalString = tommorrow;
-                } else {
-                    finalString = dateString.substring(4);
-                }
-
-                dateList.add(finalString);
+            if (i == 0) {
+                dateString = TODAY;
+            } else if (i == 1) {
+                dateString = TOMMORROW;
+            } else {
+                String[] splitDate = date.toString().split("\\s+");
+                dateString = splitDate[0] + " " + splitDate[1] + " " + splitDate[2];
             }
+            dateList.add(dateString);
+            calendar.add(Calendar.DATE, 1);
 
         }
-
-
-    }
-
-    private void loadTimeList() {
-        timeList.add("11:00 AM");
-        timeList.add("11:30 AM");
-        timeList.add("12:00 PM");
-        timeList.add("12:30 PM");
-        timeList.add("1:00 PM");
-        timeList.add("1:30 PM");
-        timeList.add("2:00 PM");
-        timeList.add("2:30 PM");
-        timeList.add("3:00 PM");
-        timeList.add("3:30 PM");
-        timeList.add("4:00 PM");
-        timeList.add("4:30 PM");
-        timeList.add("5:00 PM");
-        timeList.add("5:30 PM");
-        timeList.add("6:30 PM");
-        timeList.add("6:30 PM");
-        timeList.add("7:00 PM");
-        timeList.add("7:30 PM");
-        timeList.add("8:00 PM");
-        timeList.add("8:30 PM");
-        timeList.add("9:00 PM");
-        timeList.add("9:30 PM");
-        timeList.add("10:00 PM");
-        timeList.add("10:30 PM");
-
     }
 
     private void loadNumberList() {
@@ -389,27 +343,82 @@ public class ReservationFragment extends Fragment {
         numList.add("7+");
     }
 
+    private void loadTimeList() {
+        timeList.clear();
+        adapter2.notifyDataSetChanged();
+
+        if (finalDate.equals(TODAY)) {
+            Calendar rightnow = Calendar.getInstance();
+            int hour = rightnow.get(Calendar.HOUR_OF_DAY);
+            int AM_PM = rightnow.get(Calendar.AM_PM);
+
+
+            for (int i = hour; i < 22; i++) {
+                timeList.add(i + ":00");
+                timeList.add(i + ":30");
+            }
+        } else {
+            for (int i = 11; i < 22; i++) {
+                timeList.add(i + ":00");
+                timeList.add(i + ":30");
+            }
+        }
+
+
+    }
+
     private void initializeObject() {
         int id = radioGroup.getCheckedRadioButtonId();
         RadioButton rb = radioGroup.findViewById(id);
         tableReservation = new TableReservation();
-        tableReservation.setReservationId(1);
+        tableReservation.setReservationId(generateOrderID());
         tableReservation.setReservationForDate(finalDate);
         tableReservation.setReservationForTime(finalTime);
         tableReservation.setNumberOfPpl(finalNumber);
         tableReservation.setUserName(SendFragment.USER_NAME);
         tableReservation.setUserEmail(SendFragment.USER_EMAIL);
         tableReservation.setUserContact(SendFragment.USER_CONTACT);
-        tableReservation.setSpecialOcassion(finalSpecialOcassion);
+        tableReservation.setSpecialOccassion(finalSpecialOcassion);
         tableReservation.setSpecialInstruction(editText.getText().toString());
+        tableReservation.setReservationStatus("Requested");
         if (orderAhead) {
             tableReservation.setReservationOrderAheadList(finalReservationCartList);
-            tableReservation.setPaymentMethod(rb.getText().toString());
+            // tableReservation.setPaymentMethod(rb.getText().toString());
         } else {
-            tableReservation.setPaymentMethod(null);
+            // tableReservation.setPaymentMethod(null);
             tableReservation.setReservationOrderAheadList(null);
         }
         tableReservation.setOrderTotal(GrandTotal);
+    }
+
+    private void loadAnimations() {
+        animationView = new LottieAnimationView(getContext());
+        animationView.setAnimation(R.raw.ballon);
+        frameLayout.addView(animationView);
+        animationView.playAnimation();
+        animationView.setRepeatCount(1);
+
+
+        LottieAnimationView animationView1 = new LottieAnimationView(getContext());
+        animationView1.setAnimation(R.raw.star);
+        frameLayout1.addView(animationView1);
+        animationView1.playAnimation();
+        animationView1.setRepeatCount(4);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0) {
+            finalReservationCartList.clear();
+            finalReservationCartList = CartHelper.getItemsFromCart(getContext(), TABLE_RESERVATION_KEY);
+            adapter4 = new CartAdapter(getContext(), finalReservationCartList);
+            orderRCView.setItemAnimator(new DefaultItemAnimator());
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+            orderRCView.setLayoutManager(linearLayoutManager);
+            orderRCView.setAdapter(adapter4);
+            Refresh();
+        }
     }
 
     private void findViews() {
@@ -446,7 +455,7 @@ public class ReservationFragment extends Fragment {
         grandTotalTV = root.findViewById(R.id.order_ahead_grand_total);
 
         cartView = root.findViewById(R.id.order_ahead_cart);
-        TextView reservationCartQty = root.findViewById(R.id.reservation_cart_qty);
+        // TextView reservationCartQty = root.findViewById(R.id.reservation_cart_qty);
         payable = root.findViewById(R.id.reservation_cart_payable);
         paymentOptn = root.findViewById(R.id.reservation_cart_paymentOptn);
         radioGroup = root.findViewById(R.id.order_ahead_payment_method);
@@ -461,38 +470,8 @@ public class ReservationFragment extends Fragment {
 
     }
 
-    private void loadAnimations() {
-        animationView = new LottieAnimationView(getContext());
-        animationView.setAnimation(R.raw.ballon);
-        frameLayout.addView(animationView);
-        animationView.playAnimation();
-        animationView.setRepeatCount(1);
-
-
-        LottieAnimationView animationView1 = new LottieAnimationView(getContext());
-        animationView1.setAnimation(R.raw.star);
-        frameLayout1.addView(animationView1);
-        animationView1.playAnimation();
-        animationView1.setRepeatCount(4);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0) {
-            finalReservationCartList.clear();
-            finalReservationCartList = CartHelper.getItemsFromCart(getContext(), TABLE_RESERVATION_KEY);
-            adapter4 = new CartAdapter(getContext(), finalReservationCartList);
-            orderRCView.setItemAnimator(new DefaultItemAnimator());
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-            orderRCView.setLayoutManager(linearLayoutManager);
-            orderRCView.setAdapter(adapter4);
-            Refresh();
-        }
-    }
-
     private void showMyDialog() {
-        Dialog myDialog = new Dialog(getContext());
+        final Dialog myDialog = new Dialog(getContext());
         myDialog.setContentView(R.layout.custom_dialog_layout);
         myDialog.show();
 
@@ -505,12 +484,28 @@ public class ReservationFragment extends Fragment {
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getContext(), FinalCheckoutActivity.class);
+                Intent intent = new Intent(getContext(), FinalDummyActivity2.class);
+                intent.putExtra("date", tableReservation.getReservationForDate());
+                intent.putExtra("time", tableReservation.getReservationForTime());
+                intent.putExtra("ppl", tableReservation.getNumberOfPpl());
+                intent.putExtra("res_order_total", GrandTotal);
+                intent.putParcelableArrayListExtra("summary_list", finalReservationCartList);
+                myDialog.dismiss();
+                getActivity().finish();
                 startActivity(intent);
             }
         };
         handler.postDelayed(runnable, 3000);
         Toast.makeText(getContext(), "Reservation Done", Toast.LENGTH_LONG).show();
+    }
+
+    private String generateOrderID() {
+
+        Date now = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddhhmmss");
+        return "KCTR" + dateFormat.format(now);
+
+
     }
 
 

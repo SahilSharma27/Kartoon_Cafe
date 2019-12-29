@@ -54,14 +54,105 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
     EditText editText;
     String additionalRequest = "Not Any";
     String orderDate, orderTime;
-    TextView emptytext, addressTextView, contactTextView;
+    TextView emptytext;
+    EditText addressTextView, contactTextView;
     String address;
     FrameLayout frameLayout;
     RadioGroup radioGroup;
     Order finalOrder;
     public static String ORDER_KEY = "Order";
     static double price;
+    private String final_contact;
+    private String final_location;
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cart);
+        Checkout.preload(getApplicationContext());
+        getSupportActionBar().setTitle("CART");
+        findViews();
+        loadAnimations();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        finalCartItems.clear();
+        finalCartItems = CartHelper.getItemsFromCart(this, ORDER_KEY);
+        addressTextView.setText(SendFragment.USER_ADDRESS);
+        contactTextView.setText(SendFragment.USER_CONTACT);
+        subtotal = 0.0;
+        GrandTotal = 0.0;
+        //address = addressTextView.getText().toString();
+
+        cartfirebaseDatabase = FirebaseDatabase.getInstance();
+        cartOrderdatabaseReference = cartfirebaseDatabase.getReference().child("Orders");
+
+        adapter = new CartAdapter(this, finalCartItems);
+        cartRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        cartRecyclerView.setLayoutManager(linearLayoutManager);
+        cartRecyclerView.setAdapter(adapter);
+
+
+        if (finalCartItems.isEmpty()) {
+            emptycartView.setVisibility(View.VISIBLE);
+            emptytext.setVisibility(View.VISIBLE);
+        } else {
+            emptycartView.setVisibility(View.GONE);
+            emptytext.setVisibility(View.GONE);
+            cartContent.setVisibility(View.VISIBLE);
+            orderCard.setVisibility(View.VISIBLE);
+        }
+
+
+        for (int i = 0; i < finalCartItems.size(); i++) {
+            subtotal += finalCartItems.get(i).getPrice() * finalCartItems.get(i).getQuantity();
+            if (finalCartItems.get(i).getCustom() != null) {
+                subtotal += finalCartItems.get(i).getCustomPrice() * finalCartItems.get(i).getQuantity();
+            }
+        }
+
+        GrandTotal = subtotal + (subtotal * tax);
+        subTotalTV.setText(String.format("₹ %s", subtotal));
+        grandTotalTV.setText(String.format("₹ %s", GrandTotal));
+
+        cartTotalPrice.setText(String.format("₹ %s", GrandTotal));
+
+//Order place
+        placeOrderbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (addressTextView.getText().toString().equals("")
+                        || contactTextView.getText().toString().equals("")) {
+                    Toast.makeText(CartActivity.this, "Please provide all the details", Toast.LENGTH_SHORT).show();
+
+                } else {
+
+                    initializeObject();
+
+                    if (finalOrder.getPaymentMethod().equals("CASH")) {
+                        finalOrder.setPaymentStatus("Pending");
+                        cartOrderdatabaseReference.push().setValue(finalOrder);
+                        CartHelper.emptyThecart(CartActivity.this, ORDER_KEY);
+                        showMyDialog();
+                    } else if (finalOrder.getPaymentMethod().equals("CARD / UPI / NETBANKING")) {
+                        startPayment();
+                    }
+                }
+            }
+        });
+
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (editText.getText() != null)
+                    additionalRequest = editText.getText().toString();
+                else additionalRequest = "No Request";
+            }
+        });
+
+
+    }
     public static void Refresh() {
         subtotal = 0.0;
         GrandTotal = 0.0;
@@ -86,7 +177,7 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
     }
 
     private void showMyDialog() {
-        Dialog myDialog = new Dialog(CartActivity.this);
+        final Dialog myDialog = new Dialog(CartActivity.this);
         myDialog.setContentView(R.layout.custom_dialog_layout);
         myDialog.show();
 
@@ -99,11 +190,18 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
+
                 Intent intent = new Intent(CartActivity.this, FinalCheckoutActivity.class);
+                intent.putParcelableArrayListExtra("SummaryCart", finalCartItems);
+                intent.putExtra("total_amount", GrandTotal);
+                intent.putExtra("payment_method", finalOrder.getPaymentMethod());
+                myDialog.dismiss();
+                finishAffinity();
                 startActivity(intent);
+
             }
         };
-        handler.postDelayed(runnable, 3000);
+        handler.postDelayed(runnable, 2500);
         Toast.makeText(CartActivity.this, "Order Placed", Toast.LENGTH_LONG).show();
     }
 
@@ -144,86 +242,6 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
-        Checkout.preload(getApplicationContext());
-        getSupportActionBar().setTitle("CART");
-        findViews();
-        loadAnimations();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        finalCartItems.clear();
-        finalCartItems = CartHelper.getItemsFromCart(this, ORDER_KEY);
-        addressTextView.setText(SendFragment.USER_ADDRESS);
-        contactTextView.setText(SendFragment.USER_CONTACT);
-        subtotal = 0.0;
-        GrandTotal = 0.0;
-        address = addressTextView.getText().toString();
-
-        cartfirebaseDatabase = FirebaseDatabase.getInstance();
-        cartOrderdatabaseReference = cartfirebaseDatabase.getReference().child("Orders");
-
-        adapter = new CartAdapter(this, finalCartItems);
-        cartRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        cartRecyclerView.setLayoutManager(linearLayoutManager);
-        cartRecyclerView.setAdapter(adapter);
-
-
-        if (finalCartItems.isEmpty()) {
-            emptycartView.setVisibility(View.VISIBLE);
-            emptytext.setVisibility(View.VISIBLE);
-        } else {
-            emptycartView.setVisibility(View.GONE);
-            emptytext.setVisibility(View.GONE);
-            cartContent.setVisibility(View.VISIBLE);
-            orderCard.setVisibility(View.VISIBLE);
-        }
-
-
-        for (int i = 0; i < finalCartItems.size(); i++) {
-            subtotal += finalCartItems.get(i).getPrice() * finalCartItems.get(i).getQuantity();
-            if (finalCartItems.get(i).getCustom() != null) {
-                subtotal += finalCartItems.get(i).getCustomPrice() * finalCartItems.get(i).getQuantity();
-            }
-        }
-
-        GrandTotal = subtotal + (subtotal * tax);
-        subTotalTV.setText(String.format("₹ %s", subtotal));
-        grandTotalTV.setText(String.format("₹ %s", GrandTotal));
-
-        cartTotalPrice.setText(String.format("₹ %s", GrandTotal));
-
-//Order place
-        placeOrderbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                initializeObject();
-
-                if (finalOrder.getPayementMethod().equals("CASH")) {
-                    cartOrderdatabaseReference.push().setValue(finalOrder);
-                    CartHelper.emptyThecart(CartActivity.this, ORDER_KEY);
-                    showMyDialog();
-                } else if (finalOrder.getPayementMethod().equals("CARD / UPI / NETBANKING")) {
-                    startPayment();
-                }
-            }
-        });
-
-        editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (editText.getText() != null)
-                    additionalRequest = editText.getText().toString();
-                else additionalRequest = "No Request";
-            }
-        });
-
-    }
-
     public void getCurrentDateTime() {
         Date time = Calendar.getInstance().getTime();
         orderTime = time.toString();
@@ -233,23 +251,25 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
     }
 
     public void initializeObject() {
+        final_location = addressTextView.getText().toString();
+        final_contact = contactTextView.getText().toString();
 
         int id = radioGroup.getCheckedRadioButtonId();
         RadioButton rb = radioGroup.findViewById(id);
         finalOrder = new Order();
         getCurrentDateTime();
-        finalOrder.setOrderId(1);
-        finalOrder.setOrderDate(orderDate);
+        finalOrder.setOrderId(generateOrderID());
+        // finalOrder.setOrderDate(orderDate);
         finalOrder.setOrderTime(orderTime);
         finalOrder.setUserName(SendFragment.USER_NAME);
         finalOrder.setUserEmail(SendFragment.USER_EMAIL);
-        finalOrder.setUserContact(SendFragment.USER_CONTACT);
-        finalOrder.setUserAddress(address);
+        finalOrder.setUserContact(final_contact);
+        finalOrder.setUserAddress(final_location);
         finalOrder.setSpecialInstruction(additionalRequest);
         finalOrder.setOrderList(finalCartItems);
         finalOrder.setOrderTotal(GrandTotal);
         finalOrder.setOrderStatus("Placed");
-        finalOrder.setPayementMethod(rb.getText().toString());
+        finalOrder.setPaymentMethod(rb.getText().toString());
 
     }
 
@@ -288,7 +308,7 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
              *     Invoice Payment
              *     etc.
              */
-            options.put("description", "Test Order");
+            options.put("description", finalOrder.getOrderId());
             // options.put("order_id", id);
             options.put("currency", "INR");
 
@@ -307,16 +327,25 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
     @Override
     public void onPaymentError(int i, String s) {
 
-        Toast.makeText(this, "Oops! somthing went wrong", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Oops! something went wrong", Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void onPaymentSuccess(String s) {
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        finalOrder.setPaymentStatus("Paid with RazorPay");
         cartOrderdatabaseReference.push().setValue(finalOrder);
         CartHelper.emptyThecart(CartActivity.this, ORDER_KEY);
         showMyDialog();
+    }
+
+    private String generateOrderID() {
+
+        Date now = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddhhmmss");
+        return "KCO" + dateFormat.format(now);
+
 
     }
 

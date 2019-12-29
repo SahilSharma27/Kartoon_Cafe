@@ -1,11 +1,14 @@
 package com.example.android.kartooncafe;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "CartTable")
-public class Cart {
+public class Cart implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "cart_item_id")
     private int cartItemId;
@@ -30,6 +33,29 @@ public class Cart {
         this.price = price;
     }
 
+
+    public static final Creator<Cart> CREATOR = new Creator<Cart>() {
+        @Override
+        public Cart createFromParcel(Parcel in) {
+            return new Cart(in);
+        }
+
+        @Override
+        public Cart[] newArray(int size) {
+            return new Cart[size];
+        }
+    };
+
+    protected Cart(Parcel in) {
+        cartItemId = in.readInt();
+        cartItemName = in.readString();
+        quantity = in.readInt();
+        price = in.readDouble();
+        custom = in.readString();
+        customPrice = in.readDouble();
+        cartItemCategory = in.readInt();
+        cartItemType = in.readString();
+    }
 
     public int getCartItemId() {
         return cartItemId;
@@ -93,5 +119,22 @@ public class Cart {
 
     public void setCartItemType(String cartItemType) {
         this.cartItemType = cartItemType;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(cartItemId);
+        parcel.writeString(cartItemName);
+        parcel.writeInt(quantity);
+        parcel.writeDouble(price);
+        parcel.writeString(custom);
+        parcel.writeDouble(customPrice);
+        parcel.writeInt(cartItemCategory);
+        parcel.writeString(cartItemType);
     }
 }

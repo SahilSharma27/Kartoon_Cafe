@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/top_poster_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+
+    <TextView
+        android:id="@+id/top_poster_description"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/komiko"
+        android:shadowColor="#55000000"
+        android:shadowDx="6"
+        android:shadowDy="6"
+        android:shadowRadius="6"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+</FrameLayout>

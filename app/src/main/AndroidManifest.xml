@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
 
     <application
         android:allowBackup="true"
@@ -15,10 +17,18 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".OnBoardingActivity"
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
             android:name=".FinalCheckoutActivity"
+            android:noHistory="true"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".FinalDummyActivity2" />
+        <activity
+            android:name=".FinalDummyActivity2"
+            android:noHistory="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".OrderAheadSubMenu"
@@ -29,7 +39,7 @@
         <activity
             android:name=".SplashActivity"
             android:label="KartoonCafe"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,8 +64,6 @@
         <meta-data
             android:name="com.razorpay.ApiKey"
             android:value="rzp_test_wOMAqi7Wy3fRB0" />
-
     </application>
-
 
 </manifest>

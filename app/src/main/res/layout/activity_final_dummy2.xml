@@ -1,13 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".FinalDummyActivity2">
 
-    <TextView
-        android:id="@+id/table"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/summary_back2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:src="@drawable/ic_home_black_24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="20dp"
+                android:foregroundGravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/happymarker"
+                        android:text="Reservation Successfull!"
+                        android:textColor="@color/textColor"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--    <TextView-->
+            <!--        android:layout_width="wrap_content"-->
+            <!--        android:layout_height="wrap_content"-->
+            <!--        android:layout_marginStart="10dp"-->
+            <!--        android:layout_marginTop="30dp"-->
+            <!--        android:fontFamily="@font/happymarker"-->
+            <!--        android:text="Reservation"-->
+            <!--        android:textAlignment="viewStart"-->
+            <!--        android:textColor="@color/textColor"-->
+            <!--        android:textSize="25sp" />-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/happymarker"
+                android:text="Summary"
+                android:textAlignment="viewStart"
+                android:textColor="@color/myOrange"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@color/dividerColor" />
+
+
+            <!--    <TextView-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_gravity="center"-->
+            <!--            android:layout_marginBottom="5dp"-->
+            <!--            android:fontFamily="@font/happymarker"-->
+            <!--            android:text="For"-->
+            <!--            android:textColor="@color/textColor"-->
+            <!--            android:textSize="15sp" />-->
+
+            <TextView
+                android:id="@+id/res_confirm_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/happymarker"
+                android:text="UserName"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/res_confirm_usermail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/happymarker"
+                android:text="Usermail"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/res_confirm_usercontact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/happymarker"
+                android:text="UserContact"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@color/dividerColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/res_confirm_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/date_icon_drawable"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/happymarker"
+                    android:gravity="start"
+                    android:text="Date"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/res_confirm_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/time_icon_drawable"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/happymarker"
+                    android:gravity="start"
+                    android:text="Time"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/res_confirm_ppl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ppl_icon_drawable"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/happymarker"
+                    android:gravity="start"
+                    android:text="People"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@color/dividerColor" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reservation_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+
+            <TextView
+                android:id="@+id/reservation_summary_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/happymarker"
+                android:text="Amount Paid:"
+                android:textColor="@color/textColor"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/reservation_summary_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/happymarker"
+                android:text="Payment Method: Cash in Restaurant"
+                android:textColor="@color/textColor"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/no_order_ahead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:fontFamily="@font/happymarker"
+                android:text="No Order Ahead!"
+                android:textAlignment="viewStart"
+                android:textColor="@color/myOrange"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@color/dividerColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:drawableEnd="@drawable/ic_call_black_24dp"
+                android:drawablePadding="5dp"
+                android:fontFamily="@font/happymarker"
+                android:text="Having an issue? Call Us!"
+                android:textColor="@color/textColor"
+                android:textSize="15sp" />
+
+
+            <Button
+                android:id="@+id/summary_call_us"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="6dp"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/happymarker"
+                android:text="CALL US"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/kartoon_cafe" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="70dp" />
+
+
+            <!--    <FrameLayout-->
+            <!--        android:id="@+id/reservation_done_frame"-->
+            <!--        android:layout_width="200dp"-->
+            <!--        android:layout_height="200dp"-->
+            <!--        />-->
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Order {
 
-    private int orderId;
-    private String orderDate;
+    private String orderId;
+    // private String orderDate;
     private String orderTime;
     private String userName;
     private String userEmail;
@@ -13,31 +13,31 @@ public class Order {
     private String userAddress;
     private String specialInstruction;
     private ArrayList<Cart> orderList;
-    private String payementMethod;
+    private String paymentMethod;
     private String orderStatus;
     private double orderTotal;
+    private String paymentStatus;
 
 
     public Order() {
     }
 
 
-    public int getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
-
-    public String getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
-    }
+//    public String getOrderDate() {
+//        return orderDate;
+//    }
+//
+//    public void setOrderDate(String orderDate) {
+//        this.orderDate = orderDate;
+//    }
 
     public String getOrderTime() {
         return orderTime;
@@ -103,12 +103,12 @@ public class Order {
         this.orderTotal = orderTotal;
     }
 
-    public String getPayementMethod() {
-        return payementMethod;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setPayementMethod(String payementMethod) {
-        this.payementMethod = payementMethod;
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
     public String getOrderStatus() {
@@ -117,5 +117,13 @@ public class Order {
 
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 }

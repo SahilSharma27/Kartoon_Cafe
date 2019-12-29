@@ -13,9 +13,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.coordinatorlayout.widget.CoordinatorLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginStart="4dp">
 
                 <FrameLayout
@@ -42,8 +43,9 @@
                 </FrameLayout>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="200dp"
-                    android:layout_height="120dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_gravity="end|center"
                     android:layout_margin="10dp"
                     android:outlineSpotShadowColor="@color/myOrange"
@@ -55,6 +57,7 @@
                         android:layout_margin="4dp"
                         android:background="@color/white"
                         android:orientation="vertical"
+                        android:layout_gravity="center"
                         android:padding="4dp">
 
                         <TextView
@@ -95,29 +98,22 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-            </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:padding="3dp"
-                    android:src="@drawable/dateicon" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/happymarker"
-                    android:padding="15dp"
-                    android:text="SELECT DATE "
-                    android:textColor="@color/textColor"
-                    android:textSize="20sp" />
             </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="10dp"
+                android:drawableStart="@drawable/date_icon_drawable"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/happymarker"
+                android:padding="15dp"
+                android:text="SELECT DATE "
+                android:textColor="@color/textColor"
+                android:textSize="20sp" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dateview"
@@ -132,27 +128,19 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:drawableStart="@drawable/time_icon_drawable"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/happymarker"
+                    android:padding="15dp"
+                    android:text="SELECT TIME"
+                    android:textColor="@color/textColor"
+                    android:textSize="20sp" />
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:padding="3dp"
-                        android:src="@drawable/timeicon" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/happymarker"
-                        android:gravity="center"
-                        android:padding="15dp"
-                        android:text="SELECT TIME"
-                        android:textColor="@color/textColor"
-                        android:textSize="20sp" />
-                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/timeview"
@@ -166,29 +154,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
+                android:gravity="center"
                 android:visibility="gone">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:drawableStart="@drawable/ppl_icon_drawable"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/happymarker"
+                    android:padding="15dp"
+                    android:text="NO. OF PEOPLE"
+                    android:textColor="@color/textColor"
+                    android:textSize="20sp" />
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:padding="3dp"
-                        android:src="@drawable/pplicon" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/happymarker"
-                        android:gravity="center"
-                        android:padding="15dp"
-                        android:text="NO. OF PEOPLE"
-                        android:textColor="@color/textColor"
-                        android:textSize="20sp" />
-                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/numberview"
@@ -330,19 +311,19 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/happymarker"
                                 android:padding="15dp"
-                                android:text="CART"
+                                android:text="CART ITEMS"
                                 android:textColor="@color/textColor"
                                 android:textSize="20sp" />
 
-                            <TextView
-                                android:id="@+id/reservation_cart_qty"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/happymarker"
-                                android:padding="15dp"
-                                android:text="Items : 0"
-                                android:textColor="@color/textColor"
-                                android:textSize="15sp" />
+                            <!--                            <TextView-->
+                            <!--                                android:id="@+id/reservation_cart_qty"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:fontFamily="@font/happymarker"-->
+                            <!--                                android:padding="15dp"-->
+                            <!--                                android:text="Items : 0"-->
+                            <!--                                android:textColor="@color/textColor"-->
+                            <!--                                android:textSize="15sp" />-->
 
                         </LinearLayout>
 
@@ -522,6 +503,7 @@
                             android:buttonTint="@color/myOrange"
                             android:fontFamily="@font/happymarker"
                             android:text="CASH"
+                            android:checked="true"
                             android:textColor="@color/textColor" />
 
                         <RadioButton
@@ -573,6 +555,12 @@
                         android:textColor="@color/textColor" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/kartoon_cafe" />
 
             <View
                 android:layout_width="match_parent"

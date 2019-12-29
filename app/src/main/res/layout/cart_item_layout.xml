@@ -30,7 +30,7 @@
             android:fontFamily="@font/happymarker"
             android:maxWidth="160dp"
             android:text="NAME"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/textColor"
             android:textSize="15sp" />
 
 
@@ -71,7 +71,7 @@
                 android:background="@color/white"
                 android:fontFamily="@font/happymarker"
                 android:text="4"
-                android:textColor="@color/colorPrimaryDark" />
+                android:textColor="@color/textColor" />
 
             <Button
                 android:id="@+id/decrease_qty"

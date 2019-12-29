@@ -4,29 +4,29 @@ import java.util.ArrayList;
 
 public class TableReservation {
 
-    private int reservationId;
+    private String reservationId;
     private String reservationForDate;
     private String reservationForTime;
     private String numberOfPpl;
     private String userName;
     private String userEmail;
     private String userContact;
-    private String specialOcassion;
+    private String specialOccassion;
     private String specialInstruction;
     private ArrayList<Cart> reservationOrderAheadList;
     private double orderTotal;
-    private String paymentMethod;
+    private String reservationStatus;
 
 
     public TableReservation() {
     }
 
 
-    public int getReservationId() {
+    public String getReservationId() {
         return reservationId;
     }
 
-    public void setReservationId(int reservationId) {
+    public void setReservationId(String reservationId) {
         this.reservationId = reservationId;
     }
 
@@ -54,12 +54,12 @@ public class TableReservation {
         this.userContact = userContact;
     }
 
-    public String getSpecialOcassion() {
-        return specialOcassion;
+    public String getSpecialOccassion() {
+        return specialOccassion;
     }
 
-    public void setSpecialOcassion(String specialOcassion) {
-        this.specialOcassion = specialOcassion;
+    public void setSpecialOccassion(String specialOccassion) {
+        this.specialOccassion = specialOccassion;
     }
 
     public String getSpecialInstruction() {
@@ -110,12 +110,13 @@ public class TableReservation {
         this.reservationForTime = reservationForTime;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
+
+    public String getReservationStatus() {
+        return reservationStatus;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setReservationStatus(String reservationStatus) {
+        this.reservationStatus = reservationStatus;
     }
 }
 

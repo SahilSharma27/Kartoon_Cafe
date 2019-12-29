@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".SubMenuActivity"
-    android:background="@color/colorPrimaryDark"
     tools:showIn="@layout/activity_sub_menu">
 
     <LinearLayout
@@ -21,9 +20,13 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="fitXY"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/kartoon_cafe" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
