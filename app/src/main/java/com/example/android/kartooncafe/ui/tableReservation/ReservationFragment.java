@@ -477,7 +477,7 @@ public class ReservationFragment extends Fragment {
 
         frameLayout = myDialog.findViewById(R.id.anim);
         animationView = new LottieAnimationView(getContext());
-        animationView.setAnimation(R.raw.checkmark);
+        animationView.setAnimation(R.raw.check);
         frameLayout.addView(animationView);
         animationView.playAnimation();
         final Handler handler = new Handler();

@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.simple_icon) {
+        if (item.getItemId() == R.id.search_icon) {
             Toast.makeText(this, "KARTOON CAFE", Toast.LENGTH_SHORT).show();
             return true;
         }

@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
+def API_KEY = '"' + ApiKey + '"' ?: '"Api Key Not Found"'
+def STRING = 'String'
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
@@ -11,6 +13,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        each{type ->
+            type.buildConfigField STRING, 'ApiKey', API_KEY
+
+        }
     }
     buildTypes {
         release {

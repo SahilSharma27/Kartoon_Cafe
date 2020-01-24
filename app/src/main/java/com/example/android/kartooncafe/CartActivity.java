@@ -183,7 +183,7 @@ public class CartActivity extends AppCompatActivity implements PaymentResultList
 
         frameLayout = myDialog.findViewById(R.id.anim);
         animationView = new LottieAnimationView(CartActivity.this);
-        animationView.setAnimation(R.raw.checkmark);
+        animationView.setAnimation(R.raw.check);
         frameLayout.addView(animationView);
         animationView.playAnimation();
         final Handler handler = new Handler();

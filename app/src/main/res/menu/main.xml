@@ -2,9 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/simple_icon"
+        android:id="@+id/search_icon"
         android:orderInCategory="100"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/ic_search_black_24dp"
         android:title="@string/app_name"
+        android:iconTint="@color/myOrange"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="always" />
 </menu>
